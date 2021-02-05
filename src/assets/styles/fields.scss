@@ -1,0 +1,32 @@
+.form {
+    flex-wrap: wrap;
+    .form__input--password,
+    .form__input--password-margin,
+    .form__input--select {
+      .form__error {
+        top: 100%;
+      }
+      &.w-52 {
+        width: 52%;
+      }
+      &.f-right {
+        margin-left: 2%;
+      }
+    }
+   
+  
+    .form__input--password-margin {
+      margin-top: 2.7rem;
+    }
+    .form__input--normal-margin {
+      margin-top: 1.5rem;
+    }
+    .form__input {
+        margin-top: 1.5rem;
+    }
+    
+    }
+  
+  
+ 
+  

@@ -1,0 +1,57 @@
+ 
+/**COLORS */
+$white: #ffffff;
+$grey: #dcdcdc;
+$greySuperDark: #3b3b3b;
+$greyDark: #5e5e5e;
+$greyMedium: #7b7b7b;
+$greyLight: #e6e6e6;
+$greySuperLight: #d0d0d0;
+$orange: #f79400;
+$orangeLight: #ffcf67;
+$orangeDark: #e68a00;
+$blue: #006cff;
+$blueDark: #151f27;
+$red: #ec4a4a;
+$redDark: #b00020;
+$green: #55d595;
+$greenDark: #45ad79;
+$greenLight: #f2fff9;
+$projectGreyLight: #d0d0d0;
+$projectBlue: #559ed5;
+$silver: #c3c3c3;
+$gainsboro: #dddddd;
+$gainsboroLight: #e0e0e0;
+$greyWhisper: #ededed;
+$pinkSwan: #b8b8b8;
+$whiteSmoke: #f2f2f2;
+$buildingWhiteSmoke: #f8f8f8;
+$projectInactiveMediumGrey: #a5a5a5;
+$trashedGrey: #888888;
+$oldLace: #fff4e5;
+$aliceBlue: #f5f6f7;
+
+$primaryColor: $orange;
+$primaryColorDark: $orangeDark;
+
+$gradientBackground: radial-gradient(
+  circle,
+  rgba(255, 255, 255, 1) 0%,
+  rgba(235, 235, 235, 1) 100%
+);
+
+$mainBoxShadow: 0px 0px 20px #0000000d;
+
+/**FONTS */
+$montHeavy: "MontHeavy", sans-serif;
+$montBold: "MontBold", sans-serif;
+$openSansRegular: "OpenSansRegular", sans-serif;
+$openSansLight: "OpenSansLight", sans-serif;
+$openSansBold: "OpenSansBold", sans-serif;
+$merriweatherBold: "MerriweatherBold", serif;
+
+/** FIXED WIDTHS */
+
+$sidebarWidth: 90px;
+
+/**RESPONSIVE BREAKPOINTS */

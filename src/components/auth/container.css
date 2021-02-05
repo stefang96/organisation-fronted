@@ -1,0 +1,61 @@
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+.flex-container {
+  position: relative;
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  padding: 0 100px;
+  background-image: url('../../assets/images/organisation-image.jpg') ;
+    
+    
+    
+  }
+
+  .bg-overlay{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(20,136,204,.75);
+    z-index: 0;
+
+ 
+  }
+  
+  .contents { 
+    position: relative;
+    z-index: 1;
+    align-items: center;
+    display: flex;
+    height: 100%;
+    min-height: 100vh;   
+  }
+  .contents-form{
+    width: 650px;
+    flex-basis: 650px;
+    padding:   40px 80px;
+    background-color: #fff;
+    border-radius: 20px;
+    
+  }
+ .contents-text{
+  
+  flex-basis: calc(100% - 650px);
+    text-align: center;
+    color: #fff;
+
+     
+  }
+  h1{
+    font-size: 8rem;
+    font-weight: 600;
+  }
+   
+  
+  

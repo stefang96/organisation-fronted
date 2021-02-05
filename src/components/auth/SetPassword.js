@@ -1,111 +1,93 @@
-import React from 'react'
+  
+  import React from 'react';
 import useQuery from '../../utils/getQuery'
 import { reduxForm,Field } from 'redux-form' 
+import { withStyles } from "@material-ui/core/styles";
+import Container from './Container';
+import renderPasswordField from '../fields/renderPasswordField';
+import { useHistory } from "react-router-dom";
 
-const SetPassword = (props) => {
-      let query = useQuery();
+ 
 
-      console.log(query.get('email'))
-      console.log(query.get('setpasswordtoken'))
-      console.log(query.get('verifytoken'))
+ 
 
-      const handleSubmit =(data)=>{
-        console.log(data)
-      }
-    return (
+ const SetPassword =(props)=> {
+  const classes = withStyles();
+  const history = useHistory();
+
+  let query = useQuery();
+  const [values, setValues] = React.useState({
+    showPassword: false
+  });
+
+
+  console.log(query.get('email'))
+  console.log(query.get('setpasswordtoken'))
+  console.log(query.get('verifytoken'))
+
+ 
+  const handleClickShowPassword = () => {
+    setValues({ ...values, showPassword: !values.showPassword });
+  };
+
+  const handleMouseDownPassword = event => {
+    event.preventDefault();
+  };
+ 
+  const onSubmit = formValues => {
+    console.log(formValues)
+ //   const data = formValues.get("rePassword");
+   // const email = getParameterByName("email");
+  //  const token = getParameterByName("setpasswordtoken");
+  //  props.setPassword(data, email, token);
+    history.push('/')
+  };
+ 
+
+
+  return (
+ 
+    <Container>
+      <>
+      <h3 className="public-title" >Set password</h3>
+      <form    className={(classes.root, "form")}  onSubmit={props.handleSubmit(onSubmit)} noValidate>
+      <Field
+          name="password"
+          component={renderPasswordField}
+          label="Password"
+          values={values}
+          classes={classes}
+          classField="form__input--password"
+          handleClickShowPassword={handleClickShowPassword}
+          handleMouseDownPassword={handleMouseDownPassword}
+         
+        />
+        <Field
+          name="rePassword"
+          component={renderPasswordField}
+          classes={classes}
+          label="Confirm Password"
+          classField="form__input--password-margin"
+          values={values}
+          handleClickShowPassword={handleClickShowPassword}
+          handleMouseDownPassword={handleMouseDownPassword}
        
-        <form onSubmit={handleSubmit}>
-        <div>
-          <label>First Name</label>
-          <div>
-            <Field
-              name="firstName"
-              component="input"
-              type="text"
-              placeholder="First Name"
-            />
-          </div>
-        </div>
-        <div>
-          <label>Last Name</label>
-          <div>
-            <Field
-              name="lastName"
-              component="input"
-              type="text"
-              placeholder="Last Name"
-            />
-          </div>
-        </div>
-        <div>
-          <label>Email</label>
-          <div>
-            <Field
-              name="email"
-              component="input"
-              type="email"
-              placeholder="Email"
-            />
-          </div>
-        </div>
-        <div>
-          <label>Sex</label>
-          <div>
-            <label>
-              <Field name="sex" component="input" type="radio" value="male" />{' '}
-              Male
-            </label>
-            <label>
-              <Field name="sex" component="input" type="radio" value="female" />{' '}
-              Female
-            </label>
-            <label>
-              <Field name="sex" component="input" type="radio" value="other" />{' '}
-              Other
-            </label>
-          </div>
-        </div>
-        <div>
-          <label>Favorite Color</label>
-          <div>
-            <Field name="favoriteColor" component="select">
-              <option />
-              <option value="ff0000">Red</option>
-              <option value="00ff00">Green</option>
-              <option value="0000ff">Blue</option>
-            </Field>
-          </div>
-        </div>
-        <div>
-          <label htmlFor="employed">Employed</label>
-          <div>
-            <Field
-              name="employed"
-              id="employed"
-              component="input"
-              type="checkbox"
-            />
-          </div>
-        </div>
-        <div>
-          <label>Notes</label>
-          <div>
-            <Field name="notes" component="textarea" />
-          </div>
-        </div>
-        <div>
-          <button type="submit"  >
-            Submit
-          </button>
-          <button type="button" >
-            Clear Values
-          </button>
-        </div>
-      </form>
-    )
+        />
+
+        <button type="submit" className="btn mt-50 mb-15 btn--fluid  ">
+          Save and login
+        </button>
+       
+            
+        </form>
+          </>
+    </Container>          
+     
+       
+  );
 }
 
  
 export default reduxForm({
-    form: 'setPassword' // a unique identifier for this form
-  })(SetPassword)
+  form: 'setPassword' // a unique identifier for this form
+})(SetPassword)
