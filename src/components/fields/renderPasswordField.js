@@ -23,7 +23,18 @@ export default  ({
     ...custom
   }) => {
 
-     
+    const renderError=(error, touched)=>{
+      if ((touched && error)   ) {
+        return (
+          <span className="form__error">{error ? error :'kkk'}</span>
+        );
+      }
+    }
+
+    let errorExist = false;
+    if (touched && error) {
+      errorExist = true;
+    }
   // TODO: Better input field ID handling
   const id = input.name ? input.name : "standard-adornment-password"; 
     return (
@@ -33,7 +44,7 @@ export default  ({
             "form__input w-100",
             classField
           )}
-          
+          error={errorExist}
         >
           <InputLabel htmlFor={id} >
             {label}
@@ -44,6 +55,8 @@ export default  ({
             required
             type={values.showPassword ? "text" : "password"}
             value={values.password}
+            error={touched && invalid}
+             
             endAdornment={
                 <InputAdornment position="end">
                   <IconButton
@@ -56,7 +69,9 @@ export default  ({
                 </InputAdornment>
               }
           />
-        
+         {touched &&
+         ((error && <span className="form__error" >{error}</span>)  
+           )}
         </FormControl>
       );
      

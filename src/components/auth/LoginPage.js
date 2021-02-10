@@ -6,10 +6,13 @@ import Container from './Container';
 import renderPasswordField from '../fields/renderPasswordField';
 import renderTextField from '../fields/renderTextField ';
 import { Link } from 'react-router-dom';
+import validate from '../fields/validation/validateLogin'
 import './login.scss'
+import {login} from '../../actions/index'
+import { connect } from 'react-redux';
   
-   
-  
+
+ 
    
   
 const LoginPage =(props)=> {
@@ -36,6 +39,7 @@ const LoginPage =(props)=> {
      // const email = getParameterByName("email");
     //  const token = getParameterByName("setpasswordtoken");
     //  props.setPassword(data, email, token);
+      props.login(formValues)
     };
    
   
@@ -81,7 +85,8 @@ const LoginPage =(props)=> {
   }
   
    
-  export default reduxForm({
-    form: 'loginForm' // a unique identifier for this form
-  })(LoginPage)
+  export default  connect(null,{login})(reduxForm({
+    form: 'loginForm', // a unique identifier for this form
+    validate
+  })(LoginPage))
   
