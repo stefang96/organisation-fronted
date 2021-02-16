@@ -44,11 +44,16 @@
   color: $orange;
 }
 
+.color-blue{
+  color: #3f51b5;
+}
+
 // divider
 
 .h-divider {
   height: 1px;
-  background-color: #e6e6e6;
+  background-color: #3f51b5;
+   
   width: 100%;
 }
 
@@ -443,5 +448,39 @@
   bottom: 0;
   &--light {
     background-color: rgba(255, 255, 255, 0.3);
+  }
+}
+
+.form__input--select,
+.text-field-wrapper {
+  position: relative;
+  &.w-50 {
+    width: 48%;
+  }
+  &.f-left {
+    margin-right: 2%;
+  }
+  &.f-right {
+    margin-left: 2%;
+  }
+  &.f-right-calendar-completed {
+    margin-left: 18%;
+  }
+  &.f-right-calendar {
+    margin-left: 8%;
+  }
+  &.w-40 {
+    width: 40%;
+  }
+
+  &.w-33 {
+    width: 31%;
+  }
+  &.w-66 {
+    width: 64%;
+  }
+  &.center {
+    margin-left: 2%;
+    margin-right: 2%;
   }
 }

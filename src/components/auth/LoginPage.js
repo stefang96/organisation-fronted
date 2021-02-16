@@ -16,15 +16,11 @@ import { connect } from 'react-redux';
    
   
 const LoginPage =(props)=> {
-    const classes = withStyles();
-  
-   
+    const classes = withStyles(); 
     const [values, setValues] = React.useState({
       showPassword: false
     });
-  
-  
-   
+     
     const handleClickShowPassword = () => {
       setValues({ ...values, showPassword: !values.showPassword });
     };
@@ -34,22 +30,17 @@ const LoginPage =(props)=> {
     };
    
     const onSubmit = formValues => {
-      console.log(formValues)
-   //   const data = formValues.get("rePassword");
-     // const email = getParameterByName("email");
-    //  const token = getParameterByName("setpasswordtoken");
-    //  props.setPassword(data, email, token);
-      props.login(formValues)
+      return props.login(formValues)
     };
    
-  
-  
+
     return (
    
     <Container>
       <>
         <h3 className="public-title" >Welcome back!</h3>
-        <form    className={(classes.root, "form")}  onSubmit={props.handleSubmit(onSubmit)} noValidate>
+        <form   className={(classes.root, "form")}  onSubmit={props.handleSubmit(onSubmit)}  
+        noValidate >
             <Field name="email" component={renderTextField} label="Email" />
             <Field
                 name="password"
@@ -62,8 +53,6 @@ const LoginPage =(props)=> {
                 handleMouseDownPassword={handleMouseDownPassword}
             
             />
-          
-  
             <button type="submit" className="btn mt-50 mb-15 btn--fluid  ">
                 Login
             </button>   

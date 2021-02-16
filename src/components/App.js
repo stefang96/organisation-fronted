@@ -7,9 +7,11 @@ import PrivateRoute from './PrivateRoute'
 import LoginPage from './auth/LoginPage';
 import RegisterPage from './auth/RegisterPage';
 import ResetPassword from './auth/ResetPassword';
+import NewsList from './news/NewsList';
  
 
 function App() {
+  
   return (
     <div> 
     <Router history={history}>
@@ -18,7 +20,10 @@ function App() {
         <PublicRoute component={LoginPage} restricted={true}  exact path="/login" />
         <PublicRoute component={RegisterPage} restricted={true}  exact path="/register" />
         <PublicRoute component={ResetPassword} restricted={true}  exact path="/reset-password" />
-        <PrivateRoute component={ResetPassword}    exact path="/" />
+
+         
+        <PrivateRoute component={NewsList}  exact path="/" />
+        <PrivateRoute component={NewsList}  exact path="/news" />
       </Switch>
     </Router>
     </div>
