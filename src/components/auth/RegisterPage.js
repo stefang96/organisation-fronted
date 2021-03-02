@@ -11,10 +11,6 @@ import {register} from '../../actions/index'
 import { connect } from 'react-redux';
  
 
-  
-
-
-
 const RegisterPage = (props) => {
 
     const onSubmit =(formValues)=>{

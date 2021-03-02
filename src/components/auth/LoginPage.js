@@ -39,23 +39,25 @@ const LoginPage =(props)=> {
     <Container>
       <>
         <h3 className="public-title" >Welcome back!</h3>
-        <form   className={(classes.root, "form")}  onSubmit={props.handleSubmit(onSubmit)}  
+        <form     onSubmit={props.handleSubmit(onSubmit)}  
         noValidate >
-            <Field name="email" component={renderTextField} label="Email" />
-            <Field
-                name="password"
-                component={renderPasswordField}
-                label="Password"
-                values={values}
-                classes={classes}
-                classField="form__input--password"
-                handleClickShowPassword={handleClickShowPassword}
-                handleMouseDownPassword={handleMouseDownPassword}
+
+        <div className="mb-3">
+            <label for="exampleInputEmail1" className="form-label">Email address</label>
+            <Field name="email"  type="email" className="form-control"  component="input"  id="exampleInputEmail1" aria-describedby="emailHelp"placeholder="Email" />
             
-            />
-            <button type="submit" className="btn mt-50 mb-15 btn--fluid  ">
-                Login
-            </button>   
+            <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>
+          </div>
+          <div className="mb-3">
+            <label for="exampleInputPassword1" className="form-label">Password</label>
+            <Field type="password" data-toggle="password"   name="password" className="form-control" id="exampleInputPassword1"  placeholder="Password"
+                component="input"
+                label="Password"/>
+          </div>
+ 
+          <button class="btn-login " type="submit">Login</button>
+   
+         
         </form>
         <div  className="login__links" >
             <div>
