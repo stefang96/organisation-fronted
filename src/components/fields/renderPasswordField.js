@@ -9,33 +9,18 @@ import FormControl from "@material-ui/core/FormControl";
 import clsx from "clsx";
 
 
-export default  ({
-    label,
-    input,
-    classField,
-    values,
-    classes,
-    handleClickShowPassword,
-    handleMouseDownPassword,
-    meta: { touched, invalid, error },
-    ...custom
-  }) => {
+export default ({ input, label, type, meta: { touched, error, warning } }) => (
+ 
 
-   
-  // TODO: Better input field ID handling
-  const id = input.name ? input.name : "standard-adornment-password"; 
-    return (
-        <input
-         {...input}
-        
-        />
-           
-        
-            
-            
-         
-      );
+
+  <div className="mb-3">
+  <label  className="form-label">{label}</label>
+  <input  {...input}  type={type}   className="form-control" placeholder={label}
+      />
      
-  }
+              {touched && ((error && <span className="text-danger">{error}</span>) || (warning && <span>{warning}</span>))}
+         
+  </div>
+  )
  
  

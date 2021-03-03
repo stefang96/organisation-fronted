@@ -9,22 +9,34 @@ import RegisterPage from './auth/RegisterPage';
 import ResetPassword from './auth/ResetPassword';
 import NewsList from './news/NewsList';
  
+import NavBar from './nav-bar/NavBar';
+import OrganisationList from './organisation/OrganisationList';
+ 
 
 function App() {
   
   return (
     <div> 
+      
     <Router history={history}>
-      <Switch>
+    <NavBar />
+    
+    <Switch>
         <PublicRoute component={SetPassword} restricted={true}  exact path="/set-password" />
         <PublicRoute component={LoginPage} restricted={true}  exact path="/login" />
         <PublicRoute component={RegisterPage} restricted={true}  exact path="/register" />
         <PublicRoute component={ResetPassword} restricted={true}  exact path="/reset-password" />
 
-         
-        <PrivateRoute component={NewsList}  exact path="/" />
-        <PrivateRoute component={NewsList}  exact path="/news" />
+        <div  className="container-body" >
+        <PublicRoute component={NewsList}  exact path="/" />
+        <PublicRoute component={NewsList}  exact path="/news" />
+        <PublicRoute component={OrganisationList}  exact path="/organisation" />
+        </div>
       </Switch>
+    
+       
+
+      
     </Router>
     </div>
     

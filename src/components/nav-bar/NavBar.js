@@ -1,38 +1,22 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import NavBarItem from './NavBarItem'
 
 const NavBar = (props) => {
-
-    const navBarLeftItems = [
-        {class:"  nav-item",name:"News",to:"/news"}, {class:"nav-item",name:"Organisation",to:"/organisation"}
-    ]
-
-    const navBarRightItems = [
-        {class:"glyphicon glyphicon-log-in",name:"Login",to:"/login"}, {class:" ",name:"Register",to:"/register"}
-    ]
-
- 
     return (
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark  " aria-label="Eighth navbar example">
+    <div class="container">
+      <a class="navbar-brand" href="#">Container</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample07" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-        <>
-        <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-
-        {navBarLeftItems.map((item)=>{
-
-             return (  <li className={item.class}><Link className="nav-link active" to={item.to}>{item.name}</Link></li>)
-        })}
-        </ul>
-         
-         <ul className="nav navbar-nav navbar-right">
-          {navBarRightItems.map((item)=>{
-
-         return (  <li className="nav-item" ><Link to={item.to} className="nav-link"> <span className={item.class}></span> {item.name}</Link></li>)
-            })}
-     
-         </ul>
-        </>  
-             
-         
+      <div class="collapse navbar-collapse" id="navbarsExample07">
+      <NavBarItem />
+        
+      </div>
+    </div>
+  </nav>
+   
     )
 }
 

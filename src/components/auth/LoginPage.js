@@ -10,8 +10,6 @@ import validate from '../fields/validation/validateLogin'
 import './login.scss'
 import {login} from '../../actions/index'
 import { connect } from 'react-redux';
-  
-
  
    
   
@@ -32,7 +30,8 @@ const LoginPage =(props)=> {
     const onSubmit = formValues => {
       return props.login(formValues)
     };
-   
+ 
+ 
 
     return (
    
@@ -42,20 +41,13 @@ const LoginPage =(props)=> {
         <form     onSubmit={props.handleSubmit(onSubmit)}  
         noValidate >
 
-        <div className="mb-3">
-            <label for="exampleInputEmail1" className="form-label">Email address</label>
-            <Field name="email"  type="email" className="form-control"  component="input"  id="exampleInputEmail1" aria-describedby="emailHelp"placeholder="Email" />
-            
-            <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>
-          </div>
-          <div className="mb-3">
-            <label for="exampleInputPassword1" className="form-label">Password</label>
-            <Field type="password" data-toggle="password"   name="password" className="form-control" id="exampleInputPassword1"  placeholder="Password"
-                component="input"
-                label="Password"/>
-          </div>
+            <Field name="email" type="email" info={true} component={renderTextField} label="Email"     />
+            <Field   name="password"   type="password" component={renderPasswordField} label="Password"  />
+        
  
-          <button class="btn-login " type="submit">Login</button>
+          <div className="d-grid gap-2">
+              <button className="btn btn-primary br-30 mt-10" type="submit">Login</button>
+          </div>
    
          
         </form>

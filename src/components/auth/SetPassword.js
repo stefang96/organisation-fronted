@@ -56,28 +56,16 @@ import {connect} from 'react-redux';
           name="password"
           component={renderPasswordField}
           label="Password"
-          values={values}
-          classes={classes}
-          classField="form__input--password"
-          handleClickShowPassword={handleClickShowPassword}
-          handleMouseDownPassword={handleMouseDownPassword}
-         
         />
         <Field
           name="rePassword"
           component={renderPasswordField}
-          classes={classes}
           label="Confirm Password"
-          classField="form__input--password-margin"
-          values={values}
-          handleClickShowPassword={handleClickShowPassword}
-          handleMouseDownPassword={handleMouseDownPassword}
-       
         />
 
-        <button type="submit" className="btn mt-50 mb-15 btn--fluid  ">
-          Save and login
-        </button>
+        <div className="d-grid gap-2">
+              <button className="btn btn-primary br-30  mt-10" type="submit">    Save and login</button>
+          </div>
        
             
         </form>
