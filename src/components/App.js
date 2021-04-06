@@ -12,7 +12,7 @@ import NewsList from "./news/NewsList";
 import NavBar from "./nav-bar/NavBar";
 import OrganisationList from "./organisation/OrganisationList";
 import SingleNews from "./news/SingleNews";
-
+import "bootstrap/dist/css/bootstrap.min.css";
 function App() {
   return (
     <div>
