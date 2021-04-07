@@ -6,6 +6,9 @@ import { connect } from "react-redux";
 import { fromJS } from "immutable";
 import moment from "moment";
 import { Modal, Button, closeButton } from "react-bootstrap";
+import { reduxForm, Field } from "redux-form";
+import renderTextField from "../fields/renderTextField ";
+import ContactPersonForm from "./forms/ContactPersonForm";
 
 const OrganisationList = (props) => {
   const [contactPersonModal, setContactPersonModal] = useState(false);
@@ -98,28 +101,12 @@ const OrganisationList = (props) => {
   return (
     <>
       <Modal
-        size="lg"
-        aria-labelledby="contained-modal-title-vcenter"
-        centered
+        backdrop="static"
+        keyboard={false}
         show={contactPersonModal}
         onHide={changeModal}
       >
-        <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">
-            Modal heading
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <h4>Centered Modal</h4>
-          <p>
-            Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-            dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta
-            ac consectetur ac, vestibulum at eros.
-          </p>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button onClick={changeModal}>Close</Button>
-        </Modal.Footer>
+        <ContactPersonForm changeModal={changeModal} />
       </Modal>
       <div className="container-body ">
         <div class="table-view">

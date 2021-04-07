@@ -97,6 +97,13 @@ button:disabled {
 .cursor-pointer {
   cursor: pointer;
 }
+.left {
+  flex: 30%;
+  margin-right: 100px;
+}
+.right {
+  flex: 70%;
+}
 
 .cursor-pointer :hover {
   cursor: pointer;
@@ -127,7 +134,9 @@ button:disabled {
 .color-orange {
   color: $orange;
 }
-
+.bg-color-light-grey {
+  background-color: #f1f1f2;
+}
 .color-blue {
   color: #007bff;
 }
@@ -290,6 +299,9 @@ button:disabled {
 }
 
 .mb-20 {
+  margin-bottom: 20px;
+}
+.mb-40 {
   margin-bottom: 20px;
 }
 .mb-25 {

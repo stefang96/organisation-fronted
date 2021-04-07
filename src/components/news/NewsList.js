@@ -2,17 +2,17 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import DataGrid from "../grid/index";
 import { getNews } from "../../actions/index";
+import "./news.scss";
+import { Height } from "@material-ui/icons";
 
 const NewsList = (props) => {
   const [filters, setFilters] = useState(null);
   const [pageIndex, setPageIndex] = useState(null);
-  let data;
+
   let meta;
   const [searchFilters, setSearchFilters] = useState({
     organisationId: null,
   });
-
-  useEffect(() => {}, []);
 
   const getInitialFilters = () => {
     let initialFilters = [];
@@ -28,6 +28,7 @@ const NewsList = (props) => {
     setPageIndex(pageIndex);
   }, []);
 
+  let data = [];
   if (props.news) {
     data = props.news;
     meta = props.newsMeta;
@@ -35,9 +36,8 @@ const NewsList = (props) => {
 
   const fetchData = React.useCallback(
     ({ pageIndex, searchQuery, searchFilters }) => {
-      window.scrollTo(0, 0);
       const pagination = {
-        page: pageIndex,
+        page: pageIndex + 1,
       };
       const filters = {
         search: searchQuery,
@@ -45,23 +45,62 @@ const NewsList = (props) => {
       };
       const reqData = {
         pagination: pagination,
-        filters: filters,
+        filters: null,
       };
       props.getNews(reqData);
     },
     []
   );
+
+  const columns = React.useMemo(
+    () => [
+      {
+        Header: "Name",
+        columns: [
+          {
+            Header: "First Name",
+            accessor: "firstName",
+          },
+          {
+            Header: "Last Name",
+            accessor: "lastName",
+          },
+        ],
+      },
+      {
+        Header: "Info",
+        columns: [
+          {
+            Header: "Age",
+            accessor: "age",
+          },
+          {
+            Header: "Visits",
+            accessor: "visits",
+          },
+          {
+            Header: "Status",
+            accessor: "status",
+          },
+          {
+            Header: "Profile Progress",
+            accessor: "progress",
+          },
+        ],
+      },
+    ],
+    []
+  );
   return (
-    <div className="container-body d-flex news">
+    <div className="container-body  d-flex ">
       <DataGrid
         data={data}
         meta={meta}
-        pageIndex={pageIndex ? pageIndex : 1}
+        columns={columns}
         fetchData={fetchData}
-        fetchPage={fetchPage}
-        searchFilters={searchFilters}
         fetchFilters={fetchFilters}
-        initialFilters={!filters ? getInitialFilters() : filters}
+        searchFilters={getInitialFilters}
+        pageCount={meta && Math.ceil(meta.total / meta.limit)}
       />
     </div>
   );
