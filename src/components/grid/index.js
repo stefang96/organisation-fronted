@@ -200,34 +200,80 @@ const DataGrid = (props) => {
           )}
         </div>
       </div>
-      <div className="news-right bg-color-light-grey">
+      <div className="news-right ">
         <>
-          <div className="filter filter--search ">
-            <div class="form-group">
-              <label for="searchInput">Search</label>
-              <input
-                type="text"
-                id="searchInput"
-                className="form-control"
-                placeholder="Search"
-                aria-label="Search"
-                aria-describedby="basic-addon1"
-                onChange={onSearchChange}
-              />
-            </div>
+          <div className="p-30  h-auto bg-color-light-grey">
+            <div className="filter filter--search ">
+              <div class="form-group">
+                <label for="searchInput">Search</label>
+                <input
+                  type="text"
+                  id="searchInput"
+                  className="form-control"
+                  placeholder="Search"
+                  aria-label="Search"
+                  aria-describedby="basic-addon1"
+                  onChange={onSearchChange}
+                />
+              </div>
 
-            <div class="form-group mt-30">
-              <select
-                class="form-select"
-                onChange={setSelectedFilter}
-                aria-label="Default select example"
-              >
-                <option value="0">Open this select menu</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-              </select>
+              <div class="form-group mt-30">
+                <select
+                  class="form-select"
+                  onChange={setSelectedFilter}
+                  aria-label="Default select example"
+                >
+                  <option value="0">Open this select menu</option>
+                  <option value="1">One</option>
+                  <option value="2">Two</option>
+                  <option value="3">Three</option>
+                </select>
+              </div>
             </div>
+          </div>
+          <div class="form-group mt-30">
+            <ul class="list-group group-scroll">
+              <li class="list-group-item active" aria-current="true">
+                Latest news
+              </li>
+
+              <li class="list-group-item">
+                {" "}
+                <h5>
+                  <b>A third item</b>{" "}
+                </h5>
+                <div>
+                  A third itemA third itemA third itemA third itemA third item
+                </div>
+              </li>
+              <li class="list-group-item">
+                {" "}
+                <h5>
+                  <b>A third item</b>{" "}
+                </h5>
+                <div>
+                  A third itemA third itemA third itemA third itemA third item
+                </div>
+              </li>
+              <li class="list-group-item">
+                {" "}
+                <h5>
+                  <b>A third item</b>{" "}
+                </h5>
+                <div>
+                  A third itemA third itemA third itemA third itemA third item
+                </div>
+              </li>
+              <li class="list-group-item">
+                {" "}
+                <h5>
+                  <b>A third item</b>{" "}
+                </h5>
+                <div>
+                  A third itemA third itemA third itemA third itemA third item
+                </div>
+              </li>
+            </ul>
           </div>
         </>
       </div>

@@ -101,10 +101,12 @@ const OrganisationList = (props) => {
   return (
     <>
       <Modal
+        size="lg"
         backdrop="static"
         keyboard={false}
         show={contactPersonModal}
         onHide={changeModal}
+        aria-labelledby="example-modal-sizes-title-lg"
       >
         <ContactPersonForm changeModal={changeModal} />
       </Modal>

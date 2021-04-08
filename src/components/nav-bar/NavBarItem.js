@@ -14,23 +14,25 @@ const NavBarItem = (props) => {
 
   return (
     <>
-      <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+      <ul className="navbar-nav me-auto mb-2 mb-lg-0"></ul>
+
+      <ul className="nav navbar-nav navbar-right">
         {navBarLeftItems.map((item) => {
           return (
-            <li key={item.name} className={item.class}>
+            <li key={item.name} className={`${item.class} navbar-brand`}>
               <NavLink className="nav-link  " to={item.to}>
                 {item.name}
               </NavLink>
             </li>
           );
         })}
-      </ul>
-
-      <ul className="nav navbar-nav navbar-right">
         {navBarRightItems.map((item) => {
           return (
-            <li key={item.name} className="nav-item">
-              <NavLink to={item.to} className="nav-link">
+            <li key={item.name} className="  navbar-brand">
+              <NavLink
+                to={item.to}
+                className=" nav-link btn btn-outline-app w-150 "
+              >
                 {" "}
                 <span className={item.class}></span> {item.name}
               </NavLink>

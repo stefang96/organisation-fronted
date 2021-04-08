@@ -89,7 +89,7 @@ const RegisterPage = (props) => {
               </div>
 
               <div className="d-grid gap-2">
-                <button className="btn btn-primary   mt-30" type="submit">
+                <button className="btn btn-primary br-30  mt-30" type="submit">
                   {" "}
                   Create organisation
                 </button>

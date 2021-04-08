@@ -1,6 +1,6 @@
 import React from "react";
 import NavBarItem from "./NavBarItem";
-
+import { Link, NavLink } from "react-router-dom";
 const NavBar = (props) => {
   return (
     <nav
@@ -8,9 +8,9 @@ const NavBar = (props) => {
       aria-label="Eighth navbar example"
     >
       <div className="container">
-        <a className="navbar-brand" href="#">
-          Container
-        </a>
+        <NavLink className="navbar-brand" to="/news">
+          Logo
+        </NavLink>
         <button
           className="navbar-toggler"
           type="button"
