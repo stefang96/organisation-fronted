@@ -4,6 +4,7 @@ import { reduxForm, Field } from "redux-form";
 import renderTextField from "../../fields/renderTextField ";
 import { connect } from "react-redux";
 import validate from "../../fields/validation/validateContactPersonForm";
+import { sendEmailToContactPerson } from "../../../actions/index";
 
 const ContactPersonForm = (props) => {
   const renderTextArea = ({ input, label, name, classField }) => {
@@ -21,8 +22,9 @@ const ContactPersonForm = (props) => {
   };
 
   const onSubmit = (formValues) => {
-    //  return props.login(formValues);
+    //  return props.sendEmailToContactPerson(formValues);
     console.log(formValues);
+    console.log(props.memberId);
   };
 
   return (

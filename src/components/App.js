@@ -8,17 +8,19 @@ import LoginPage from "./auth/LoginPage";
 import RegisterPage from "./auth/RegisterPage";
 import ResetPassword from "./auth/ResetPassword";
 import NewsList from "./news/NewsList";
-
+import { connect } from "react-redux";
 import NavBar from "./nav-bar/NavBar";
 import OrganisationList from "./organisation/OrganisationList";
 import SingleNews from "./news/SingleNews";
 import "bootstrap/dist/css/bootstrap.min.css";
-function App() {
+import { isLogin } from "../middleware/auth";
+import Logout from "./auth/Logout";
+
+function App(props) {
   return (
     <div>
       <Router history={history}>
         <NavBar />
-
         <Switch>
           <PublicRoute
             component={SetPassword}
@@ -54,6 +56,7 @@ function App() {
               exact
               path="/organisation"
             />
+            <PrivateRoute component={Logout} exact path="/logout" />
           </Switch>
         </Switch>
       </Router>
@@ -61,4 +64,10 @@ function App() {
   );
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    loggedIn: state.auth.loggedIn,
+  };
+};
+
+export default connect(mapStateToProps)(App);

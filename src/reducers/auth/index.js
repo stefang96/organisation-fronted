@@ -6,33 +6,56 @@ import jwt from "jsonwebtoken";
  * Login and registration reducer redux
  */
 
-const initialState = Map({
+const initialState = {
   loggedIn: null,
-  user: Map(),
+  user: {},
   resetPasswordEmail: "",
-  resetPasswordSuccess: false,
   redirectToPath: null,
   signUp: false,
-});
+  resetPassword: false,
+  message: "",
+};
 
 export default (state = initialState, action) => {
   switch (action.type) {
     case authConstants.LOGIN_SUCCESS:
       localStorage.setItem("token", action.result.token);
       const user = jwt.decode(action.result.token);
-      console.log(action);
+
       return {
         ...state,
-        token: action.result.token,
         user: fromJS(user),
         loggedIn: true,
       };
-    case authConstants.SIGNUP_SUCCESS:
+    case authConstants.SIGNUP_MESSAGE:
       return {
         ...state,
         signUp: true,
+        message: action.data,
       };
 
+    case authConstants.RESET_PASSWORD_MESSAGE:
+      return {
+        ...state,
+        resetPassword: true,
+        message: action.data,
+      };
+
+    case authConstants.DISABLED_MESSAGE:
+      return {
+        ...state,
+        resetPassword: false,
+        signUp: false,
+        message: "",
+      };
+
+    case authConstants.LOGOUT:
+      localStorage.removeItem("token");
+      return {
+        ...state,
+        user: null,
+        loggedIn: false,
+      };
     default:
       return state;
   }

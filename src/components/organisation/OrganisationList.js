@@ -12,6 +12,7 @@ import ContactPersonForm from "./forms/ContactPersonForm";
 
 const OrganisationList = (props) => {
   const [contactPersonModal, setContactPersonModal] = useState(false);
+  const [contactPersonId, setContactPersonId] = useState(null);
   const cotactPersonCell = (props) => {
     const contactPerson = props.row.original.contactPerson;
     console.log(props.row.original);
@@ -20,13 +21,17 @@ const OrganisationList = (props) => {
     }
 
     return (
-      <div onClick={() => changeModal()} className="contact-person">
+      <div
+        onClick={() => changeModal(contactPerson.id)}
+        className="contact-person"
+      >
         {contactPerson.firstName} {contactPerson.lastName}
       </div>
     );
   };
-  const changeModal = () => {
+  const changeModal = (contactPersonId = null) => {
     setContactPersonModal(!contactPersonModal);
+    setContactPersonId(contactPersonId);
   };
 
   const dateCell = ({ value }) => {
@@ -108,7 +113,10 @@ const OrganisationList = (props) => {
         onHide={changeModal}
         aria-labelledby="example-modal-sizes-title-lg"
       >
-        <ContactPersonForm changeModal={changeModal} />
+        <ContactPersonForm
+          memberId={contactPersonId}
+          changeModal={changeModal}
+        />
       </Modal>
       <div className="container-body ">
         <div class="table-view">

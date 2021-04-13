@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { reduxForm, Field } from "redux-form";
 
 import Container from "./Container";
@@ -7,28 +7,38 @@ import renderTextField from "../fields/renderTextField ";
 import { Link } from "react-router-dom";
 import validate from "../fields/validation/validateSignUp";
 import "./login.scss";
-import { register } from "../../actions/index";
+import { register, disableAuthMessage } from "../../actions/index";
 import { connect } from "react-redux";
+import history from "../../history";
 
 const RegisterPage = (props) => {
   const onSubmit = (formValues) => {
     console.log(formValues);
     return props.register(formValues);
   };
-
+  const disableAuthMessage = () => {
+    props.disableAuthMessage();
+    history.push("/login");
+  };
   return (
     <Container>
       <>
         <h3 className="public-title">Create organisation</h3>
         {props.signUp && props.signUp === true ? (
-          <>
-            <h1>You hvae signed up successfully</h1>
-
-            <p>
-              Thank you for choosing Orgaisation , please check your email for
-              activation
+          <div>
+            <p className="text-center pt-10">
+              {props.message && props.message}
             </p>
-          </>
+
+            <div className="text-center ">
+              <button
+                onClick={() => disableAuthMessage()}
+                className="btn btn-primary w-200 br-30 mt-10"
+              >
+                Ok
+              </button>
+            </div>
+          </div>
         ) : (
           <>
             <form
@@ -112,10 +122,11 @@ const RegisterPage = (props) => {
 const mapStateToProps = (state) => {
   return {
     signUp: state.auth.signUp,
+    message: state.auth.message,
   };
 };
 
-export default connect(mapStateToProps, { register })(
+export default connect(mapStateToProps, { register, disableAuthMessage })(
   reduxForm({
     form: "signUpForm",
     validate,
