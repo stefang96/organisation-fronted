@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import DataTable from "../table/DataTable";
 import "../table/table.scss";
-import { getOrganisations } from "../../actions/index";
+import { getOrganisations, clearMemerAction } from "../../actions/index";
 import { connect } from "react-redux";
 import { fromJS } from "immutable";
 import moment from "moment";
-import { Modal, Button, closeButton } from "react-bootstrap";
+import { Modal, Alert } from "react-bootstrap";
 import { reduxForm, Field } from "redux-form";
 import renderTextField from "../fields/renderTextField ";
 import ContactPersonForm from "./forms/ContactPersonForm";
@@ -13,6 +13,12 @@ import ContactPersonForm from "./forms/ContactPersonForm";
 const OrganisationList = (props) => {
   const [contactPersonModal, setContactPersonModal] = useState(false);
   const [contactPersonId, setContactPersonId] = useState(null);
+  const [variant, setVariant] = useState(null);
+
+  useEffect(() => {
+    checkResponseAction();
+  }, [props.successAction, props.errorAction]);
+
   const cotactPersonCell = (props) => {
     const contactPerson = props.row.original.contactPerson;
     console.log(props.row.original);
@@ -103,6 +109,22 @@ const OrganisationList = (props) => {
   }
   console.log(data);
   console.log(meta);
+
+  const checkResponseAction = () => {
+    if (props.successAction) {
+      setTimeout(() => props.clearMemerAction(), 5000);
+      setVariant("success");
+    } else if (props.errorAction) {
+      setTimeout(() => props.clearMemerAction(), 5000);
+      setVariant("danger");
+    }
+  };
+
+  const setShow = (value) => {
+    if (!value) {
+      props.clearMemerAction();
+    }
+  };
   return (
     <>
       <Modal
@@ -137,16 +159,23 @@ const OrganisationList = (props) => {
               </div>
             </div>
 
-            {true && (
+            {
               <DataTable
                 fetchData={fetchData}
                 data={data}
                 columns={columns}
                 pageCount={meta && Math.ceil(meta.total / meta.limit)}
               />
-            )}
+            }
           </div>
         </div>
+        {(props.successAction || props.errorAction) && (
+          <div className="alert-position">
+            <Alert variant={variant} onClose={() => setShow(false)} dismissible>
+              {props.message && props.message}
+            </Alert>
+          </div>
+        )}
       </div>
     </>
   );
@@ -156,6 +185,11 @@ const mapStateToProps = (state) => {
   return {
     organisationList: state.organisation.organisationList,
     organisationMeta: state.organisation.organisationMeta,
+    successAction: state.member.successAction,
+    errorAction: state.member.errorAction,
+    message: state.member.message,
   };
 };
-export default connect(mapStateToProps, { getOrganisations })(OrganisationList);
+export default connect(mapStateToProps, { getOrganisations, clearMemerAction })(
+  OrganisationList
+);

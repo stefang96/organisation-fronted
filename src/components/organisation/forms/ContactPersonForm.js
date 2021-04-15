@@ -22,9 +22,11 @@ const ContactPersonForm = (props) => {
   };
 
   const onSubmit = (formValues) => {
-    //  return props.sendEmailToContactPerson(formValues);
-    console.log(formValues);
-    console.log(props.memberId);
+    return props
+      .sendEmailToContactPerson(formValues, props.memberId)
+      .then((res) => {
+        props.changeModal();
+      });
   };
 
   return (
@@ -96,7 +98,7 @@ const ContactPersonForm = (props) => {
   );
 };
 
-export default connect(null)(
+export default connect(null, { sendEmailToContactPerson })(
   reduxForm({
     form: "contactPersonForm", // a unique identifier for this form
     validate,
