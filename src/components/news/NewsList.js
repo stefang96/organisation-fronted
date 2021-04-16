@@ -43,10 +43,18 @@ const NewsList = (props) => {
         search: searchQuery,
         organisationId: searchFilters.organisationId,
       };
-      const reqData = {
+      let reqData = {
         pagination: pagination,
         filters: null,
       };
+      if (props.profile) {
+        reqData = {
+          pagination: pagination,
+          filters: null,
+          memberId: props.memberId,
+        };
+      }
+
       props.getNews(reqData);
     },
     []
@@ -92,7 +100,9 @@ const NewsList = (props) => {
     []
   );
   return (
-    <div className="container-body  d-flex ">
+    <div
+      className={` ${!props.profile ? "container-body" : "mt-30"}   d-flex `}
+    >
       <DataGrid
         data={data}
         meta={meta}

@@ -124,6 +124,41 @@ button:disabled {
   color: white;
   border-color: #299be4;
 }
+.btn-outline-status-active {
+  color: white;
+  border-color: #299be4;
+  background-color: #299be4;
+  border-radius: 100px;
+  padding: 10px;
+  letter-spacing: 2px;
+  font-weight: bold;
+  &:hover {
+    color: #299be4;
+    background-color: white;
+  }
+}
+.btn-outline-status-inactive {
+  color: white;
+  border-color: #ec3c6a;
+  background-color: #ec3c6a;
+  border-radius: 100px;
+  letter-spacing: 2px;
+  font-weight: bold;
+  padding: 10px;
+  &:hover {
+    color: #ec3c6a;
+    background-color: white;
+  }
+}
+.flex-50 {
+  flex: 50;
+}
+.my-profile--header {
+  padding: 10px;
+  text-align: center;
+  font-size: 20px;
+  background-color: #f5f5f5;
+}
 .w-150 {
   width: 150px;
 }

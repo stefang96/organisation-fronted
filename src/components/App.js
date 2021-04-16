@@ -15,6 +15,8 @@ import SingleNews from "./news/SingleNews";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { isLogin } from "../middleware/auth";
 import Logout from "./auth/Logout";
+import MemberList from "./member/MemberList";
+import MyProfile from "./member/MyProfile";
 
 function App(props) {
   return (
@@ -57,6 +59,12 @@ function App(props) {
               path="/organisation"
             />
             <PrivateRoute component={Logout} exact path="/logout" />
+            <PrivateRoute component={MemberList} exact path="/members" />
+            <PrivateRoute
+              component={MyProfile}
+              exact
+              path="/members/:memberId"
+            />
           </Switch>
         </Switch>
       </Router>

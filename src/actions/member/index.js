@@ -1,6 +1,7 @@
 import api from "../../api/index";
 import memberConstants from "../../constants/memberConstants";
 import { SubmissionError } from "redux-form";
+import getToken from "../../utils/getToken";
 
 export const sendEmailToContactPerson = (data, memberId) => async (
   dispatch
@@ -21,6 +22,31 @@ export const sendEmailToContactPerson = (data, memberId) => async (
       throw new SubmissionError({
         email: err.response.data.message,
       });
+      //   dispatch({
+      //   type: memberConstants.ERROR_ACTION,
+      //  });
+    });
+};
+
+export const getMemberById = (memberId) => async (dispatch) => {
+  return await api
+    .get("/member/" + memberId, {
+      headers: {
+        Authorization: "Bearer " + getToken(),
+        "Content-Type": "application/json",
+      },
+    })
+    .then((res) => {
+      const result = res.data.result;
+
+      dispatch({
+        type: memberConstants.GET_MEMBER,
+        data: result,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+
       //   dispatch({
       //   type: memberConstants.ERROR_ACTION,
       //  });

@@ -7,6 +7,7 @@ import memberConstants from "../../constants/memberConstants";
 
 const initialState = {
   memberList: null,
+  member: {},
   memberMeta: null,
   successAction: false,
   errorAction: false,
@@ -15,6 +16,11 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case memberConstants.GET_MEMBER:
+      return {
+        ...state,
+        member: action.data,
+      };
     case memberConstants.SUCCESS_ACTION:
       return {
         ...state,
