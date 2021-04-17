@@ -53,6 +53,10 @@ export const getMemberById = (memberId) => async (dispatch) => {
     });
 };
 
+export const updateMember = (data) => async (dispatch) => {};
+
+export const archiveMember = (data) => async (dispatch) => {};
+
 export const clearMemerAction = () => async (dispatch) => {
   dispatch({
     type: memberConstants.CLEAR_ACTION,

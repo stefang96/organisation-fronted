@@ -4,10 +4,13 @@ import DataGrid from "../grid/index";
 import { getNews } from "../../actions/index";
 import "./news.scss";
 import { Height } from "@material-ui/icons";
+import { Modal, Alert } from "react-bootstrap";
+import CreateNews from "./forms/CreateNews";
 
 const NewsList = (props) => {
   const [filters, setFilters] = useState(null);
   const [pageIndex, setPageIndex] = useState(null);
+  const [createNewsModal, setCreateNewsModal] = useState(false);
 
   let meta;
   const [searchFilters, setSearchFilters] = useState({
@@ -99,20 +102,38 @@ const NewsList = (props) => {
     ],
     []
   );
+
+  const createNews = () => {
+    setCreateNewsModal(!createNewsModal);
+  };
   return (
-    <div
-      className={` ${!props.profile ? "container-body" : "mt-30"}   d-flex `}
-    >
-      <DataGrid
-        data={data}
-        meta={meta}
-        columns={columns}
-        fetchData={fetchData}
-        fetchFilters={fetchFilters}
-        searchFilters={getInitialFilters}
-        pageCount={meta && Math.ceil(meta.total / meta.limit)}
-      />
-    </div>
+    <>
+      <Modal
+        size="lg"
+        backdrop="static"
+        keyboard={false}
+        show={createNewsModal}
+        onHide={createNews}
+        aria-labelledby="example-modal-sizes-title-lg"
+      >
+        <CreateNews changeModal={createNews} />
+      </Modal>
+      <div
+        className={` ${!props.profile ? "container-body" : "mt-30"}   d-flex `}
+      >
+        <DataGrid
+          data={data}
+          meta={meta}
+          columns={columns}
+          fetchData={fetchData}
+          fetchFilters={fetchFilters}
+          createNews={createNews}
+          searchFilters={getInitialFilters}
+          profile={props.profile}
+          pageCount={meta && Math.ceil(meta.total / meta.limit)}
+        />
+      </div>
+    </>
   );
 };
 

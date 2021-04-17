@@ -4,28 +4,23 @@ export default ({
   input,
   label,
   disabled,
-  info,
+  children,
   type,
   meta: { touched, error, warning },
 }) => (
-  <div className="mb-3">
+  <div class="form-group mb-3">
     <label className="form-label">{label}</label>
-    <input
-      {...input}
+    <select
+      class="form-select"
       disabled={disabled}
-      type={type}
-      className="form-control"
-      placeholder={label}
-    />
+      aria-label="Default select example"
+      {...input}
+    >
+      {children}
+    </select>
 
     {touched &&
       ((error && <span className="text-danger">{error}</span>) ||
         (warning && <span>{warning}</span>))}
-
-    {info && (
-      <div className="form-text">
-        We'll never share your email with anyone else.
-      </div>
-    )}
   </div>
 );

@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useTable, usePagination } from "react-table";
 import history from "../../history";
 import moment from "moment";
+import loggedUser from "../../utils/getLoggedUser";
 
 const DataGrid = (props) => {
+  const user = loggedUser();
   const { data, fetchData, searchFilters, meta, fetchPage } = props;
   // const { limit, page, total } = props.meta;
   console.log(meta);
@@ -204,6 +206,17 @@ const DataGrid = (props) => {
         <>
           <div className="p-30  h-auto bg-color-light-grey">
             <div className="filter filter--search ">
+              {true && (
+                <button
+                  onClick={() => props.createNews()}
+                  className="btn btn-create-news h-50-px mb-30 w-100    "
+                >
+                  <div className="center">
+                    <i className="bi bi-plus-square mr-10"></i>
+                    <span>Create news</span>
+                  </div>
+                </button>
+              )}
               <div class="form-group">
                 <label for="searchInput">Search</label>
                 <input
@@ -217,18 +230,20 @@ const DataGrid = (props) => {
                 />
               </div>
 
-              <div class="form-group mt-30">
-                <select
-                  class="form-select"
-                  onChange={setSelectedFilter}
-                  aria-label="Default select example"
-                >
-                  <option value="0">Open this select menu</option>
-                  <option value="1">One</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
-                </select>
-              </div>
+              {!props.profile && (
+                <div class="form-group mt-30">
+                  <select
+                    class="form-select"
+                    onChange={setSelectedFilter}
+                    aria-label="Default select example"
+                  >
+                    <option value="0">Open this select menu</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                  </select>
+                </div>
+              )}
             </div>
           </div>
           <div class="form-group mt-30">

@@ -25,7 +25,7 @@ const MyProfile = (props) => {
           <NewsList profile={true} memberId={props.match.params.memberId} />
         </Tab>
         <Tab eventKey="payments" title="Payments">
-          User payments
+          <div className="mt-30">User payments</div>
         </Tab>
       </Tabs>
     </div>
