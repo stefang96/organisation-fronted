@@ -2,13 +2,34 @@
   overflow: hidden;
   margin: 12.5px;
   max-width: 403px;
-
   background-color: #fff !important;
-  border-right: 3px solid #38cfd8;
   min-height: 217px;
+  position: relative;
+
+  .actions {
+    display: none;
+  }
 
   &:hover {
-    border-right: 3px solid #ec3c6a;
+    .actions {
+      display: inline-block;
+      position: absolute;
+
+      z-index: 3;
+      right: 0;
+      top: 0;
+      margin-top: 3px;
+      height: 50px;
+
+      .actions_buttons {
+        i {
+          font-size: 20px;
+        }
+        border-radius: 3px;
+        padding: 3px;
+        background-color: #f1f1f2;
+      }
+    }
   }
 }
 .post-slide .post-img {
@@ -49,7 +70,7 @@
 }
 .post-slide .post-review {
   padding: 5% 3% 1% 0;
-  border-top: 3px solid #38cfd8;
+  border-top: 3px solid #299be4;
 }
 .post-slide:hover .post-review {
   border-top-color: #ec3c6a;
@@ -79,7 +100,7 @@
 }
 .post-slide .post-bar:after,
 .post-slide .post-bar:before {
-  border: 1px solid #38cfd8;
+  border: 1px solid #299be4;
   bottom: -10px;
   content: "";
   display: block;

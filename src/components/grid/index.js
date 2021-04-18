@@ -75,50 +75,72 @@ const DataGrid = (props) => {
                 data.length > 0 &&
                 data.map((item) => {
                   return (
-                    <div
-                      class="post-slide cursor-pointer"
-                      onClick={() => getSingleView(item.id)}
-                    >
-                      <div class="post-img">
-                        <a href="#">
-                          <img
-                            src={
-                              item.filePath
-                                ? item.filePath
-                                : "http://localhost:5000/static/defaultNews.png"
-                            }
-                            alt=""
-                          />
-                          <div class="post-date">
-                            <span class="date">
-                              {moment.unix(item.createdAt).day()}
-                            </span>
-                            <span class="month">
-                              {moment.unix(item.createdAt, "MM").format("MMMM")}
-                            </span>
-                          </div>
-                        </a>
+                    <div class="post-slide  ">
+                      <div className="actions ">
+                        <div className="d-flex actions_buttons">
+                          <button
+                            onClick={() => props.editNews(item.id)}
+                            className="btn   h-50-px   w-100"
+                          >
+                            <i class="bi bi-pencil-square color-app-blue ml-5-px mr-5-px"></i>
+                          </button>
+                          <button
+                            onClick={() => props.removeNews(item.id)}
+                            className="btn  h-50-px   w-100"
+                          >
+                            <i class="bi bi-x-circle-fill h-50-px color-app-red mr-5-px"></i>
+                          </button>
+                        </div>
                       </div>
-                      <div class="post-review">
-                        <h3 class="post-title">
-                          <a href="#">{item.title}</a>
-                        </h3>
-                        <ul class="post-bar">
-                          <li>
-                            <i class="bi bi-person-fill"></i>
-                            <a href="#">
-                              {item.member.firstName +
-                                " " +
-                                item.member.lastName}
-                            </a>
-                          </li>
-                          <li>
-                            <i class="bi bi-building"></i>
-                            <a href="#">{item.member.organisation.name}</a>
-                          </li>
-                        </ul>
+                      <div
+                        class="  cursor-pointer"
+                        onClick={() => getSingleView(item.id)}
+                      >
+                        <div class="post-img">
+                          <a href="#">
+                            <img
+                              src={
+                                item.filePath
+                                  ? item.filePath
+                                  : "http://localhost:5000/static/defaultNews.png"
+                              }
+                              alt=""
+                            />
+                            <div class="post-date">
+                              <span class="date">
+                                {moment.unix(item.createdAt).day()}
+                              </span>
+                              <span class="month">
+                                {moment
+                                  .unix(item.createdAt, "MM")
+                                  .format("MMMM")}
+                              </span>
+                            </div>
+                          </a>
+                        </div>
+                        <div class="post-review">
+                          <h3 class="post-title">
+                            <a href="#">{item.title}</a>
+                          </h3>
+                          <ul class="post-bar">
+                            <li>
+                              <i class="bi bi-person-fill"></i>
+                              <a href="#">
+                                {item.member.firstName +
+                                  " " +
+                                  item.member.lastName}
+                              </a>
+                            </li>
+                            <li>
+                              <i class="bi bi-building"></i>
+                              <a href="#">{item.member.organisation.name}</a>
+                            </li>
+                          </ul>
 
-                        <p class="post-description">{item.shortDescription}</p>
+                          <p class="post-description">
+                            {item.shortDescription}
+                          </p>
+                        </div>
                       </div>
                     </div>
                   );

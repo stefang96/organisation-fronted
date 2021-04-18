@@ -6,11 +6,16 @@ import "./news.scss";
 import { Height } from "@material-ui/icons";
 import { Modal, Alert } from "react-bootstrap";
 import CreateNews from "./forms/CreateNews";
+import EditNews from "./forms/EditNews";
+import RemoveNews from "./forms/RemoveNews";
 
 const NewsList = (props) => {
   const [filters, setFilters] = useState(null);
   const [pageIndex, setPageIndex] = useState(null);
   const [createNewsModal, setCreateNewsModal] = useState(false);
+  const [editNewsModal, setEditNewsModal] = useState(false);
+  const [removeNewsModal, setRemoveNewsModal] = useState(false);
+  const [newsId, setNewsId] = useState(false);
 
   let meta;
   const [searchFilters, setSearchFilters] = useState({
@@ -106,6 +111,15 @@ const NewsList = (props) => {
   const createNews = () => {
     setCreateNewsModal(!createNewsModal);
   };
+  const editNews = (newsId = null) => {
+    setEditNewsModal(!editNewsModal);
+    setNewsId(newsId);
+  };
+
+  const removeNews = (newsId = null) => {
+    setRemoveNewsModal(!removeNewsModal);
+    setNewsId(newsId);
+  };
   return (
     <>
       <Modal
@@ -118,6 +132,26 @@ const NewsList = (props) => {
       >
         <CreateNews changeModal={createNews} />
       </Modal>
+      <Modal
+        size="lg"
+        backdrop="static"
+        keyboard={false}
+        show={editNewsModal}
+        onHide={editNews}
+        aria-labelledby="example-modal-sizes-title-lg"
+      >
+        <EditNews newsId={newsId} changeModal={editNews} />
+      </Modal>
+      <Modal
+        size="lg"
+        backdrop="static"
+        keyboard={false}
+        show={removeNewsModal}
+        onHide={removeNews}
+        aria-labelledby="example-modal-sizes-title-lg"
+      >
+        <RemoveNews newsId={newsId} changeModal={removeNews} />
+      </Modal>
       <div
         className={` ${!props.profile ? "container-body" : "mt-30"}   d-flex `}
       >
@@ -128,6 +162,8 @@ const NewsList = (props) => {
           fetchData={fetchData}
           fetchFilters={fetchFilters}
           createNews={createNews}
+          removeNews={removeNews}
+          editNews={editNews}
           searchFilters={getInitialFilters}
           profile={props.profile}
           pageCount={meta && Math.ceil(meta.total / meta.limit)}
