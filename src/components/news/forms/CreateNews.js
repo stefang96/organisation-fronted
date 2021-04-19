@@ -2,30 +2,27 @@ import React, { useState } from "react";
 import { Modal, Button, closeButton } from "react-bootstrap";
 import { reduxForm, Field } from "redux-form";
 import renderTextField from "../../fields/renderTextField ";
-
+import validate from "../../fields/validation/validateNews";
 import { connect } from "react-redux";
-import { updateMember } from "../../../actions/index";
+import { createNews } from "../../../actions/index";
 import renderFileField from "../../fields/renderFileField";
+import renderTextArea from "../../fields/renderTextArea";
 
 const CreateNews = (props) => {
   const [fileUrl, setFileUrl] = useState(null);
   const [file, setFile] = useState(null);
-  const renderTextArea = ({ input, label, name, classField }) => {
-    return (
-      <div className=" mt-30 form-floating">
-        <textarea
-          {...input}
-          className={`form-control  ${classField}`}
-          placeholder="Leave a comment here"
-          id={name}
-        ></textarea>
-        <label for={name}>{label}</label>
-      </div>
-    );
-  };
+
   const onSubmit = (formValues) => {
     console.log(file);
     console.log(formValues);
+    const formData = new FormData();
+    if (file) formData.append("file", file);
+
+    Object.keys(formValues).forEach((key) =>
+      formData.append(key, formValues[key])
+    );
+
+    props.createNews(formData);
   };
 
   const changeFile = (file) => {
@@ -93,8 +90,9 @@ const CreateNews = (props) => {
   );
 };
 
-export default connect(null)(
+export default connect(null, { createNews })(
   reduxForm({
     form: "createNewsForm", // a unique identifier for this form
+    validate,
   })(CreateNews)
 );

@@ -16,6 +16,11 @@ const NewsList = (props) => {
   const [editNewsModal, setEditNewsModal] = useState(false);
   const [removeNewsModal, setRemoveNewsModal] = useState(false);
   const [newsId, setNewsId] = useState(false);
+  const [variant, setVariant] = useState(null);
+
+  useEffect(() => {
+    checkResponseAction();
+  }, [props.successAction, props.errorAction]);
 
   let meta;
   const [searchFilters, setSearchFilters] = useState({
@@ -108,6 +113,22 @@ const NewsList = (props) => {
     []
   );
 
+  const checkResponseAction = () => {
+    if (props.successAction) {
+      setTimeout(() => props.clearMemerAction(), 5000);
+      setVariant("success");
+    } else if (props.errorAction) {
+      setTimeout(() => props.clearMemerAction(), 5000);
+      setVariant("danger");
+    }
+  };
+
+  const setShow = (value) => {
+    if (!value) {
+      props.clearMemerAction();
+    }
+  };
+
   const createNews = () => {
     setCreateNewsModal(!createNewsModal);
   };
@@ -142,14 +163,7 @@ const NewsList = (props) => {
       >
         <EditNews newsId={newsId} changeModal={editNews} />
       </Modal>
-      <Modal
-        size="lg"
-        backdrop="static"
-        keyboard={false}
-        show={removeNewsModal}
-        onHide={removeNews}
-        aria-labelledby="example-modal-sizes-title-lg"
-      >
+      <Modal keyboard={false} show={removeNewsModal} onHide={removeNews}>
         <RemoveNews newsId={newsId} changeModal={removeNews} />
       </Modal>
       <div
@@ -169,6 +183,14 @@ const NewsList = (props) => {
           pageCount={meta && Math.ceil(meta.total / meta.limit)}
         />
       </div>
+
+      {(props.successAction || props.errorAction) && (
+        <div className="alert-position">
+          <Alert variant={variant} onClose={() => setShow(false)} dismissible>
+            {props.message && props.message}
+          </Alert>
+        </div>
+      )}
     </>
   );
 };
@@ -177,6 +199,9 @@ const mapStateToProps = (state) => {
   return {
     news: state.news.newsList,
     newsMeta: state.news.newsMeta,
+    successAction: state.news.successAction,
+    errorAction: state.news.errorAction,
+    message: state.news.message,
   };
 };
 export default connect(mapStateToProps, { getNews })(NewsList);

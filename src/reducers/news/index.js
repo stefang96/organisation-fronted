@@ -8,6 +8,10 @@ import newsConstants from "../../constants/newsConstants";
 const initialState = {
   newsList: null,
   newsMeta: null,
+  news: null,
+  message: null,
+  successAction: false,
+  errorAction: false,
 };
 
 export default (state = initialState, action) => {
@@ -17,6 +21,43 @@ export default (state = initialState, action) => {
         ...state,
         newsList: action.data.result,
         newsMeta: action.data.meta,
+      };
+    case newsConstants.CREATE_NEWS:
+      return {
+        ...state,
+        successAction: true,
+        errorAction: false,
+        message: "Success create news.",
+      };
+
+    case newsConstants.GET_NEWS_BY_ID:
+      return {
+        ...state,
+        news: action.data.result,
+      };
+
+    case newsConstants.UPDATE_NEWS:
+      return {
+        ...state,
+        successAction: true,
+        errorAction: false,
+        message: "Success update news.",
+      };
+
+    case newsConstants.REMOVE_NEWS:
+      return {
+        ...state,
+        successAction: true,
+        errorAction: false,
+        message: "Success remove news.",
+      };
+
+    case newsConstants.FAILED_RESPONSE:
+      return {
+        ...state,
+        successAction: false,
+        errorAction: true,
+        message: action.message,
       };
 
     default:

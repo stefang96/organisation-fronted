@@ -107,14 +107,14 @@ const OrganisationList = (props) => {
     data = props.organisationList;
     console.log(Math.ceil(meta.total / meta.limit));
   }
-  console.log(data);
-  console.log(meta);
 
   const checkResponseAction = () => {
     if (props.successAction) {
+      changeModal();
       setTimeout(() => props.clearMemerAction(), 5000);
       setVariant("success");
     } else if (props.errorAction) {
+      changeModal();
       setTimeout(() => props.clearMemerAction(), 5000);
       setVariant("danger");
     }

@@ -3,7 +3,7 @@ import { Modal, Button, closeButton } from "react-bootstrap";
 import { reduxForm, Field } from "redux-form";
 import renderTextField from "../../fields/renderTextField ";
 import { connect } from "react-redux";
-//import { getNewsById } from "../../../actions/index";
+import { getNewsById } from "../../../actions/index";
 import renderFileField from "../../fields/renderFileField";
 
 const EditNews = (props) => {
@@ -11,7 +11,7 @@ const EditNews = (props) => {
   const [file, setFile] = useState(null);
 
   useEffect(() => {
-    //props.getNewsById(props.newsId)
+    props.getNewsById(props.newsId);
   }, [props.newsId]);
 
   const renderTextArea = ({ input, label, name, classField }) => {
@@ -45,7 +45,9 @@ const EditNews = (props) => {
       <form onSubmit={props.handleSubmit(onSubmit)} noValidate>
         <Modal.Body className="px-70">
           <div className=" row">
-            {file && <img src={fileUrl} className="h-200" alt="file" />}
+            {props.filePath && (
+              <img src={props.filePath} className="h-200" alt="file" />
+            )}
             <div className="col">
               <Field
                 name="file"
@@ -98,7 +100,25 @@ const EditNews = (props) => {
   );
 };
 
-export default connect(null)(
+const mapStateToProps = (state) => {
+  const news = state.news.news && state.news.news;
+
+  const initialValues = news && {
+    title: news.title,
+    description: news.description,
+    short_description: news.shortDescription,
+  };
+  const fileName = news && news.fileName;
+  const filePath = news && news.filePath;
+
+  return {
+    initialValues,
+    fileName,
+    filePath,
+  };
+};
+
+export default connect(mapStateToProps, { getNewsById })(
   reduxForm({
     form: "editNewsForm", // a unique identifier for this form
   })(EditNews)

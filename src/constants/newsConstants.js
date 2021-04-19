@@ -1,5 +1,10 @@
 const newsConstants = {
   GET_NEWS: "GET_NEWS",
+  GET_NEWS_BY_ID: "GET_NEWS_BY_ID",
+  UPDATE_NEWS: "UPDATE_NEWS",
+  CREATE_NEWS: "CREATE_NEWS",
+  REMOVE_NEWS: "REMOVE_NEWS",
+  FAILED_RESPONSE: "FAILED_RESPONSE",
 };
 
 export default newsConstants;
