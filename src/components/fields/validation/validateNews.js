@@ -8,8 +8,8 @@ export default (formValues) => {
   if (!formValues.title) {
     errors.title = "Title is required";
   }
-  if (!formValues.short_description) {
-    errors.short_description = "Description is required";
+  if (!formValues.shortDescription) {
+    errors.shortDescription = "Short Description is required";
   }
 
   return errors;

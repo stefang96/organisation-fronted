@@ -60,6 +60,14 @@ export default (state = initialState, action) => {
         message: action.message,
       };
 
+    case newsConstants.CLEAR_ACTIONS:
+      return {
+        ...state,
+        successAction: false,
+        errorAction: false,
+        message: null,
+      };
+
     default:
       return state;
   }

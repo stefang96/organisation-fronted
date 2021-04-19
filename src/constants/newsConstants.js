@@ -5,6 +5,7 @@ const newsConstants = {
   CREATE_NEWS: "CREATE_NEWS",
   REMOVE_NEWS: "REMOVE_NEWS",
   FAILED_RESPONSE: "FAILED_RESPONSE",
+  CLEAR_ACTIONS: "CLEAR_ACTIONS",
 };
 
 export default newsConstants;

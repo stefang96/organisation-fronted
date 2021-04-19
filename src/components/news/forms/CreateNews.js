@@ -56,7 +56,7 @@ const CreateNews = (props) => {
             </div>
           </div>
           <Field
-            name="short_description"
+            name="shortDescription"
             component={renderTextArea}
             classField="min-h-100"
             label="Short description"

@@ -146,3 +146,9 @@ const failedResponse = (message) => {
     message: message,
   };
 };
+
+export const clearNewsAction = () => (dispatch) => {
+  dispatch({
+    type: newsConstants.CLEAR_ACTIONS,
+  });
+};

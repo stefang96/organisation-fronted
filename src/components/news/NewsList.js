@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import DataGrid from "../grid/index";
-import { getNews } from "../../actions/index";
+import { getNews, clearNewsAction } from "../../actions/index";
 import "./news.scss";
 import { Height } from "@material-ui/icons";
 import { Modal, Alert } from "react-bootstrap";
@@ -115,17 +115,17 @@ const NewsList = (props) => {
 
   const checkResponseAction = () => {
     if (props.successAction) {
-      setTimeout(() => props.clearMemerAction(), 5000);
+      setTimeout(() => props.clearNewsAction(), 5000);
       setVariant("success");
     } else if (props.errorAction) {
-      setTimeout(() => props.clearMemerAction(), 5000);
+      setTimeout(() => props.clearNewsAction(), 5000);
       setVariant("danger");
     }
   };
 
   const setShow = (value) => {
     if (!value) {
-      props.clearMemerAction();
+      props.clearNewsAction();
     }
   };
 
@@ -204,4 +204,4 @@ const mapStateToProps = (state) => {
     message: state.news.message,
   };
 };
-export default connect(mapStateToProps, { getNews })(NewsList);
+export default connect(mapStateToProps, { getNews, clearNewsAction })(NewsList);
