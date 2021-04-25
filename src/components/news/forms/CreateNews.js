@@ -22,7 +22,8 @@ const CreateNews = (props) => {
       formData.append(key, formValues[key])
     );
 
-    props.createNews(formData);
+    props.createNews(formData, props.memberId);
+    props.changeModal();
   };
 
   const changeFile = (file) => {
@@ -36,8 +37,10 @@ const CreateNews = (props) => {
       </Modal.Header>
       <form onSubmit={props.handleSubmit(onSubmit)} noValidate>
         <Modal.Body className="px-70">
-          <div className=" row">
-            {file && <img src={fileUrl} className="h-200" alt="file" />}
+          <div className="row">
+            <div>
+              {file && <img src={fileUrl} className="h-200" alt="file" />}
+            </div>
             <div className="col">
               <Field
                 name="file"

@@ -39,6 +39,7 @@ export default (state = initialState, action) => {
     case newsConstants.UPDATE_NEWS:
       return {
         ...state,
+        news: null,
         successAction: true,
         errorAction: false,
         message: "Success update news.",
@@ -47,6 +48,7 @@ export default (state = initialState, action) => {
     case newsConstants.REMOVE_NEWS:
       return {
         ...state,
+        news: null,
         successAction: true,
         errorAction: false,
         message: "Success remove news.",
@@ -55,6 +57,7 @@ export default (state = initialState, action) => {
     case newsConstants.FAILED_RESPONSE:
       return {
         ...state,
+        news: null,
         successAction: false,
         errorAction: true,
         message: action.message,

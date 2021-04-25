@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import { Modal, Button, closeButton } from "react-bootstrap";
 import { reduxForm, Field } from "redux-form";
-import renderTextField from "../../fields/renderTextField ";
+
 import { connect } from "react-redux";
-import { updateMember } from "../../../actions/index";
-import renderFileField from "../../fields/renderFileField";
+import { removeNews } from "../../../actions/index";
 
 const RemoveNews = (props) => {
   const onSubmit = (formValues) => {
     console.log(formValues);
+    props.removeNews(props.newsId, props.memberId);
+    props.changeModal();
   };
 
   return (
@@ -40,7 +41,7 @@ const RemoveNews = (props) => {
   );
 };
 
-export default connect(null)(
+export default connect(null, { removeNews })(
   reduxForm({
     form: "removeNewsForm", // a unique identifier for this form
   })(RemoveNews)

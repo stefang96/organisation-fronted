@@ -108,7 +108,7 @@ const DataGrid = (props) => {
                             />
                             <div class="post-date">
                               <span class="date">
-                                {moment.unix(item.createdAt).day()}
+                                {moment.unix(item.createdAt, "DD").format("DD")}
                               </span>
                               <span class="month">
                                 {moment

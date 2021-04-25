@@ -3,7 +3,7 @@ import { Modal, Button, closeButton } from "react-bootstrap";
 import { reduxForm, Field } from "redux-form";
 import renderTextField from "../../fields/renderTextField ";
 import { connect } from "react-redux";
-import { getNewsById } from "../../../actions/index";
+import { getNewsById, updateNews } from "../../../actions/index";
 import renderFileField from "../../fields/renderFileField";
 
 const EditNews = (props) => {
@@ -31,6 +31,15 @@ const EditNews = (props) => {
   const onSubmit = (formValues) => {
     console.log(file);
     console.log(formValues);
+
+    const formData = new FormData();
+    if (file) formData.append("file", file);
+
+    Object.keys(formValues).forEach((key) =>
+      formData.append(key, formValues[key])
+    );
+    props.updateNews(props.newsId, formData, props.memberId);
+    props.changeModal();
   };
 
   const changeFile = (file) => {
@@ -45,9 +54,15 @@ const EditNews = (props) => {
       <form onSubmit={props.handleSubmit(onSubmit)} noValidate>
         <Modal.Body className="px-70">
           <div className=" row">
-            {props.filePath && (
-              <img src={props.filePath} className="h-200" alt="file" />
-            )}
+            <div>
+              {fileUrl ? (
+                <img src={fileUrl} className="h-200" alt="file" />
+              ) : (
+                props.filePath && (
+                  <img src={props.filePath} className="h-200" alt="file" />
+                )
+              )}
+            </div>
             <div className="col">
               <Field
                 name="file"
@@ -66,7 +81,7 @@ const EditNews = (props) => {
             </div>
           </div>
           <Field
-            name="short_description"
+            name="shortDescription"
             component={renderTextArea}
             classField="min-h-100"
             label="Short description"
@@ -106,7 +121,7 @@ const mapStateToProps = (state) => {
   const initialValues = news && {
     title: news.title,
     description: news.description,
-    short_description: news.shortDescription,
+    shortDescription: news.shortDescription,
   };
   const fileName = news && news.fileName;
   const filePath = news && news.filePath;
@@ -118,7 +133,7 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { getNewsById })(
+export default connect(mapStateToProps, { getNewsById, updateNews })(
   reduxForm({
     form: "editNewsForm", // a unique identifier for this form
   })(EditNews)

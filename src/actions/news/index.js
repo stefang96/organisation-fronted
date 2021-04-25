@@ -54,7 +54,7 @@ export const getNewsById = (newsId) => async (dispatch) => {
     });
 };
 
-export const updateNews = (newsId) => async (dispatch) => {
+export const updateNews = (newsId, data, memberId) => async (dispatch) => {
   let headers = {};
   if (getToken()) {
     headers = {
@@ -63,7 +63,7 @@ export const updateNews = (newsId) => async (dispatch) => {
     };
   }
   return await api
-    .put("/news/" + newsId, {
+    .put("/news/" + newsId, data, {
       headers: headers,
     })
     .then((res) => {
@@ -74,6 +74,11 @@ export const updateNews = (newsId) => async (dispatch) => {
         data: result,
       });
 
+      const getNewsData = {
+        pagination: { page: 1 },
+        memberId: memberId,
+      };
+      dispatch(getNews(getNewsData));
       console.log(result);
     })
     .catch((err) => {
@@ -82,7 +87,7 @@ export const updateNews = (newsId) => async (dispatch) => {
     });
 };
 
-export const removeNews = (newsId) => async (dispatch) => {
+export const removeNews = (newsId, memberId) => async (dispatch) => {
   let headers = {};
   if (getToken()) {
     headers = {
@@ -102,6 +107,11 @@ export const removeNews = (newsId) => async (dispatch) => {
         data: result,
       });
 
+      const getNewsData = {
+        pagination: { page: 1 },
+        memberId: memberId,
+      };
+      dispatch(getNews(getNewsData));
       console.log(result);
     })
     .catch((err) => {
@@ -110,7 +120,7 @@ export const removeNews = (newsId) => async (dispatch) => {
     });
 };
 
-export const createNews = (data) => async (dispatch) => {
+export const createNews = (data, memberId = null) => async (dispatch) => {
   let headers = {};
   if (getToken()) {
     headers = {
@@ -129,8 +139,11 @@ export const createNews = (data) => async (dispatch) => {
         type: newsConstants.CREATE_NEWS,
         data: result,
       });
-
-      dispatch(getNews());
+      const getNewsData = {
+        pagination: { page: 1 },
+        memberId: memberId,
+      };
+      dispatch(getNews(getNewsData));
 
       console.log(result);
     })

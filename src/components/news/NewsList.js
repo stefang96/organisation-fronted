@@ -134,12 +134,12 @@ const NewsList = (props) => {
   };
   const editNews = (newsId = null) => {
     setEditNewsModal(!editNewsModal);
-    setNewsId(newsId);
+    if (newsId) setNewsId(newsId);
   };
 
   const removeNews = (newsId = null) => {
     setRemoveNewsModal(!removeNewsModal);
-    setNewsId(newsId);
+    if (newsId) setNewsId(newsId);
   };
   return (
     <>
@@ -151,7 +151,10 @@ const NewsList = (props) => {
         onHide={createNews}
         aria-labelledby="example-modal-sizes-title-lg"
       >
-        <CreateNews changeModal={createNews} />
+        <CreateNews
+          memberId={props.memberId ? props.memberId : null}
+          changeModal={createNews}
+        />
       </Modal>
       <Modal
         size="lg"
@@ -161,10 +164,18 @@ const NewsList = (props) => {
         onHide={editNews}
         aria-labelledby="example-modal-sizes-title-lg"
       >
-        <EditNews newsId={newsId} changeModal={editNews} />
+        <EditNews
+          memberId={props.memberId ? props.memberId : null}
+          newsId={newsId}
+          changeModal={editNews}
+        />
       </Modal>
       <Modal keyboard={false} show={removeNewsModal} onHide={removeNews}>
-        <RemoveNews newsId={newsId} changeModal={removeNews} />
+        <RemoveNews
+          memberId={props.memberId ? props.memberId : null}
+          newsId={newsId}
+          changeModal={removeNews}
+        />
       </Modal>
       <div
         className={` ${!props.profile ? "container-body" : "mt-30"}   d-flex `}
