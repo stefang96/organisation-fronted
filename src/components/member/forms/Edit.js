@@ -1,15 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Modal, Button, closeButton } from "react-bootstrap";
 import { reduxForm, Field } from "redux-form";
 import renderTextField from "../../fields/renderTextField ";
 import validate from "../../fields/validation/validateContactPersonForm";
 import { connect } from "react-redux";
-import { updateMember } from "../../../actions/index";
+import { updateMember, getMemberById } from "../../../actions/index";
 import renderSelectField from "../../fields/renderSelectField";
 import loggedUser from "../../../utils/getLoggedUser";
 
 const Edit = (props) => {
   const user = loggedUser();
+
+  useEffect(() => {
+    props.getMemberById(props.memberId);
+  }, [props.memberId]);
   const onSubmit = (formValues) => {
     console.log(formValues);
   };
@@ -110,8 +114,10 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { updateMember })(
+export default connect(mapStateToProps, { updateMember, getMemberById })(
   reduxForm({
     form: "updateMemberForm", // a unique identifier for this form
+    enableReinitialize: true,
+    touchOnBlur: false,
   })(Edit)
 );

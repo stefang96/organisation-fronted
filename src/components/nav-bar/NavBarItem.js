@@ -29,7 +29,7 @@ const NavBarItem = (props) => {
         {
           class: "nav-item",
           name: "My Profile",
-          to: "/members/" + loggedUser.id,
+          to: "/my-profile/" + loggedUser.id,
         },
       ];
     } else if (loggedUser.role === "member") {
@@ -129,7 +129,7 @@ const NavBarItem = (props) => {
                 <li>
                   <NavLink
                     className="dropdown-item"
-                    to={"/members/" + loggedUser.id}
+                    to={"/my-profile/" + loggedUser.id}
                   >
                     My profile
                   </NavLink>

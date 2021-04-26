@@ -53,6 +53,31 @@ export const getMemberById = (memberId) => async (dispatch) => {
     });
 };
 
+export const getMembers = (data) => async (dispatch) => {
+  return await api
+    .put("/member", data, {
+      headers: {
+        Authorization: "Bearer " + getToken(),
+        "Content-Type": "application/json",
+      },
+    })
+    .then((res) => {
+      const result = res.data;
+
+      dispatch({
+        type: memberConstants.GET_MEMBERS,
+        data: result,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+
+      //   dispatch({
+      //   type: memberConstants.ERROR_ACTION,
+      //  });
+    });
+};
+
 export const updateMember = (data) => async (dispatch) => {};
 
 export const archiveMember = (data) => async (dispatch) => {};

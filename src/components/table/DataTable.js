@@ -45,6 +45,12 @@ const DataTable = (props) => {
     setSearchQuery(e.target.value);
   };
 
+  const singleView = (row) => {
+    console.log({ row });
+
+    props.view(row.original.id);
+  };
+
   return (
     <>
       <div className="p-10-0 d-flex ">

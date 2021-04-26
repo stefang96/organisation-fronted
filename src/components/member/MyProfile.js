@@ -19,7 +19,7 @@ const MyProfile = (props) => {
         onSelect={(k) => setKey(k)}
       >
         <Tab eventKey="info" title="Information">
-          <MemberInformation />
+          <MemberInformation memberId={props.match.params.memberId} />
         </Tab>
         <Tab eventKey="news" title="My news">
           <NewsList profile={true} memberId={props.match.params.memberId} />

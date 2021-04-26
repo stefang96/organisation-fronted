@@ -65,6 +65,11 @@ function App(props) {
               exact
               path="/members/:memberId"
             />
+            <PrivateRoute
+              component={MyProfile}
+              exact
+              path="/my-profile/:memberId"
+            />
           </Switch>
         </Switch>
       </Router>

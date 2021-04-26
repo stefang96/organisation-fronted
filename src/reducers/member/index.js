@@ -16,6 +16,12 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case memberConstants.GET_MEMBERS:
+      return {
+        ...state,
+        memberList: action.data.result,
+        memberMeta: action.data.meta,
+      };
     case memberConstants.GET_MEMBER:
       return {
         ...state,

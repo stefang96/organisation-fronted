@@ -3,6 +3,7 @@ const authConstants = {
   ERROR_ACTION: "ERROR_ACTION",
   CLEAR_ACTION: "CLEAR_ACTION",
   GET_MEMBER: "GET_MEMBER",
+  GET_MEMBERS: "GET_MEMBERS",
 };
 
 export default authConstants;

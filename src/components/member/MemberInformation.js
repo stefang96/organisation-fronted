@@ -63,7 +63,7 @@ const MemberInformation = (props) => {
   return (
     <>
       <Modal show={archiveMemberModal} onHide={archiveMember}>
-        <Archive changeModal={archiveMember} />
+        <Archive memberId={props.memberId} changeModal={archiveMember} />
       </Modal>
       <Modal
         size="lg"
@@ -73,7 +73,7 @@ const MemberInformation = (props) => {
         onHide={editMember}
         aria-labelledby="example-modal-sizes-title-lg"
       >
-        <Edit changeModal={editMember} />
+        <Edit memberId={props.memberId} changeModal={editMember} />
       </Modal>
 
       <div class="table-view">
