@@ -32,10 +32,4 @@ const MyProfile = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    member: state.member.member,
-    news: state.member.member.news,
-  };
-};
-export default connect(mapStateToProps, { getMemberById })(MyProfile);
+export default connect(null, { getMemberById })(MyProfile);

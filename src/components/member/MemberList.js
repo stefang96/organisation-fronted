@@ -1,42 +1,25 @@
 import React, { useState, useEffect } from "react";
 import DataTable from "../table/DataTable";
 import "../table/table.scss";
-import {
-  getMembers,
-  clearMemerAction,
-  getMemberById,
-} from "../../actions/index";
+import { getMembers, clearMemerAction } from "../../actions/index";
 import { connect } from "react-redux";
-import { fromJS } from "immutable";
 import moment from "moment";
 import { Modal, Alert } from "react-bootstrap";
-import { reduxForm, Field } from "redux-form";
 import history from "../../history";
-
 import Archive from "./forms/Archive";
 import Edit from "./forms/Edit";
+import AddMember from "./forms/AddMember";
 
 const MemberList = (props) => {
-  const [contactPersonModal, setContactPersonModal] = useState(false);
-  const [contactPersonId, setContactPersonId] = useState(null);
   const [variant, setVariant] = useState(null);
-  const [archiveMemberModal, setArchiveMemberModal] = useState(false);
+  const [removeMemberModal, setRemoveMemberModal] = useState(false);
   const [editMemberModal, setEditMemberModal] = useState(false);
+  const [createMemberModal, setCreateMemberModal] = useState(false);
   const [memberId, setMemberId] = useState(null);
 
   useEffect(() => {
     checkResponseAction();
   }, [props.successAction, props.errorAction]);
-
-  const archiveMember = (memberId) => {
-    setArchiveMemberModal(!archiveMemberModal);
-    setMemberId(memberId);
-  };
-
-  const editMember = (memberId) => {
-    setEditMemberModal(!editMemberModal);
-    setMemberId(memberId);
-  };
 
   const statusCell = (props) => {
     const active = props.row.original.active;
@@ -53,7 +36,7 @@ const MemberList = (props) => {
         <span
           class={`status  ${
             active ? "color-app-green " : "color-app-red"
-          } text-success mr-10`}
+          }   mr-10`}
         >
           •
         </span>
@@ -112,7 +95,7 @@ const MemberList = (props) => {
           data-bs-placement="top"
           title="Edit"
           className=" btn action-hover"
-          onClick={() => editMember(userId)}
+          onClick={() => setMemberIdEdit(userId)}
         >
           <i className="bi bi-pencil-square color-app-blue  "></i>
         </button>
@@ -121,16 +104,12 @@ const MemberList = (props) => {
           data-bs-placement="top"
           title="Remove"
           className="btn action-hover"
-          onClick={() => archiveMember(userId)}
+          onClick={() => setMemberIdRemove(userId)}
         >
           <i className="bi bi-person-x-fill color-app-red  "></i>
         </button>
       </div>
     );
-  };
-  const changeModal = (contactPersonId = null) => {
-    setContactPersonModal(!contactPersonModal);
-    setContactPersonId(contactPersonId);
   };
 
   const dateCell = ({ value }) => {
@@ -219,11 +198,9 @@ const MemberList = (props) => {
 
   const checkResponseAction = () => {
     if (props.successAction) {
-      changeModal();
       setTimeout(() => props.clearMemerAction(), 5000);
       setVariant("success");
     } else if (props.errorAction) {
-      changeModal();
       setTimeout(() => props.clearMemerAction(), 5000);
       setVariant("danger");
     }
@@ -239,10 +216,40 @@ const MemberList = (props) => {
     history.push("members/" + memberId);
   };
 
+  const createMember = () => {
+    setCreateMemberModal(!createMemberModal);
+  };
+  const removeMember = () => {
+    setRemoveMemberModal(!removeMemberModal);
+  };
+
+  const editMember = () => {
+    setEditMemberModal(!editMemberModal);
+  };
+
+  const setMemberIdRemove = (memberId) => {
+    setRemoveMemberModal(!removeMemberModal);
+    setMemberId(memberId);
+  };
+  const setMemberIdEdit = (memberId) => {
+    setEditMemberModal(!editMemberModal);
+    setMemberId(memberId);
+  };
+
   return (
     <>
-      <Modal show={archiveMemberModal} onHide={archiveMember}>
-        <Archive memberId={memberId} changeModal={archiveMember} />
+      <Modal
+        size="lg"
+        backdrop="static"
+        keyboard={false}
+        show={createMemberModal}
+        onHide={createMember}
+        aria-labelledby="example-modal-sizes-title-lg"
+      >
+        <AddMember changeModal={createMember} />
+      </Modal>
+      <Modal show={removeMemberModal} onHide={removeMember}>
+        <Archive memberId={memberId} changeModal={removeMember} />
       </Modal>
       <Modal
         size="lg"
@@ -266,7 +273,10 @@ const MemberList = (props) => {
                   </h2>
                 </div>
                 <div className="magin-auto mr-10">
-                  <button class="btn btn-primary d-flex align-items-center">
+                  <button
+                    onClick={() => createMember()}
+                    class="btn btn-primary d-flex align-items-center"
+                  >
                     <i class="bi bi-plus-circle-fill"></i>
                     Add New User
                   </button>

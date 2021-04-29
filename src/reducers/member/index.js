@@ -51,6 +51,41 @@ export default (state = initialState, action) => {
         message: "",
       };
 
+    case memberConstants.REMOVE_MEMBER:
+      return {
+        ...state,
+        member: null,
+        successAction: true,
+        errorAction: false,
+        message: "Success remove member.",
+      };
+
+    case memberConstants.FAILED_RESPONSE:
+      return {
+        ...state,
+        member: null,
+        successAction: false,
+        errorAction: true,
+        message: action.message,
+      };
+
+    case memberConstants.CREATE_MEMBER:
+      return {
+        ...state,
+        successAction: true,
+        errorAction: false,
+        message: "Success create member.",
+      };
+
+    case memberConstants.UPDATE_MEMBER:
+      return {
+        ...state,
+        member: action.data,
+        successAction: true,
+        errorAction: false,
+        message: "Success update member.",
+      };
+
     default:
       return state;
   }

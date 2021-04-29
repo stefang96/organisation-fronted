@@ -44,5 +44,7 @@ const RemoveNews = (props) => {
 export default connect(null, { removeNews })(
   reduxForm({
     form: "removeNewsForm", // a unique identifier for this form
+    enableReinitialize: true,
+    touchOnBlur: false,
   })(RemoveNews)
 );

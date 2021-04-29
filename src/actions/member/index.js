@@ -22,9 +22,6 @@ export const sendEmailToContactPerson = (data, memberId) => async (
       throw new SubmissionError({
         email: err.response.data.message,
       });
-      //   dispatch({
-      //   type: memberConstants.ERROR_ACTION,
-      //  });
     });
 };
 
@@ -46,14 +43,11 @@ export const getMemberById = (memberId) => async (dispatch) => {
     })
     .catch((err) => {
       console.log(err);
-
-      //   dispatch({
-      //   type: memberConstants.ERROR_ACTION,
-      //  });
     });
 };
 
 export const getMembers = (data) => async (dispatch) => {
+  console.log("get memberss");
   return await api
     .put("/member", data, {
       headers: {
@@ -71,19 +65,102 @@ export const getMembers = (data) => async (dispatch) => {
     })
     .catch((err) => {
       console.log(err);
-
-      //   dispatch({
-      //   type: memberConstants.ERROR_ACTION,
-      //  });
     });
 };
 
-export const updateMember = (data) => async (dispatch) => {};
+export const updateMember = (data, memberId) => async (dispatch) => {
+  return await api
+    .put("/member/" + memberId, data, {
+      headers: {
+        Authorization: "Bearer " + getToken(),
+        "Content-Type": "application/json",
+      },
+    })
+    .then((res) => {
+      const result = res.data.result;
 
-export const archiveMember = (data) => async (dispatch) => {};
+      dispatch({
+        type: memberConstants.UPDATE_MEMBER,
+        data: result,
+      });
+
+      const getMembersData = {
+        pagination: { page: 1 },
+      };
+      dispatch(getMembers(getMembersData));
+      console.log(result);
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch(failedResponse("Error when update member!"));
+    });
+};
+
+export const deleteMember = (memberId) => async (dispatch) => {
+  return await api
+    .delete("/member/" + memberId, {
+      headers: {
+        Authorization: "Bearer " + getToken(),
+        "Content-Type": "application/json",
+      },
+    })
+    .then((res) => {
+      const result = res.data;
+
+      dispatch({
+        type: memberConstants.REMOVE_MEMBER,
+        data: result,
+      });
+
+      const getMembersData = {
+        pagination: { page: 1 },
+      };
+      dispatch(getMembers(getMembersData));
+      console.log(result);
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch(failedResponse("Error when remove member!"));
+    });
+};
+
+export const addMember = (data) => async (dispatch) => {
+  return await api
+    .post("/member", data, {
+      headers: {
+        Authorization: "Bearer " + getToken(),
+        "Content-Type": "application/json",
+      },
+    })
+    .then((res) => {
+      const result = res.data;
+
+      dispatch({
+        type: memberConstants.CREATE_MEMBER,
+        data: result,
+      });
+
+      const getMembersData = {
+        pagination: { page: 1 },
+      };
+      dispatch(getMembers(getMembersData));
+      console.log(result);
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch(failedResponse("Error when creating member!"));
+    });
+};
 
 export const clearMemerAction = () => async (dispatch) => {
   dispatch({
     type: memberConstants.CLEAR_ACTION,
   });
+};
+
+const failedResponse = (message) => {
+  return {
+    type: memberConstants.FAILED_RESPONSE,
+    message: message,
+  };
 };

@@ -136,5 +136,7 @@ const mapStateToProps = (state) => {
 export default connect(mapStateToProps, { getNewsById, updateNews })(
   reduxForm({
     form: "editNewsForm", // a unique identifier for this form
+    enableReinitialize: true,
+    touchOnBlur: false,
   })(EditNews)
 );

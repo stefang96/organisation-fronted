@@ -1,25 +1,30 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Modal, Button, closeButton } from "react-bootstrap";
 import { reduxForm } from "redux-form";
-
 import { connect } from "react-redux";
-import { archiveMember } from "../../../actions/index";
+import { deleteMember, getMemberById } from "../../../actions/index";
 
 const Archive = (props) => {
+  useEffect(() => {
+    props.getMemberById(props.memberId);
+  }, [props.memberId]);
+
   const onSubmit = (formValues) => {
     console.log(formValues);
+    props.deleteMember(props.memberId);
+    props.changeModal();
   };
   return (
     <div>
       <Modal.Header className="app-bg-color-red" closeButton>
-        <Modal.Title className="m-auto color-white">Archive member</Modal.Title>
+        <Modal.Title className="m-auto color-white">Delete member</Modal.Title>
       </Modal.Header>
 
       <form onSubmit={props.handleSubmit(onSubmit)} noValidate>
         <Modal.Body className="px-70">
           <h5>
             {" "}
-            Archive{" "}
+            Delete{" "}
             <b>
               {" "}
               {props.member &&
@@ -39,7 +44,7 @@ const Archive = (props) => {
           </div>
           <div className="modal-right-button">
             <button class="btn  btn-outline-primary  w-150 " type="submit">
-              Archive
+              Delete
             </button>
           </div>
         </Modal.Footer>
@@ -55,8 +60,10 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { archiveMember })(
+export default connect(mapStateToProps, { deleteMember, getMemberById })(
   reduxForm({
-    form: "archiveMemberForm", // a unique identifier for this form
+    form: "deleteMemberForm", // a unique identifier for this form
+    enableReinitialize: true,
+    touchOnBlur: false,
   })(Archive)
 );

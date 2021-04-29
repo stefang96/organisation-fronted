@@ -3,14 +3,14 @@ import DataTable from "../table/DataTable";
 import "../table/table.scss";
 import { getOrganisations, clearMemerAction } from "../../actions/index";
 import { connect } from "react-redux";
-import { fromJS } from "immutable";
 import moment from "moment";
 import { Modal, Alert } from "react-bootstrap";
-import { reduxForm, Field } from "redux-form";
-import renderTextField from "../fields/renderTextField ";
+import loggedUser from "../../utils/getLoggedUser";
 import ContactPersonForm from "./forms/ContactPersonForm";
+import history from "../../history";
 
 const OrganisationList = (props) => {
+  const user = loggedUser();
   const [contactPersonModal, setContactPersonModal] = useState(false);
   const [contactPersonId, setContactPersonId] = useState(null);
   const [variant, setVariant] = useState(null);
@@ -48,6 +48,48 @@ const OrganisationList = (props) => {
 
     return <div>{moment.unix(value).format("MMMM Do YYYY")}</div>;
   };
+
+  const actionCell = (props) => {
+    const organisationId = props.row.original.id;
+
+    return (
+      <div className="d-flex">
+        <button
+          data-bs-toggle="tooltip"
+          data-bs-placement="top"
+          title="View"
+          class="btn action-hover"
+          onClick={() => viewOrganisation(organisationId)}
+        >
+          <i className="bi bi-eye-fill color-app-green  "></i>
+        </button>
+        {user && user.role === "super_admin" && (
+          <>
+            <button
+              data-bs-toggle="tooltip"
+              data-bs-placement="top"
+              title="Edit"
+              className=" btn action-hover"
+            >
+              <i className="bi bi-pencil-square color-app-blue  "></i>
+            </button>
+            <button
+              data-bs-toggle="tooltip"
+              data-bs-placement="top"
+              title="Remove"
+              className="btn action-hover"
+            >
+              <i className="bi bi-person-x-fill color-app-red  "></i>
+            </button>
+          </>
+        )}
+      </div>
+    );
+  };
+
+  const viewOrganisation = (memberId) => {
+    history.push("organisation/" + memberId);
+  };
   const columns = React.useMemo(
     () => [
       {
@@ -75,6 +117,11 @@ const OrganisationList = (props) => {
         Header: "Created At",
         accessor: "createdAt",
         Cell: dateCell,
+      },
+      {
+        Header: "",
+        accessor: "action",
+        Cell: actionCell,
       },
     ],
     []

@@ -4,27 +4,23 @@ import { reduxForm, Field } from "redux-form";
 import renderTextField from "../../fields/renderTextField ";
 import validate from "../../fields/validation/validateContactPersonForm";
 import { connect } from "react-redux";
-import { updateMember, getMemberById } from "../../../actions/index";
+import { addMember } from "../../../actions/index";
 import renderSelectField from "../../fields/renderSelectField";
 import loggedUser from "../../../utils/getLoggedUser";
 
-const Edit = (props) => {
+const AddMember = (props) => {
   const user = loggedUser();
-
-  useEffect(() => {
-    props.getMemberById(props.memberId);
-  }, [props.memberId]);
 
   const onSubmit = (formValues) => {
     console.log(formValues);
-    props.updateMember(formValues, props.memberId);
+    props.addMember(formValues);
     props.changeModal();
   };
 
   return (
     <div>
       <Modal.Header className="app-bg-color" closeButton>
-        <Modal.Title className="m-auto color-white">Edit member</Modal.Title>
+        <Modal.Title className="m-auto color-white">Add member</Modal.Title>
       </Modal.Header>
       <form onSubmit={props.handleSubmit(onSubmit)} noValidate>
         <Modal.Body className="px-70">
@@ -51,7 +47,6 @@ const Edit = (props) => {
 
           <Field
             name="email"
-            disabled={true}
             type="email"
             info={false}
             component={renderTextField}
@@ -93,7 +88,7 @@ const Edit = (props) => {
           </div>
           <div className="modal-right-button">
             <button class="btn  btn-outline-primary  w-150 " type="submit">
-              Save
+              Create
             </button>
           </div>
         </Modal.Footer>
@@ -102,25 +97,10 @@ const Edit = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  const member = state.member.member;
-
-  const initialValues = {
-    firstName: member.firstName,
-    lastName: member.lastName,
-    email: member.email,
-    phone: member.phone,
-    role: member.role,
-  };
-  return {
-    initialValues,
-  };
-};
-
-export default connect(mapStateToProps, { updateMember, getMemberById })(
+export default connect(null, { addMember })(
   reduxForm({
-    form: "updateMemberForm", // a unique identifier for this form
+    form: "addMemberForm", // a unique identifier for this form
     enableReinitialize: true,
     touchOnBlur: false,
-  })(Edit)
+  })(AddMember)
 );

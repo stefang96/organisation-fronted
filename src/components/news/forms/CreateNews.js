@@ -97,5 +97,7 @@ export default connect(null, { createNews })(
   reduxForm({
     form: "createNewsForm", // a unique identifier for this form
     validate,
+    enableReinitialize: true,
+    touchOnBlur: false,
   })(CreateNews)
 );
