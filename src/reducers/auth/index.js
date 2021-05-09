@@ -8,7 +8,7 @@ import jwt from "jsonwebtoken";
 
 const initialState = {
   loggedIn: null,
-  user: {},
+  user: null,
   resetPasswordEmail: "",
   redirectToPath: null,
   signUp: false,
@@ -24,7 +24,7 @@ export default (state = initialState, action) => {
 
       return {
         ...state,
-        user: fromJS(user),
+        user: user,
         loggedIn: true,
       };
     case authConstants.SIGNUP_MESSAGE:

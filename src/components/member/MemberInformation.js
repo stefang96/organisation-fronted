@@ -46,7 +46,7 @@ const MemberInformation = (props) => {
             class="btn btn-primary d-flex align-items-center"
           >
             <i class="bi bi-person-x-fill color-app-red"></i>
-            Archive member
+            Remove member
           </button>
           <button
             onClick={() => editMember()}

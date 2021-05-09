@@ -8,12 +8,19 @@ import { Modal, Alert } from "react-bootstrap";
 import loggedUser from "../../utils/getLoggedUser";
 import ContactPersonForm from "./forms/ContactPersonForm";
 import history from "../../history";
+import AddOrganisation from "./forms/AddOrganisation";
+import RemoveOrganisation from "./forms/RemoveOrganisation";
+import EditOrganisation from "./forms/EditOrganisation";
 
 const OrganisationList = (props) => {
   const user = loggedUser();
   const [contactPersonModal, setContactPersonModal] = useState(false);
   const [contactPersonId, setContactPersonId] = useState(null);
   const [variant, setVariant] = useState(null);
+  const [removeOrganisationModal, setRemoveOrganisationModal] = useState(false);
+  const [editOrganisationModal, setEditOrganisationModal] = useState(false);
+  const [createOrganisationModal, setCreateOrganisationModal] = useState(false);
+  const [organisationId, setOrganisationId] = useState(null);
 
   useEffect(() => {
     checkResponseAction();
@@ -28,16 +35,12 @@ const OrganisationList = (props) => {
 
     return (
       <div
-        onClick={() => changeModal(contactPerson.id)}
+        onClick={() => setConactPersonId(contactPerson.id)}
         className="contact-person"
       >
         {contactPerson.firstName} {contactPerson.lastName}
       </div>
     );
-  };
-  const changeModal = (contactPersonId = null) => {
-    setContactPersonModal(!contactPersonModal);
-    setContactPersonId(contactPersonId);
   };
 
   const dateCell = ({ value }) => {
@@ -70,6 +73,7 @@ const OrganisationList = (props) => {
               data-bs-placement="top"
               title="Edit"
               className=" btn action-hover"
+              onClick={() => setOrganisationIdEdit(organisationId)}
             >
               <i className="bi bi-pencil-square color-app-blue  "></i>
             </button>
@@ -78,6 +82,7 @@ const OrganisationList = (props) => {
               data-bs-placement="top"
               title="Remove"
               className="btn action-hover"
+              onClick={() => setOrgnisationIdRemove(organisationId)}
             >
               <i className="bi bi-person-x-fill color-app-red  "></i>
             </button>
@@ -152,16 +157,13 @@ const OrganisationList = (props) => {
   const meta = props.organisationMeta;
   if (props.organisationList) {
     data = props.organisationList;
-    console.log(Math.ceil(meta.total / meta.limit));
   }
 
   const checkResponseAction = () => {
     if (props.successAction) {
-      changeModal();
       setTimeout(() => props.clearMemerAction(), 5000);
       setVariant("success");
     } else if (props.errorAction) {
-      changeModal();
       setTimeout(() => props.clearMemerAction(), 5000);
       setVariant("danger");
     }
@@ -172,6 +174,33 @@ const OrganisationList = (props) => {
       props.clearMemerAction();
     }
   };
+
+  const createOrganisation = () => {
+    setCreateOrganisationModal(!createOrganisationModal);
+  };
+  const removeOrganisation = () => {
+    setRemoveOrganisationModal(!removeOrganisationModal);
+  };
+
+  const editOrganisation = () => {
+    setEditOrganisationModal(!editOrganisationModal);
+  };
+
+  const conactPersonEmail = () => {
+    setContactPersonModal(!contactPersonModal);
+  };
+  const setConactPersonId = (contactPersonId) => {
+    setContactPersonModal(!contactPersonModal);
+    setContactPersonId(contactPersonId);
+  };
+  const setOrgnisationIdRemove = (organisationId) => {
+    setRemoveOrganisationModal(!removeOrganisationModal);
+    setOrganisationId(organisationId);
+  };
+  const setOrganisationIdEdit = (organisationId) => {
+    setEditOrganisationModal(!editOrganisationModal);
+    setOrganisationId(organisationId);
+  };
   return (
     <>
       <Modal
@@ -179,14 +208,45 @@ const OrganisationList = (props) => {
         backdrop="static"
         keyboard={false}
         show={contactPersonModal}
-        onHide={changeModal}
+        onHide={conactPersonEmail}
         aria-labelledby="example-modal-sizes-title-lg"
       >
         <ContactPersonForm
           memberId={contactPersonId}
-          changeModal={changeModal}
+          changeModal={conactPersonEmail}
         />
       </Modal>
+
+      <Modal
+        size="lg"
+        backdrop="static"
+        keyboard={false}
+        show={createOrganisationModal}
+        onHide={createOrganisation}
+        aria-labelledby="example-modal-sizes-title-lg"
+      >
+        <AddOrganisation changeModal={createOrganisation} />
+      </Modal>
+      <Modal show={removeOrganisationModal} onHide={removeOrganisation}>
+        <RemoveOrganisation
+          organisationId={organisationId}
+          changeModal={removeOrganisation}
+        />
+      </Modal>
+      <Modal
+        size="lg"
+        backdrop="static"
+        keyboard={false}
+        show={editOrganisationModal}
+        onHide={editOrganisation}
+        aria-labelledby="example-modal-sizes-title-lg"
+      >
+        <EditOrganisation
+          organisationId={organisationId}
+          changeModal={editOrganisation}
+        />
+      </Modal>
+
       <div className="container-body ">
         <div class="table-view">
           <div class="table-wrapper">
@@ -198,9 +258,12 @@ const OrganisationList = (props) => {
                   </h2>
                 </div>
                 <div className="magin-auto mr-10">
-                  <button class="btn btn-primary d-flex align-items-center">
-                    <i class="bi bi-plus-circle-fill"></i>
-                    Add New User
+                  <button
+                    onClick={() => createOrganisation()}
+                    class="btn btn-primary d-flex align-items-center"
+                  >
+                    <i class="bi bi-plus-circle-fill "></i>
+                    Add New Organisation
                   </button>
                 </div>
               </div>
@@ -232,9 +295,9 @@ const mapStateToProps = (state) => {
   return {
     organisationList: state.organisation.organisationList,
     organisationMeta: state.organisation.organisationMeta,
-    successAction: state.member.successAction,
-    errorAction: state.member.errorAction,
-    message: state.member.message,
+    successAction: state.organisation.successAction,
+    errorAction: state.organisation.errorAction,
+    message: state.organisation.message,
   };
 };
 export default connect(mapStateToProps, { getOrganisations, clearMemerAction })(

@@ -17,6 +17,8 @@ import { isLogin } from "../middleware/auth";
 import Logout from "./auth/Logout";
 import MemberList from "./member/MemberList";
 import MyProfile from "./member/MyProfile";
+import SingleOrganisation from "./organisation/SingleOrganisation";
+import PaymentsList from "./payments/PaymentsList";
 
 function App(props) {
   return (
@@ -57,6 +59,12 @@ function App(props) {
               component={OrganisationList}
               exact
               path="/organisation"
+            />
+            <PrivateRoute component={PaymentsList} exact path="/payments" />
+            <PublicRoute
+              component={SingleOrganisation}
+              exact
+              path="/organisation/:organisationId"
             />
             <PrivateRoute component={Logout} exact path="/logout" />
             <PrivateRoute component={MemberList} exact path="/members" />

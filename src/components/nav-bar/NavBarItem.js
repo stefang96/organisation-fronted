@@ -4,6 +4,8 @@ import { isLogin } from "../../middleware/auth";
 import getLoggedUser from "../../utils/getLoggedUser";
 import { Modal, Alert } from "react-bootstrap";
 import Status from "../member/forms/Status";
+import { connect } from "react-redux";
+import AddPayments from "../payments/forms/AddPayments";
 
 const NavBarItem = (props) => {
   const loggedUser = getLoggedUser();
@@ -48,7 +50,11 @@ const NavBarItem = (props) => {
     { class: " ", name: "Register", to: "/register" },
   ];
 
-  const changeStatusModal = (userActive = null, userId = null) => {
+  const changeStatusModal = () => {
+    setStatusModal(!statusModal);
+  };
+
+  const changeUserData = (userActive = null, userId = null) => {
     setStatusModal(!statusModal);
     setUserData({ active: userActive, id: userId });
   };
@@ -56,15 +62,12 @@ const NavBarItem = (props) => {
   return (
     <>
       <ul className="navbar-nav me-auto mb-2 mb-lg-0"></ul>
-      <Modal
-        size="lg"
-        backdrop="static"
-        keyboard={false}
-        show={statusModal}
-        onHide={changeStatusModal}
-        aria-labelledby="example-modal-sizes-title-lg"
-      >
-        <Status active={userData.active} id={userData.active} />
+      <Modal show={statusModal} onHide={changeStatusModal}>
+        <AddPayments
+          changeModal={changeStatusModal}
+          active={userData.active}
+          id={userData.id}
+        />
       </Modal>
 
       <ul className="nav navbar-nav navbar-right">
@@ -82,7 +85,7 @@ const NavBarItem = (props) => {
               <li key={"Status"} className="navbar-brand">
                 <button
                   onClick={() =>
-                    changeStatusModal(loggedUser.active, loggedUser.id)
+                    changeUserData(loggedUser.active, loggedUser.id)
                   }
                   className={`btn ${
                     loggedUser.active
@@ -156,4 +159,10 @@ const NavBarItem = (props) => {
   );
 };
 
-export default NavBarItem;
+const mapSateToProps = (state) => {
+  return {
+    loggedUser: state.auth.user,
+  };
+};
+
+export default connect(mapSateToProps)(NavBarItem);

@@ -178,11 +178,18 @@ const MemberList = (props) => {
       const filters = {
         search: searchQuery,
       };
-      const reqData = {
+
+      let reqData = {
         pagination: pagination,
         filters: filters,
       };
-      console.log(pageIndex);
+      if (props.singleView) {
+        reqData = {
+          pagination: pagination,
+          filters: filters,
+          organisationId: props.organisationId && props.organisationId,
+        };
+      }
 
       props.getMembers(reqData);
     },
@@ -213,7 +220,7 @@ const MemberList = (props) => {
   };
 
   const viewMember = (memberId) => {
-    history.push("members/" + memberId);
+    history.push("/members/" + memberId);
   };
 
   const createMember = () => {
@@ -262,7 +269,7 @@ const MemberList = (props) => {
         <Edit memberId={memberId} changeModal={editMember} />
       </Modal>
 
-      <div className="container-body ">
+      <div className={`${props.singleView ? "" : "container-body"}  `}>
         <div class="table-view">
           <div class="table-wrapper">
             <div class="table-title">

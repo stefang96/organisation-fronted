@@ -8,6 +8,7 @@ const authConstants = {
   FAILED_RESPONSE: "FAILED_RESPONSE",
   UPDATE_MEMBER: "UPDATE_MEMBER",
   CREATE_MEMBER: "CREATE_MEMBER",
+  GET_ADMINS: "GET_ADMINS",
 };
 
 export default authConstants;
