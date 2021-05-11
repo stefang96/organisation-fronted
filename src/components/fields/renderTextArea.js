@@ -4,17 +4,17 @@ export default ({
   input,
   label,
   name,
-  classField,
+  classNameField,
   meta: { touched, error, warning },
 }) => (
   <div className=" mt-3 form-floating">
     <textarea
       {...input}
-      className={`form-control  ${classField}`}
+      className={`form-control  ${classNameField}`}
       placeholder="Leave a comment here"
       id={name}
     ></textarea>
-    <label for={name}>{label}</label>
+    <label htmlFor={name}>{label}</label>
 
     {touched &&
       ((error && <span className="text-danger">{error}</span>) ||

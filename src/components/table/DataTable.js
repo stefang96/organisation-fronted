@@ -54,7 +54,7 @@ const DataTable = (props) => {
   return (
     <>
       <div className="p-10-0 d-flex ">
-        <div class="form-group mr-30">
+        <div className="form-group mr-30">
           <input
             type="text"
             id="searchInput"
@@ -66,8 +66,8 @@ const DataTable = (props) => {
           />
         </div>
 
-        <div class="form-group ">
-          <select class="form-select" aria-label="Default select example">
+        <div className="form-group ">
+          <select className="form-select" aria-label="Default select example">
             <option value="0">Open this select menu</option>
             <option value="1">One</option>
             <option value="2">Two</option>
@@ -109,34 +109,34 @@ const DataTable = (props) => {
       {pageCount > 1 && (
         <div className=" ">
           <nav aria-label="Page navigation example">
-            <ul class="pagination">
-              <li class="page-item">
+            <ul className="pagination">
+              <li className="page-item">
                 <button
                   onClick={() => gotoPage(0)}
                   disabled={!canPreviousPage}
-                  class="page-link"
+                  className="page-link"
                   href="#"
                   aria-label="Previous"
                 >
                   <span aria-hidden="true">&laquo;</span>
                 </button>
               </li>
-              <li class="page-item">
+              <li className="page-item">
                 <button
                   onClick={() => previousPage()}
                   disabled={!canPreviousPage}
-                  class="page-link"
+                  className="page-link"
                   href="#"
                 >
                   {" "}
                   {"<"}
                 </button>
               </li>
-              <li class="page-item">
+              <li className="page-item">
                 <button
                   onClick={() => nextPage()}
                   disabled={!canNextPage}
-                  class="page-link"
+                  className="page-link"
                   href="#"
                 >
                   {" "}
@@ -144,11 +144,11 @@ const DataTable = (props) => {
                 </button>
               </li>
 
-              <li class="page-item">
+              <li className="page-item">
                 <button
                   onClick={() => gotoPage(pageCount - 1)}
                   disabled={!canNextPage}
-                  class="page-link"
+                  className="page-link"
                   href="#"
                   aria-label="Next"
                 >

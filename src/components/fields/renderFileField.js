@@ -17,7 +17,7 @@ export default ({
 
   return (
     <div className="mb-3">
-      <label for="formFile" className="form-label">
+      <label htmlFor="formFile" className="form-label">
         {label}
       </label>
       <input

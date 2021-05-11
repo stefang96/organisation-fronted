@@ -29,7 +29,7 @@ ${payment.toDate}. Iznos clanarine iznosi ${payment.price}.`}
           <button
             onClick={props.changeModal}
             type="button"
-            class="btn  btn-outline-danger  w-150"
+            className="btn  btn-outline-danger  w-150"
           >
             OK
           </button>

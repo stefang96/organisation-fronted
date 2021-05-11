@@ -25,7 +25,7 @@ const AddMember = (props) => {
       <form onSubmit={props.handleSubmit(onSubmit)} noValidate>
         <Modal.Body className="px-70">
           <div className="row">
-            <div class="col">
+            <div className="col">
               <Field
                 name="firstName"
                 type="text"
@@ -34,7 +34,7 @@ const AddMember = (props) => {
                 className="w-50"
               />
             </div>
-            <div class="col">
+            <div className="col">
               <Field
                 className="w-50"
                 name="lastName"
@@ -53,7 +53,7 @@ const AddMember = (props) => {
             label="Email"
           />
           <div className="row">
-            <div class="col">
+            <div className="col">
               <Field
                 name="phone"
                 type="text"
@@ -62,7 +62,7 @@ const AddMember = (props) => {
                 className="w-50"
               />
             </div>
-            <div class="col">
+            <div className="col">
               <Field
                 className="w-50"
                 name="role"
@@ -81,13 +81,13 @@ const AddMember = (props) => {
             <button
               onClick={props.changeModal}
               type="button"
-              class="btn  btn-outline-danger  w-150"
+              className="btn  btn-outline-danger  w-150"
             >
               Close
             </button>
           </div>
           <div className="modal-right-button">
-            <button class="btn  btn-outline-primary  w-150 " type="submit">
+            <button className="btn  btn-outline-primary  w-150 " type="submit">
               Create
             </button>
           </div>

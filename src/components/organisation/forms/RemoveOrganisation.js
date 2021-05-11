@@ -39,13 +39,13 @@ const RemoveOrganisation = (props) => {
             <button
               onClick={props.changeModal}
               type="button"
-              class="btn  btn-outline-danger    w-150"
+              className="btn  btn-outline-danger    w-150"
             >
               Close
             </button>
           </div>
           <div className="modal-right-button">
-            <button class="btn  btn-outline-primary  w-150 " type="submit">
+            <button className="btn  btn-outline-primary  w-150 " type="submit">
               Remove
             </button>
           </div>

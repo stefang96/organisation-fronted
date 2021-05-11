@@ -48,7 +48,7 @@ const EditOrganisation = (props) => {
             type="text"
           />
           <div className="row">
-            <div class="col">
+            <div className="col">
               <Field
                 name="type"
                 component={renderTextField}
@@ -56,7 +56,7 @@ const EditOrganisation = (props) => {
                 type="text"
               />
             </div>
-            <div class="col">
+            <div className="col">
               <Field
                 name="numberOfEmployees"
                 component={renderTextField}
@@ -88,13 +88,13 @@ const EditOrganisation = (props) => {
             <button
               onClick={props.changeModal}
               type="button"
-              class="btn  btn-outline-danger  w-150"
+              className="btn  btn-outline-danger  w-150"
             >
               Close
             </button>
           </div>
           <div className="modal-right-button">
-            <button class="btn  btn-outline-primary  w-150 " type="submit">
+            <button className="btn  btn-outline-primary  w-150 " type="submit">
               Save
             </button>
           </div>

@@ -11,7 +11,7 @@ import { login } from "../../actions/index";
 import { connect } from "react-redux";
 
 const LoginPage = (props) => {
-  const classes = withStyles();
+  const classNamees = withStyles();
   const [values, setValues] = React.useState({
     showPassword: false,
   });

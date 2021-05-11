@@ -49,7 +49,7 @@ const CreateNews = (props) => {
                 label="Upload file"
               />
             </div>
-            <div class="col">
+            <div className="col">
               <Field
                 name="title"
                 type="text"
@@ -61,13 +61,13 @@ const CreateNews = (props) => {
           <Field
             name="shortDescription"
             component={renderTextArea}
-            classField="min-h-100"
+            classNameField="min-h-100"
             label="Short description"
           />
           <Field
             name="description"
             component={renderTextArea}
-            classField="min-h-150"
+            classNameField="min-h-150"
             label="Description"
           />
         </Modal.Body>
@@ -77,13 +77,13 @@ const CreateNews = (props) => {
             <button
               onClick={props.changeModal}
               type="button"
-              class="btn  btn-outline-danger    w-150"
+              className="btn  btn-outline-danger    w-150"
             >
               Close
             </button>
           </div>
           <div className="modal-right-button">
-            <button class="btn  btn-outline-primary  w-150 " type="submit">
+            <button className="btn  btn-outline-primary  w-150 " type="submit">
               Create
             </button>
           </div>

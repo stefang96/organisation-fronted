@@ -14,16 +14,16 @@ const EditNews = (props) => {
     props.getNewsById(props.newsId);
   }, [props.newsId]);
 
-  const renderTextArea = ({ input, label, name, classField }) => {
+  const renderTextArea = ({ input, label, name, classNameField }) => {
     return (
       <div className=" mt-30 form-floating">
         <textarea
           {...input}
-          className={`form-control  ${classField}`}
+          className={`form-control  ${classNameField}`}
           placeholder="Leave a comment here"
           id={name}
         ></textarea>
-        <label for={name}>{label}</label>
+        <label htmlFor={name}>{label}</label>
       </div>
     );
   };
@@ -71,7 +71,7 @@ const EditNews = (props) => {
                 label="Upload file"
               />
             </div>
-            <div class="col">
+            <div className="col">
               <Field
                 name="title"
                 type="text"
@@ -83,13 +83,13 @@ const EditNews = (props) => {
           <Field
             name="shortDescription"
             component={renderTextArea}
-            classField="min-h-100"
+            classNameField="min-h-100"
             label="Short description"
           />
           <Field
             name="description"
             component={renderTextArea}
-            classField="min-h-150"
+            classNameField="min-h-150"
             label="Description"
           />
         </Modal.Body>
@@ -99,13 +99,13 @@ const EditNews = (props) => {
             <button
               onClick={props.changeModal}
               type="button"
-              class="btn  btn-outline-danger    w-150"
+              className="btn  btn-outline-danger    w-150"
             >
               Close
             </button>
           </div>
           <div className="modal-right-button">
-            <button class="btn  btn-outline-primary  w-150 " type="submit">
+            <button className="btn  btn-outline-primary  w-150 " type="submit">
               Save
             </button>
           </div>

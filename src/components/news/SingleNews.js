@@ -5,20 +5,20 @@ const SingleNews = () => {
     <div className="container-body ">
       <div className="px-20p">
         <h1>Card title</h1>
-        <div class="card mb-3">
+        <div className="card mb-3">
           <img
             src={"http://localhost:5000/static/defaultNews.png"}
-            class="card-img-top h-500"
+            className="card-img-top h-500"
             alt="..."
           />
-          <div class="card-body d-flex">
+          <div className="card-body d-flex">
             <div className="left">
-              <ul class="list-group group-scroll">
-                <li class="list-group-item active" aria-current="true">
+              <ul className="list-group group-scroll">
+                <li className="list-group-item active" aria-current="true">
                   Latest news
                 </li>
 
-                <li class="list-group-item">
+                <li className="list-group-item">
                   {" "}
                   <h5>
                     <b>A third item</b>{" "}
@@ -27,7 +27,7 @@ const SingleNews = () => {
                     A third itemA third itemA third itemA third itemA third item
                   </div>
                 </li>
-                <li class="list-group-item">
+                <li className="list-group-item">
                   {" "}
                   <h5>
                     <b>A third item</b>{" "}
@@ -36,7 +36,7 @@ const SingleNews = () => {
                     A third itemA third itemA third itemA third itemA third item
                   </div>
                 </li>
-                <li class="list-group-item">
+                <li className="list-group-item">
                   {" "}
                   <h5>
                     <b>A third item</b>{" "}
@@ -45,7 +45,7 @@ const SingleNews = () => {
                     A third itemA third itemA third itemA third itemA third item
                   </div>
                 </li>
-                <li class="list-group-item">
+                <li className="list-group-item">
                   {" "}
                   <h5>
                     <b>A third item</b>{" "}
@@ -67,7 +67,7 @@ const SingleNews = () => {
                 lead-in to additional content. This content is a little bit
                 longer.
               </h3>
-              <p class="card-text">
+              <p className="card-text">
                 This is a wider card with supporting text below as a natural
                 lead-in to additional content. This content is a little bit
                 longer. This is a wider card with supporting text below as a

@@ -26,9 +26,9 @@ const MemberInformation = (props) => {
         <>
           <button
             onClick={() => editMember()}
-            class="btn btn-primary d-flex align-items-center"
+            className="btn btn-primary d-flex align-items-center"
           >
-            <i class="bi bi-pencil-square"></i>
+            <i className="bi bi-pencil-square"></i>
             Edit member
           </button>
         </>
@@ -43,16 +43,16 @@ const MemberInformation = (props) => {
         <>
           <button
             onClick={() => archiveMember()}
-            class="btn btn-primary d-flex align-items-center"
+            className="btn btn-primary d-flex align-items-center"
           >
-            <i class="bi bi-person-x-fill color-app-red"></i>
+            <i className="bi bi-person-x-fill color-app-red"></i>
             Remove member
           </button>
           <button
             onClick={() => editMember()}
-            class="btn btn-primary d-flex align-items-center"
+            className="btn btn-primary d-flex align-items-center"
           >
-            <i class="bi bi-pencil-square"></i>
+            <i className="bi bi-pencil-square"></i>
             Edit member
           </button>
         </>
@@ -76,10 +76,10 @@ const MemberInformation = (props) => {
         <Edit memberId={props.memberId} changeModal={editMember} />
       </Modal>
 
-      <div class="table-view">
-        <div class="table-wrapper">
-          <div class="table-title">
-            <div class="d-flex">
+      <div className="table-view">
+        <div className="table-wrapper">
+          <div className="table-title">
+            <div className="d-flex">
               <div>
                 <h2>
                   <b>
@@ -94,53 +94,53 @@ const MemberInformation = (props) => {
           <div className="d-flex">
             <div className="flex-50 mr-30">
               <div className="my-profile--header">Member information</div>
-              <div class="card mb-3    ">
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">Full Name</h6>
+              <div className="card mb-3    ">
+                <div className="card-body">
+                  <div className="row">
+                    <div className="col-sm-3">
+                      <h6 className="mb-0">Full Name</h6>
                     </div>
-                    <div class="col-sm-9 text-secondary">
+                    <div className="col-sm-9 text-secondary">
                       {" "}
                       {props.member.firstName} {props.member.lastName}
                     </div>
                   </div>
                   <hr />
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">Email</h6>
+                  <div className="row">
+                    <div className="col-sm-3">
+                      <h6 className="mb-0">Email</h6>
                     </div>
-                    <div class="col-sm-9 text-secondary">
+                    <div className="col-sm-9 text-secondary">
                       {" "}
                       {props.member.email}{" "}
                     </div>
                   </div>
                   <hr />
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">Phone</h6>
+                  <div className="row">
+                    <div className="col-sm-3">
+                      <h6 className="mb-0">Phone</h6>
                     </div>
-                    <div class="col-sm-9 text-secondary">
+                    <div className="col-sm-9 text-secondary">
                       {" "}
                       {props.member.phone ? props.member.phone : "--"}{" "}
                     </div>
                   </div>
                   <hr />
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">Role</h6>
+                  <div className="row">
+                    <div className="col-sm-3">
+                      <h6 className="mb-0">Role</h6>
                     </div>
-                    <div class="col-sm-9 text-secondary">
+                    <div className="col-sm-9 text-secondary">
                       {" "}
                       {props.member.role}
                     </div>
                   </div>
                   <hr />
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">Address</h6>
+                  <div className="row">
+                    <div className="col-sm-3">
+                      <h6 className="mb-0">Address</h6>
                     </div>
-                    <div class="col-sm-9 text-secondary">
+                    <div className="col-sm-9 text-secondary">
                       {" "}
                       Bay Area, San Francisco, CA
                     </div>
@@ -153,43 +153,43 @@ const MemberInformation = (props) => {
                 <div className="my-profile--header">
                   Organisation information
                 </div>
-                <div class="card mb-3  ">
-                  <div class="card-body">
-                    <div class="row">
-                      <div class="col-sm-3">
-                        <h6 class="mb-0">Name</h6>
+                <div className="card mb-3  ">
+                  <div className="card-body">
+                    <div className="row">
+                      <div className="col-sm-3">
+                        <h6 className="mb-0">Name</h6>
                       </div>
-                      <div class="col-sm-9 text-secondary">
+                      <div className="col-sm-9 text-secondary">
                         {organisation.name}
                       </div>
                     </div>
                     <hr />
-                    <div class="row">
-                      <div class="col-sm-3">
-                        <h6 class="mb-0">Type</h6>
+                    <div className="row">
+                      <div className="col-sm-3">
+                        <h6 className="mb-0">Type</h6>
                       </div>
-                      <div class="col-sm-9 text-secondary">
+                      <div className="col-sm-9 text-secondary">
                         {" "}
                         {organisation.type}
                       </div>
                     </div>
                     <hr />
-                    <div class="row">
-                      <div class="col-sm-3">
-                        <h6 class="mb-0">Number Of Employees</h6>
+                    <div className="row">
+                      <div className="col-sm-3">
+                        <h6 className="mb-0">Number Of Employees</h6>
                       </div>
-                      <div class="col-sm-9 text-secondary">
+                      <div className="col-sm-9 text-secondary">
                         {" "}
                         {organisation.numberOfEmployees}
                       </div>
                     </div>
                     <hr />
 
-                    <div class="row">
-                      <div class="col-sm-3">
-                        <h6 class="mb-0">Address</h6>
+                    <div className="row">
+                      <div className="col-sm-3">
+                        <h6 className="mb-0">Address</h6>
                       </div>
-                      <div class="col-sm-9 text-secondary">
+                      <div className="col-sm-9 text-secondary">
                         {" "}
                         Bay Area, San Francisco, CA
                       </div>

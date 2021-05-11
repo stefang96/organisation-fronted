@@ -69,34 +69,34 @@ const DataGrid = (props) => {
     <>
       <div className="news-left bg-color-light-grey ">
         <div className=" ">
-          <div class="row">
-            <div class="col-md-12 d-flex flex-wrap ">
+          <div className="row">
+            <div className="col-md-12 d-flex flex-wrap ">
               {data &&
                 data.length > 0 &&
                 data.map((item) => {
                   return (
-                    <div class="post-slide  ">
+                    <div className="post-slide  " key={`news-${item.id}`}>
                       <div className="actions ">
                         <div className="d-flex actions_buttons">
                           <button
                             onClick={() => props.editNews(item.id)}
                             className="btn   h-50-px   w-100"
                           >
-                            <i class="bi bi-pencil-square color-app-blue ml-5-px mr-5-px"></i>
+                            <i className="bi bi-pencil-square color-app-blue ml-5-px mr-5-px"></i>
                           </button>
                           <button
                             onClick={() => props.removeNews(item.id)}
                             className="btn  h-50-px   w-100"
                           >
-                            <i class="bi bi-x-circle-fill h-50-px color-app-red mr-5-px"></i>
+                            <i className="bi bi-x-circle-fill h-50-px color-app-red mr-5-px"></i>
                           </button>
                         </div>
                       </div>
                       <div
-                        class="  cursor-pointer"
+                        className="  cursor-pointer"
                         onClick={() => getSingleView(item.id)}
                       >
-                        <div class="post-img">
+                        <div className="post-img">
                           <a href="#">
                             <img
                               src={
@@ -106,11 +106,11 @@ const DataGrid = (props) => {
                               }
                               alt=""
                             />
-                            <div class="post-date">
-                              <span class="date">
+                            <div className="post-date">
+                              <span className="date">
                                 {moment.unix(item.createdAt, "DD").format("DD")}
                               </span>
-                              <span class="month">
+                              <span className="month">
                                 {moment
                                   .unix(item.createdAt, "MM")
                                   .format("MMMM")}
@@ -118,13 +118,13 @@ const DataGrid = (props) => {
                             </div>
                           </a>
                         </div>
-                        <div class="post-review">
-                          <h3 class="post-title">
+                        <div className="post-review">
+                          <h3 className="post-title">
                             <a href="#">{item.title}</a>
                           </h3>
-                          <ul class="post-bar">
+                          <ul className="post-bar">
                             <li>
-                              <i class="bi bi-person-fill"></i>
+                              <i className="bi bi-person-fill"></i>
                               <a href="#">
                                 {item.member.firstName +
                                   " " +
@@ -132,12 +132,12 @@ const DataGrid = (props) => {
                               </a>
                             </li>
                             <li>
-                              <i class="bi bi-building"></i>
+                              <i className="bi bi-building"></i>
                               <a href="#">{item.member.organisation.name}</a>
                             </li>
                           </ul>
 
-                          <p class="post-description">
+                          <p className="post-description">
                             {item.shortDescription}
                           </p>
                         </div>
@@ -152,34 +152,34 @@ const DataGrid = (props) => {
           {pageCount > 1 && (
             <div className=" ">
               <nav aria-label="Page navigation example">
-                <ul class="pagination">
-                  <li class="page-item">
+                <ul className="pagination">
+                  <li className="page-item">
                     <button
                       onClick={() => gotoPage(0)}
                       disabled={!canPreviousPage}
-                      class="page-link"
+                      className="page-link"
                       href="#"
                       aria-label="Previous"
                     >
                       <span aria-hidden="true">&laquo;</span>
                     </button>
                   </li>
-                  <li class="page-item">
+                  <li className="page-item">
                     <button
                       onClick={() => previousPage()}
                       disabled={!canPreviousPage}
-                      class="page-link"
+                      className="page-link"
                       href="#"
                     >
                       {" "}
                       {"<"}
                     </button>
                   </li>
-                  <li class="page-item">
+                  <li className="page-item">
                     <button
                       onClick={() => nextPage()}
                       disabled={!canNextPage}
-                      class="page-link"
+                      className="page-link"
                       href="#"
                     >
                       {" "}
@@ -187,11 +187,11 @@ const DataGrid = (props) => {
                     </button>
                   </li>
 
-                  <li class="page-item">
+                  <li className="page-item">
                     <button
                       onClick={() => gotoPage(pageCount - 1)}
                       disabled={!canNextPage}
-                      class="page-link"
+                      className="page-link"
                       href="#"
                       aria-label="Next"
                     >
@@ -239,8 +239,8 @@ const DataGrid = (props) => {
                   </div>
                 </button>
               )}
-              <div class="form-group">
-                <label for="searchInput">Search</label>
+              <div className="form-group">
+                <label htmlFor="searchInput">Search</label>
                 <input
                   type="text"
                   id="searchInput"
@@ -253,9 +253,9 @@ const DataGrid = (props) => {
               </div>
 
               {!props.profile && (
-                <div class="form-group mt-30">
+                <div className="form-group mt-30">
                   <select
-                    class="form-select"
+                    className="form-select"
                     onChange={setSelectedFilter}
                     aria-label="Default select example"
                   >
@@ -268,13 +268,13 @@ const DataGrid = (props) => {
               )}
             </div>
           </div>
-          <div class="form-group mt-30">
-            <ul class="list-group group-scroll">
-              <li class="list-group-item active" aria-current="true">
+          <div className="form-group mt-30">
+            <ul className="list-group group-scroll">
+              <li className="list-group-item active" aria-current="true">
                 Latest news
               </li>
 
-              <li class="list-group-item">
+              <li className="list-group-item">
                 {" "}
                 <h5>
                   <b>A third item</b>{" "}
@@ -283,7 +283,7 @@ const DataGrid = (props) => {
                   A third itemA third itemA third itemA third itemA third item
                 </div>
               </li>
-              <li class="list-group-item">
+              <li className="list-group-item">
                 {" "}
                 <h5>
                   <b>A third item</b>{" "}
@@ -292,7 +292,7 @@ const DataGrid = (props) => {
                   A third itemA third itemA third itemA third itemA third item
                 </div>
               </li>
-              <li class="list-group-item">
+              <li className="list-group-item">
                 {" "}
                 <h5>
                   <b>A third item</b>{" "}
@@ -301,7 +301,7 @@ const DataGrid = (props) => {
                   A third itemA third itemA third itemA third itemA third item
                 </div>
               </li>
-              <li class="list-group-item">
+              <li className="list-group-item">
                 {" "}
                 <h5>
                   <b>A third item</b>{" "}

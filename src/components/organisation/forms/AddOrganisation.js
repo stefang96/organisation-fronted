@@ -36,7 +36,7 @@ const AddOrganisation = (props) => {
             type="text"
           />
           <div className="row">
-            <div class="col">
+            <div className="col">
               <Field
                 name="type"
                 component={renderTextField}
@@ -44,7 +44,7 @@ const AddOrganisation = (props) => {
                 type="text"
               />
             </div>
-            <div class="col">
+            <div className="col">
               <Field
                 name="numberOfEmployees"
                 component={renderTextField}
@@ -59,14 +59,14 @@ const AddOrganisation = (props) => {
             </div>
             <div className="h-divider mb-15 mt-10"></div>
             <div className="row">
-              <div class="col">
+              <div className="col">
                 <Field
                   name="firstName"
                   component={renderTextField}
                   label="First Name"
                 />
               </div>
-              <div class="col">
+              <div className="col">
                 <Field
                   name="lastName"
                   component={renderTextField}
@@ -88,13 +88,13 @@ const AddOrganisation = (props) => {
             <button
               onClick={props.changeModal}
               type="button"
-              class="btn  btn-outline-danger  w-150"
+              className="btn  btn-outline-danger  w-150"
             >
               Close
             </button>
           </div>
           <div className="modal-right-button">
-            <button class="btn  btn-outline-primary  w-150 " type="submit">
+            <button className="btn  btn-outline-primary  w-150 " type="submit">
               Add
             </button>
           </div>

@@ -29,16 +29,16 @@ const OrganisationInformation = (props) => {
         <>
           <button
             onClick={() => removeOrganisation()}
-            class="btn btn-primary d-flex align-items-center"
+            className="btn btn-primary d-flex align-items-center"
           >
-            <i class="bi bi-person-x-fill color-app-red"></i>
+            <i className="bi bi-person-x-fill color-app-red"></i>
             Remove organisation
           </button>
           <button
             onClick={() => editOrganisation()}
-            class="btn btn-primary d-flex align-items-center"
+            className="btn btn-primary d-flex align-items-center"
           >
-            <i class="bi bi-pencil-square"></i>
+            <i className="bi bi-pencil-square"></i>
             Edit organisation
           </button>
         </>
@@ -66,10 +66,10 @@ const OrganisationInformation = (props) => {
         />
       </Modal>
 
-      <div class="table-view">
-        <div class="table-wrapper">
-          <div class="table-title">
-            <div class="d-flex">
+      <div className="table-view">
+        <div className="table-wrapper">
+          <div className="table-title">
+            <div className="d-flex">
               <div>
                 <h2>
                   <b>{props.organisation.name}</b> Information
@@ -84,43 +84,43 @@ const OrganisationInformation = (props) => {
                 <div className="my-profile--header">
                   Organisation information
                 </div>
-                <div class="card mb-3  ">
-                  <div class="card-body">
-                    <div class="row">
-                      <div class="col-sm-3">
-                        <h6 class="mb-0">Name</h6>
+                <div className="card mb-3  ">
+                  <div className="card-body">
+                    <div className="row">
+                      <div className="col-sm-3">
+                        <h6 className="mb-0">Name</h6>
                       </div>
-                      <div class="col-sm-9 text-secondary">
+                      <div className="col-sm-9 text-secondary">
                         {organisation.name}
                       </div>
                     </div>
                     <hr />
-                    <div class="row">
-                      <div class="col-sm-3">
-                        <h6 class="mb-0">Type</h6>
+                    <div className="row">
+                      <div className="col-sm-3">
+                        <h6 className="mb-0">Type</h6>
                       </div>
-                      <div class="col-sm-9 text-secondary">
+                      <div className="col-sm-9 text-secondary">
                         {" "}
                         {organisation.type}
                       </div>
                     </div>
                     <hr />
-                    <div class="row">
-                      <div class="col-sm-3">
-                        <h6 class="mb-0">Number Of Employees</h6>
+                    <div className="row">
+                      <div className="col-sm-3">
+                        <h6 className="mb-0">Number Of Employees</h6>
                       </div>
-                      <div class="col-sm-9 text-secondary">
+                      <div className="col-sm-9 text-secondary">
                         {" "}
                         {organisation.numberOfEmployees}
                       </div>
                     </div>
                     <hr />
 
-                    <div class="row">
-                      <div class="col-sm-3">
-                        <h6 class="mb-0">Address</h6>
+                    <div className="row">
+                      <div className="col-sm-3">
+                        <h6 className="mb-0">Address</h6>
                       </div>
-                      <div class="col-sm-9 text-secondary">
+                      <div className="col-sm-9 text-secondary">
                         {" "}
                         Bay Area, San Francisco, CA
                       </div>
@@ -134,53 +134,53 @@ const OrganisationInformation = (props) => {
                 <div className="my-profile--header">
                   Contact Person information
                 </div>
-                <div class="card mb-3    ">
-                  <div class="card-body">
-                    <div class="row">
-                      <div class="col-sm-3">
-                        <h6 class="mb-0">Full Name</h6>
+                <div className="card mb-3    ">
+                  <div className="card-body">
+                    <div className="row">
+                      <div className="col-sm-3">
+                        <h6 className="mb-0">Full Name</h6>
                       </div>
-                      <div class="col-sm-9 text-secondary">
+                      <div className="col-sm-9 text-secondary">
                         {" "}
                         {conactPerson.firstName} {conactPerson.lastName}
                       </div>
                     </div>
                     <hr />
-                    <div class="row">
-                      <div class="col-sm-3">
-                        <h6 class="mb-0">Email</h6>
+                    <div className="row">
+                      <div className="col-sm-3">
+                        <h6 className="mb-0">Email</h6>
                       </div>
-                      <div class="col-sm-9 text-secondary">
+                      <div className="col-sm-9 text-secondary">
                         {" "}
                         {conactPerson.email}{" "}
                       </div>
                     </div>
                     <hr />
-                    <div class="row">
-                      <div class="col-sm-3">
-                        <h6 class="mb-0">Phone</h6>
+                    <div className="row">
+                      <div className="col-sm-3">
+                        <h6 className="mb-0">Phone</h6>
                       </div>
-                      <div class="col-sm-9 text-secondary">
+                      <div className="col-sm-9 text-secondary">
                         {" "}
                         {conactPerson.phone ? conactPerson.phone : "--"}{" "}
                       </div>
                     </div>
                     <hr />
-                    <div class="row">
-                      <div class="col-sm-3">
-                        <h6 class="mb-0">Role</h6>
+                    <div className="row">
+                      <div className="col-sm-3">
+                        <h6 className="mb-0">Role</h6>
                       </div>
-                      <div class="col-sm-9 text-secondary">
+                      <div className="col-sm-9 text-secondary">
                         {" "}
                         {conactPerson.role}
                       </div>
                     </div>
                     <hr />
-                    <div class="row">
-                      <div class="col-sm-3">
-                        <h6 class="mb-0">Address</h6>
+                    <div className="row">
+                      <div className="col-sm-3">
+                        <h6 className="mb-0">Address</h6>
                       </div>
-                      <div class="col-sm-9 text-secondary">
+                      <div className="col-sm-9 text-secondary">
                         {" "}
                         Bay Area, San Francisco, CA
                       </div>

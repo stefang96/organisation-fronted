@@ -34,7 +34,7 @@ const MemberList = (props) => {
     return (
       <div className="  ">
         <span
-          class={`status  ${
+          className={`status  ${
             active ? "color-app-green " : "color-app-red"
           }   mr-10`}
         >
@@ -84,7 +84,7 @@ const MemberList = (props) => {
           data-bs-toggle="tooltip"
           data-bs-placement="top"
           title="View"
-          class="btn action-hover"
+          className="btn action-hover"
           onClick={() => viewMember(userId)}
         >
           <i className="bi bi-eye-fill color-app-green  "></i>
@@ -270,10 +270,10 @@ const MemberList = (props) => {
       </Modal>
 
       <div className={`${props.singleView ? "" : "container-body"}  `}>
-        <div class="table-view">
-          <div class="table-wrapper">
-            <div class="table-title">
-              <div class="d-flex">
+        <div className="table-view">
+          <div className="table-wrapper">
+            <div className="table-title">
+              <div className="d-flex">
                 <div>
                   <h2>
                     Member <b>Management</b>
@@ -282,9 +282,9 @@ const MemberList = (props) => {
                 <div className="magin-auto mr-10">
                   <button
                     onClick={() => createMember()}
-                    class="btn btn-primary d-flex align-items-center"
+                    className="btn btn-primary d-flex align-items-center"
                   >
-                    <i class="bi bi-plus-circle-fill"></i>
+                    <i className="bi bi-plus-circle-fill"></i>
                     Add New User
                   </button>
                 </div>

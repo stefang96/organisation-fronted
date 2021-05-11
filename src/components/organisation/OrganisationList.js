@@ -61,7 +61,7 @@ const OrganisationList = (props) => {
           data-bs-toggle="tooltip"
           data-bs-placement="top"
           title="View"
-          class="btn action-hover"
+          className="btn action-hover"
           onClick={() => viewOrganisation(organisationId)}
         >
           <i className="bi bi-eye-fill color-app-green  "></i>
@@ -248,10 +248,10 @@ const OrganisationList = (props) => {
       </Modal>
 
       <div className="container-body ">
-        <div class="table-view">
-          <div class="table-wrapper">
-            <div class="table-title">
-              <div class="d-flex">
+        <div className="table-view">
+          <div className="table-wrapper">
+            <div className="table-title">
+              <div className="d-flex">
                 <div>
                   <h2>
                     Organisation <b>Management</b>
@@ -260,9 +260,9 @@ const OrganisationList = (props) => {
                 <div className="magin-auto mr-10">
                   <button
                     onClick={() => createOrganisation()}
-                    class="btn btn-primary d-flex align-items-center"
+                    className="btn btn-primary d-flex align-items-center"
                   >
-                    <i class="bi bi-plus-circle-fill "></i>
+                    <i className="bi bi-plus-circle-fill "></i>
                     Add New Organisation
                   </button>
                 </div>

@@ -15,42 +15,42 @@ const NavBarItem = (props) => {
 
   useEffect(() => {}, [props.loggedIn]);
   let privateItems = [
-    { class: "nav-item", name: "News", to: "/news" },
-    { class: "nav-item", name: "Organisations", to: "/organisation" },
+    { className: "nav-item", name: "News", to: "/news" },
+    { className: "nav-item", name: "Organisations", to: "/organisation" },
   ];
 
   if (loggedUser)
     if (loggedUser.role === "super_admin") {
       privateItems = [
-        { class: "nav-item", name: "News", to: "/news" },
-        { class: "nav-item", name: "Organisations", to: "/organisation" },
-        { class: "nav-item", name: "Members", to: "/members" },
+        { className: "nav-item", name: "News", to: "/news" },
+        { className: "nav-item", name: "Organisations", to: "/organisation" },
+        { className: "nav-item", name: "Members", to: "/members" },
       ];
     } else if (loggedUser.role === "admin") {
       privateItems = [
-        { class: "nav-item", name: "News", to: "/news" },
-        { class: "nav-item", name: "Members", to: "/members" },
-        { class: "nav-item", name: "Payments", to: "/payments" },
+        { className: "nav-item", name: "News", to: "/news" },
+        { className: "nav-item", name: "Members", to: "/members" },
+        { className: "nav-item", name: "Payments", to: "/payments" },
         {
-          class: "nav-item",
+          className: "nav-item",
           name: "My Profile",
           to: "/my-profile/" + loggedUser.id,
         },
       ];
     } else if (loggedUser.role === "member") {
       privateItems = [
-        { class: "nav-item", name: "News", to: "/news" },
-        { class: "nav-item", name: "Status", to: "/members" },
+        { className: "nav-item", name: "News", to: "/news" },
+        { className: "nav-item", name: "Status", to: "/members" },
         {
-          class: "nav-item",
+          className: "nav-item",
           name: "My Profile",
           to: "/members/" + loggedUser.id,
         },
       ];
     }
   const publicItems = [
-    { class: "glyphicon glyphicon-log-in", name: "Login", to: "/login" },
-    { class: " ", name: "Register", to: "/register" },
+    { className: "glyphicon glyphicon-log-in", name: "Login", to: "/login" },
+    { className: " ", name: "Register", to: "/register" },
   ];
 
   const changeStatusModal = () => {
@@ -77,7 +77,7 @@ const NavBarItem = (props) => {
         {privateItems.map((item) => {
           if (item.name !== "Status") {
             return (
-              <li key={item.name} className={`${item.class} navbar-brand`}>
+              <li key={item.name} className={`${item.className} navbar-brand`}>
                 <NavLink className="nav-link  " to={item.to}>
                   {item.name}
                 </NavLink>
@@ -112,7 +112,7 @@ const NavBarItem = (props) => {
                   className=" nav-link btn btn-outline-app w-150 "
                 >
                   {" "}
-                  <span className={item.class}></span> {item.name}
+                  <span className={item.className}></span> {item.name}
                 </NavLink>
               </li>
             );

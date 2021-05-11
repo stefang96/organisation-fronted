@@ -8,10 +8,10 @@ export default ({
   type,
   meta: { touched, error, warning },
 }) => (
-  <div class="form-group mb-3">
+  <div className="form-group mb-3">
     <label className="form-label">{label}</label>
     <select
-      class="form-select"
+      className="form-select"
       disabled={disabled}
       aria-label="Default select example"
       {...input}

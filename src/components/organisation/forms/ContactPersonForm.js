@@ -7,16 +7,16 @@ import validate from "../../fields/validation/validateContactPersonForm";
 import { sendEmailToContactPerson } from "../../../actions/index";
 
 const ContactPersonForm = (props) => {
-  const renderTextArea = ({ input, label, name, classField }) => {
+  const renderTextArea = ({ input, label, name, classNameField }) => {
     return (
       <div className="form-floating">
         <textarea
           {...input}
-          className={`form-control  ${classField}`}
+          className={`form-control  ${classNameField}`}
           placeholder="Leave a comment here"
           id={name}
         ></textarea>
-        <label for={name}>{label}</label>
+        <label htmlFor={name}>{label}</label>
       </div>
     );
   };
@@ -39,7 +39,7 @@ const ContactPersonForm = (props) => {
       <form onSubmit={props.handleSubmit(onSubmit)} noValidate>
         <Modal.Body className="px-70">
           <div className="row">
-            <div class="col">
+            <div className="col">
               <Field
                 name="firstName"
                 type="text"
@@ -48,7 +48,7 @@ const ContactPersonForm = (props) => {
                 className="w-50"
               />
             </div>
-            <div class="col">
+            <div className="col">
               <Field
                 className="w-50"
                 name="lastName"
@@ -70,7 +70,7 @@ const ContactPersonForm = (props) => {
           <Field
             name="message"
             component={renderTextArea}
-            classField="h-100"
+            classNameField="h-100"
             label="Message"
           />
         </Modal.Body>
@@ -79,14 +79,14 @@ const ContactPersonForm = (props) => {
             <button
               onClick={props.changeModal}
               type="button"
-              class="btn  btn-outline-danger btn-lg  w-150"
+              className="btn  btn-outline-danger btn-lg  w-150"
             >
               Close
             </button>
           </div>
           <div className="modal-right-button">
             <button
-              class="btn  btn-outline-primary  w-150 btn-lg"
+              className="btn  btn-outline-primary  w-150 btn-lg"
               type="submit"
             >
               Send

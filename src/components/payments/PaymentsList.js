@@ -5,10 +5,10 @@ const PaymentsList = (props) => {
   return (
     <div>
       <div className="container-body ">
-        <div class="table-view">
-          <div class="table-wrapper">
-            <div class="table-title">
-              <div class="d-flex">
+        <div className="table-view">
+          <div className="table-wrapper">
+            <div className="table-title">
+              <div className="d-flex">
                 <div>
                   <h2>
                     Payments <b>Management</b>
