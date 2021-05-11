@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { isLogin } from "../../middleware/auth";
 import getLoggedUser from "../../utils/getLoggedUser";
@@ -6,11 +6,14 @@ import { Modal, Alert } from "react-bootstrap";
 import Status from "../member/forms/Status";
 import { connect } from "react-redux";
 import AddPayments from "../payments/forms/AddPayments";
+import StatusModal from "../payments/forms/StatusModal";
 
 const NavBarItem = (props) => {
   const loggedUser = getLoggedUser();
   const [statusModal, setStatusModal] = useState(false);
   const [userData, setUserData] = useState({ active: null, id: null });
+
+  useEffect(() => {}, [props.loggedIn]);
   let privateItems = [
     { class: "nav-item", name: "News", to: "/news" },
     { class: "nav-item", name: "Organisations", to: "/organisation" },
@@ -63,7 +66,7 @@ const NavBarItem = (props) => {
     <>
       <ul className="navbar-nav me-auto mb-2 mb-lg-0"></ul>
       <Modal show={statusModal} onHide={changeStatusModal}>
-        <AddPayments
+        <StatusModal
           changeModal={changeStatusModal}
           active={userData.active}
           id={userData.id}
@@ -161,7 +164,7 @@ const NavBarItem = (props) => {
 
 const mapSateToProps = (state) => {
   return {
-    loggedUser: state.auth.user,
+    loggedIn: state.auth.loggedIn,
   };
 };
 

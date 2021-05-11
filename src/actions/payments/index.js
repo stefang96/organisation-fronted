@@ -5,7 +5,12 @@ import getToken from "../../utils/getToken";
 
 export const getPayments = (data) => async (dispatch) => {
   return await api
-    .put("/payments/all", data)
+    .put("/payments/all", data, {
+      headers: {
+        Authorization: "Bearer " + getToken(),
+        "Content-Type": "application/json",
+      },
+    })
     .then((res) => {
       const result = res.data;
       dispatch({
@@ -18,6 +23,23 @@ export const getPayments = (data) => async (dispatch) => {
     .catch((err) => {});
 };
 
+export const getLatestPayment = () => async (dispatch) => {
+  return await api
+    .get("/payments/payment/latest", {
+      headers: {
+        Authorization: "Bearer " + getToken(),
+        "Content-Type": "application/json",
+      },
+    })
+    .then((res) => {
+      const result = res.data.result;
+      dispatch({
+        type: paymentsConstants.GET_PAYMENT,
+        data: result,
+      });
+    })
+    .catch((err) => {});
+};
 export const addPayments = (data) => async (dispatch) => {
   return await api
     .post("/payments", data, {
