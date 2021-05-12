@@ -1,5 +1,6 @@
 import api from "../../api/index";
 import paymentsConstants from "../../constants/paymentsConstants";
+import authConstants from "../../constants/authConstants";
 import { SubmissionError } from "redux-form";
 import getToken from "../../utils/getToken";
 
@@ -17,7 +18,7 @@ export const getPayments = (data) => async (dispatch) => {
         type: paymentsConstants.GET_PAYMENTS,
         data: result,
       });
-
+      console.log("dsfasvfqdwqedwede");
       console.log(result);
     })
     .catch((err) => {});
@@ -49,11 +50,11 @@ export const addPayments = (data) => async (dispatch) => {
       },
     })
     .then((res) => {
-      const result = res.data;
+      const result = res.data.result;
 
       dispatch({
-        type: paymentsConstants.CREATE_PAYMENTS,
-        data: result,
+        type: authConstants.LOGIN_SUCCESS,
+        result,
       });
 
       const getPaymentsData = {

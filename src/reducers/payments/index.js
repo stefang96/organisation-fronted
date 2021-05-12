@@ -21,6 +21,12 @@ export default (state = initialState, action) => {
         ...state,
         payment: action.data,
       };
+    case paymentsConstants.GET_PAYMENTS:
+      return {
+        ...state,
+        paymentList: action.data.result,
+        paymentMeta: action.data.meta,
+      };
 
     default:
       return state;

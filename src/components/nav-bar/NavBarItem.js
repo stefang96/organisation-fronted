@@ -13,7 +13,7 @@ const NavBarItem = (props) => {
   const [statusModal, setStatusModal] = useState(false);
   const [userData, setUserData] = useState({ active: null, id: null });
 
-  useEffect(() => {}, [props.loggedIn]);
+  useEffect(() => {}, [props.loggedIn, props.loggedActive]);
   let privateItems = [
     { className: "nav-item", name: "News", to: "/news" },
     { className: "nav-item", name: "Organisations", to: "/organisation" },
@@ -165,6 +165,7 @@ const NavBarItem = (props) => {
 const mapSateToProps = (state) => {
   return {
     loggedIn: state.auth.loggedIn,
+    loggedActive: state.auth.loggedActive,
   };
 };
 

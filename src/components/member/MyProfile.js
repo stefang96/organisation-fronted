@@ -2,10 +2,18 @@ import React, { useState, useEffect } from "react";
 import { Tab, Tabs } from "react-bootstrap";
 import NewsList from "../news/NewsList";
 import MemberInformation from "./MemberInformation";
+import PaymentsList from "../payments/PaymentsList";
 import { connect } from "react-redux";
 import { getMemberById } from "../../actions/index";
+import getLoggedUser from "../../utils/getLoggedUser";
+import history from "../../history";
 
 const MyProfile = (props) => {
+  const loggedUser = getLoggedUser();
+
+  console.log(history.location.pathname);
+  const isMyPofile = history.location.pathname.includes("my-profile");
+  console.log(isMyPofile);
   const [key, setKey] = useState("info");
   useEffect(() => {
     props.getMemberById(props.match.params.memberId);
@@ -21,12 +29,17 @@ const MyProfile = (props) => {
         <Tab eventKey="info" title="Information">
           <MemberInformation memberId={props.match.params.memberId} />
         </Tab>
-        <Tab eventKey="news" title="My news">
+        <Tab eventKey="news" title="News">
           <NewsList profile={true} memberId={props.match.params.memberId} />
         </Tab>
-        <Tab eventKey="payments" title="Payments">
-          <div className="mt-30">User payments</div>
-        </Tab>
+        {(!isMyPofile || loggedUser.role === "member") && (
+          <Tab eventKey="payments" title="Payments">
+            <PaymentsList
+              profile={true}
+              memberId={props.match.params.memberId}
+            />
+          </Tab>
+        )}
       </Tabs>
     </div>
   );

@@ -26,6 +26,7 @@ export default (state = initialState, action) => {
         ...state,
         user: user,
         loggedIn: true,
+        loggedActive: user.active,
       };
     case authConstants.SIGNUP_MESSAGE:
       return {
