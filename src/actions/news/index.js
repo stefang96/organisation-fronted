@@ -54,7 +54,9 @@ export const getNewsById = (newsId) => async (dispatch) => {
     });
 };
 
-export const updateNews = (newsId, data, memberId) => async (dispatch) => {
+export const updateNews = (newsId, data, memberId, profile = false) => async (
+  dispatch
+) => {
   let headers = {};
   if (getToken()) {
     headers = {
@@ -74,12 +76,16 @@ export const updateNews = (newsId, data, memberId) => async (dispatch) => {
         data: result,
       });
 
-      const getNewsData = {
+      let getNewsData = {
         pagination: { page: 1 },
-        memberId: memberId,
       };
+      if (profile) {
+        getNewsData = {
+          pagination: { page: 1 },
+          memberId: memberId,
+        };
+      }
       dispatch(getNews(getNewsData));
-      console.log(result);
     })
     .catch((err) => {
       console.log(err);
@@ -87,7 +93,9 @@ export const updateNews = (newsId, data, memberId) => async (dispatch) => {
     });
 };
 
-export const removeNews = (newsId, memberId) => async (dispatch) => {
+export const removeNews = (newsId, memberId, profile = false) => async (
+  dispatch
+) => {
   let headers = {};
   if (getToken()) {
     headers = {
@@ -107,10 +115,15 @@ export const removeNews = (newsId, memberId) => async (dispatch) => {
         data: result,
       });
 
-      const getNewsData = {
+      let getNewsData = {
         pagination: { page: 1 },
-        memberId: memberId,
       };
+      if (profile) {
+        getNewsData = {
+          pagination: { page: 1 },
+          memberId: memberId,
+        };
+      }
       dispatch(getNews(getNewsData));
       console.log(result);
     })
@@ -120,7 +133,9 @@ export const removeNews = (newsId, memberId) => async (dispatch) => {
     });
 };
 
-export const createNews = (data, memberId = null) => async (dispatch) => {
+export const createNews = (data, memberId = null, profile = false) => async (
+  dispatch
+) => {
   let headers = {};
   if (getToken()) {
     headers = {
@@ -139,10 +154,15 @@ export const createNews = (data, memberId = null) => async (dispatch) => {
         type: newsConstants.CREATE_NEWS,
         data: result,
       });
-      const getNewsData = {
+      let getNewsData = {
         pagination: { page: 1 },
-        memberId: memberId,
       };
+      if (profile) {
+        getNewsData = {
+          pagination: { page: 1 },
+          memberId: memberId,
+        };
+      }
       dispatch(getNews(getNewsData));
 
       console.log(result);

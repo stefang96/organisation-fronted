@@ -24,16 +24,19 @@ const OrganisationInformation = (props) => {
   };
 
   const renderActionsButton = () => {
-    if (user.role === "super_admin")
+    if (user && user.role !== "member")
       return (
         <>
-          <button
-            onClick={() => removeOrganisation()}
-            className="btn btn-primary d-flex align-items-center"
-          >
-            <i className="bi bi-person-x-fill color-app-red"></i>
-            Remove organisation
-          </button>
+          {user.role === "super_admin" && (
+            <button
+              onClick={() => removeOrganisation()}
+              className="btn btn-primary d-flex align-items-center"
+            >
+              <i className="bi bi-person-x-fill color-app-red"></i>
+              Remove organisation
+            </button>
+          )}
+
           <button
             onClick={() => editOrganisation()}
             className="btn btn-primary d-flex align-items-center"

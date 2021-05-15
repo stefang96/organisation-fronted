@@ -38,7 +38,7 @@ const EditNews = (props) => {
     Object.keys(formValues).forEach((key) =>
       formData.append(key, formValues[key])
     );
-    props.updateNews(props.newsId, formData, props.memberId);
+    props.updateNews(props.newsId, formData, props.memberId, props.profile);
     props.changeModal();
   };
 

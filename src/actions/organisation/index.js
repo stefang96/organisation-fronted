@@ -148,8 +148,9 @@ export const updateOrganisation = (organisationId, data) => async (
       },
     })
     .then((res) => {
-      const result = res.data;
+      const result = res.data.result;
 
+      console.log(result);
       dispatch({
         type: organisationConstants.UPDATE_ORGANISATION,
         data: result,

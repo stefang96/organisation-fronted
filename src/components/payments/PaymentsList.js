@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import "../table/table.scss";
 import { getPayments } from "../../actions/index";
 import DataTable from "../table/DataTable";
@@ -7,6 +7,22 @@ import moment from "moment";
 import "../table/table.scss";
 
 const PaymentsList = (props) => {
+  const [filters, setFilters] = useState(null);
+  const [searchFilters, setSearchFilters] = useState({
+    memberId: null,
+  });
+
+  const getInitialFilters = () => {
+    let initialFilters = [];
+
+    return initialFilters;
+  };
+
+  //Fetch and  rewrite filters based on selected filter
+  const fetchFilters = React.useCallback(({ filters }) => {
+    setFilters(filters);
+  }, []);
+
   const dateCell = ({ value }) => {
     if (!value) {
       return <div>-</div>;
@@ -73,39 +89,35 @@ const PaymentsList = (props) => {
   );
 
   //Fetch data into list, based on current page, search query or selected filters
-  const fetchData = useCallback(
-    ({ pageIndex, pageSize, searchQuery, searchFilters }) => {
-      window.scrollTo(0, 0);
+  const fetchData = useCallback(({ pageIndex, pageSize, searchFilters }) => {
+    window.scrollTo(0, 0);
 
-      const pagination = {
-        page: pageIndex + 1,
-      };
-      const filters = {
-        search: searchQuery,
-      };
-      let reqData = {
+    const pagination = {
+      page: pageIndex + 1,
+    };
+    const filters = {
+      memberId: searchFilters.memberId,
+    };
+    let reqData = {
+      pagination: pagination,
+      filters: filters,
+    };
+    if (props.memberId) {
+      reqData = {
         pagination: pagination,
         filters: filters,
+        memberId: props.memberId,
       };
-      if (props.memberId) {
-        reqData = {
-          pagination: pagination,
-          filters: filters,
-          memberId: props.memberId,
-        };
-      }
+    }
 
-      props.getPayments(reqData);
-    },
-    []
-  );
+    props.getPayments(reqData);
+  }, []);
 
   let data = [];
   const meta = props.paymentMeta;
 
   if (props.paymentList) {
     data = props.paymentList;
-    console.log(data);
   }
 
   return (
@@ -132,7 +144,12 @@ const PaymentsList = (props) => {
               </div>
 
               <DataTable
+                name="payments"
                 fetchData={fetchData}
+                filterName="All members"
+                fetchFilters={fetchFilters}
+                initialFilters={getInitialFilters}
+                searchFilters={searchFilters}
                 data={data}
                 columns={columns}
                 pageCount={meta && Math.ceil(meta.total / meta.limit)}

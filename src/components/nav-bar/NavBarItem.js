@@ -30,12 +30,17 @@ const NavBarItem = (props) => {
       privateItems = [
         { className: "nav-item", name: "News", to: "/news" },
         { className: "nav-item", name: "Members", to: "/members" },
-        { className: "nav-item", name: "Payments", to: "/payments" },
+        {
+          className: "nav-item",
+          name: "My Organisaton",
+          to: "/my-organisation/" + loggedUser.organisation.id,
+        },
         {
           className: "nav-item",
           name: "My Profile",
           to: "/my-profile/" + loggedUser.id,
         },
+        { className: "nav-item", name: "Payments", to: "/payments" },
       ];
     } else if (loggedUser.role === "member") {
       privateItems = [
@@ -43,8 +48,13 @@ const NavBarItem = (props) => {
         { className: "nav-item", name: "Status", to: "/members" },
         {
           className: "nav-item",
+          name: "My Organisaton",
+          to: "/my-organisation/" + loggedUser.organisation.id,
+        },
+        {
+          className: "nav-item",
           name: "My Profile",
-          to: "/members/" + loggedUser.id,
+          to: "/my-profile/" + loggedUser.id,
         },
       ];
     }

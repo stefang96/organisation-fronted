@@ -45,33 +45,48 @@ const DataTable = (props) => {
     setSearchQuery(e.target.value);
   };
 
-  const singleView = (row) => {
-    console.log({ row });
+  const setSelectedFilter = (e, searchName) => {
+    // let filtersInner = props.searchFilters;
+    console.log(e.target.value);
+    const valueData = e.target.value;
+    const value = valueData === "null" ? null : valueData;
 
-    props.view(row.original.id);
+    for (let key in searchFilters) {
+      if (key === searchName) {
+        searchFilters[key] = value;
+      }
+    }
+
+    //  props.fetchFilters({ filters: filtersInner });
+    fetchData({ pageIndex, searchQuery, searchFilters });
   };
 
   return (
     <>
       <div className="p-10-0 d-flex ">
-        <div className="form-group mr-30">
-          <input
-            type="text"
-            id="searchInput"
-            className="form-control"
-            placeholder="Search"
-            aria-label="Search"
-            aria-describedby="basic-addon1"
-            onChange={onSearchChange}
-          />
-        </div>
+        {props.name !== "payments" && (
+          <div className="form-group mr-30">
+            <input
+              type="text"
+              id="searchInput"
+              className="form-control"
+              placeholder="Search"
+              aria-label="Search"
+              aria-describedby="basic-addon1"
+              onChange={onSearchChange}
+            />
+          </div>
+        )}
 
         <div className="form-group ">
-          <select className="form-select" aria-label="Default select example">
-            <option value="0">Open this select menu</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
+          <select
+            onChange={(e) => setSelectedFilter(e, "memberId")}
+            className="form-select"
+            aria-label="Default select example"
+          >
+            <option value="null">{props.filterName}</option>
+            <option value="9">Stefan2 Grujicic</option>
+            <option value="17">Stefan Gru</option>
           </select>
         </div>
       </div>

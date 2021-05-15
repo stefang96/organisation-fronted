@@ -25,6 +25,7 @@ const NewsList = (props) => {
   let meta;
   const [searchFilters, setSearchFilters] = useState({
     organisationId: null,
+    memberId: null,
   });
 
   const getInitialFilters = () => {
@@ -55,15 +56,16 @@ const NewsList = (props) => {
       const filters = {
         search: searchQuery,
         organisationId: searchFilters.organisationId,
+        memberId: searchFilters.memberId,
       };
       let reqData = {
         pagination: pagination,
-        filters: null,
+        filters: filters,
       };
       if (props.profile) {
         reqData = {
           pagination: pagination,
-          filters: null,
+          filters: filters,
           memberId: props.memberId,
         };
       }
@@ -153,6 +155,7 @@ const NewsList = (props) => {
       >
         <CreateNews
           memberId={props.memberId ? props.memberId : null}
+          profile={props.profile}
           changeModal={createNews}
         />
       </Modal>
@@ -165,6 +168,7 @@ const NewsList = (props) => {
         aria-labelledby="example-modal-sizes-title-lg"
       >
         <EditNews
+          profile={props.profile}
           memberId={props.memberId ? props.memberId : null}
           newsId={newsId}
           changeModal={editNews}
@@ -172,6 +176,7 @@ const NewsList = (props) => {
       </Modal>
       <Modal keyboard={false} show={removeNewsModal} onHide={removeNews}>
         <RemoveNews
+          profile={props.profile}
           memberId={props.memberId ? props.memberId : null}
           newsId={newsId}
           changeModal={removeNews}
@@ -183,13 +188,15 @@ const NewsList = (props) => {
         <DataGrid
           data={data}
           meta={meta}
+          isMyPofile={props.isMyPofile}
           columns={columns}
           fetchData={fetchData}
           fetchFilters={fetchFilters}
           createNews={createNews}
           removeNews={removeNews}
           editNews={editNews}
-          searchFilters={getInitialFilters}
+          initialFilters={getInitialFilters}
+          searchFilters={searchFilters}
           profile={props.profile}
           pageCount={meta && Math.ceil(meta.total / meta.limit)}
         />

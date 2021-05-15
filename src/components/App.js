@@ -74,6 +74,11 @@ function App(props) {
               path="/members/:memberId"
             />
             <PrivateRoute
+              component={SingleOrganisation}
+              exact
+              path="/my-organisation/:organisationId"
+            />
+            <PrivateRoute
               component={MyProfile}
               exact
               path="/my-profile/:memberId"

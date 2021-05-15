@@ -22,7 +22,7 @@ const CreateNews = (props) => {
       formData.append(key, formValues[key])
     );
 
-    props.createNews(formData, props.memberId);
+    props.createNews(formData, props.memberId, props.profile);
     props.changeModal();
   };
 

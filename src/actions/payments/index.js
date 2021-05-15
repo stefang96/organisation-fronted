@@ -18,7 +18,7 @@ export const getPayments = (data) => async (dispatch) => {
         type: paymentsConstants.GET_PAYMENTS,
         data: result,
       });
-      console.log("dsfasvfqdwqedwede");
+
       console.log(result);
     })
     .catch((err) => {});

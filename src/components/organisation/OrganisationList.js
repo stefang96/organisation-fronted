@@ -21,6 +21,10 @@ const OrganisationList = (props) => {
   const [editOrganisationModal, setEditOrganisationModal] = useState(false);
   const [createOrganisationModal, setCreateOrganisationModal] = useState(false);
   const [organisationId, setOrganisationId] = useState(null);
+  const [filters, setFilters] = useState(null);
+  const [searchFilters, setSearchFilters] = useState({
+    memberId: null,
+  });
 
   useEffect(() => {
     checkResponseAction();
@@ -28,7 +32,7 @@ const OrganisationList = (props) => {
 
   const cotactPersonCell = (props) => {
     const contactPerson = props.row.original.contactPerson;
-    console.log(props.row.original);
+
     if (!contactPerson) {
       return <div>-</div>;
     }
@@ -93,7 +97,7 @@ const OrganisationList = (props) => {
   };
 
   const viewOrganisation = (memberId) => {
-    history.push("organisation/" + memberId);
+    history.push("/organisation/" + memberId);
   };
   const columns = React.useMemo(
     () => [
@@ -141,12 +145,12 @@ const OrganisationList = (props) => {
       };
       const filters = {
         search: searchQuery,
+        memberId: searchFilters.memberId,
       };
       const reqData = {
         pagination: pagination,
         filters: filters,
       };
-      console.log(pageIndex);
 
       props.getOrganisations(reqData);
     },
@@ -201,6 +205,17 @@ const OrganisationList = (props) => {
     setEditOrganisationModal(!editOrganisationModal);
     setOrganisationId(organisationId);
   };
+
+  const getInitialFilters = () => {
+    let initialFilters = [];
+
+    return initialFilters;
+  };
+
+  //Fetch and  rewrite filters based on selected filter
+  const fetchFilters = React.useCallback(({ filters }) => {
+    setFilters(filters);
+  }, []);
   return (
     <>
       <Modal
@@ -272,6 +287,10 @@ const OrganisationList = (props) => {
             {
               <DataTable
                 fetchData={fetchData}
+                fetchFilters={fetchFilters}
+                initialFilters={getInitialFilters}
+                searchFilters={searchFilters}
+                filterName="All contact person"
                 data={data}
                 columns={columns}
                 pageCount={meta && Math.ceil(meta.total / meta.limit)}

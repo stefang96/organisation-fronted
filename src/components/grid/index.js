@@ -7,8 +7,7 @@ import loggedUser from "../../utils/getLoggedUser";
 const DataGrid = (props) => {
   const user = loggedUser();
   const { data, fetchData, searchFilters, meta, fetchPage } = props;
-  // const { limit, page, total } = props.meta;
-  console.log(meta);
+
   const filters = props.initialFilters;
   const [searchQuery, setSearchQuery] = useState(null);
 
@@ -45,19 +44,27 @@ const DataGrid = (props) => {
 
   useEffect(() => {
     fetchData({ pageIndex, searchQuery, searchFilters });
-  }, [fetchData, pageIndex]);
+  }, [fetchData, pageIndex, searchQuery, searchFilters]);
 
   const onSearchChange = (e) => {
     console.log(e.target.value);
-    // setSearchQuery(e.target.value);
+    setSearchQuery(e.target.value);
   };
 
-  const setSelectedFilter = (e) => {
-    let filtersInner = filters;
+  const setSelectedFilter = (e, searchName) => {
+    // let filtersInner = props.searchFilters;
     console.log(e.target.value);
-    console.log(filtersInner);
+    const valueData = e.target.value;
+    const value = valueData === "null" ? null : valueData;
+
+    for (let key in searchFilters) {
+      if (key === searchName) {
+        searchFilters[key] = value;
+      }
+    }
+
     //  props.fetchFilters({ filters: filtersInner });
-    //    fetchData({ limit, searchQuery, searchFilters });
+    fetchData({ pageIndex, searchQuery, searchFilters });
   };
 
   const getSingleView = (id) => {
@@ -228,7 +235,7 @@ const DataGrid = (props) => {
         <>
           <div className="p-30  h-auto bg-color-light-grey">
             <div className="filter filter--search ">
-              {true && (
+              {user && !props.isMyPofile && (
                 <button
                   onClick={() => props.createNews()}
                   className="btn btn-create-news h-50-px mb-30 w-100    "
@@ -253,18 +260,48 @@ const DataGrid = (props) => {
               </div>
 
               {!props.profile && (
-                <div className="form-group mt-30">
-                  <select
-                    className="form-select"
-                    onChange={setSelectedFilter}
-                    aria-label="Default select example"
-                  >
-                    <option value="0">Open this select menu</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                  </select>
-                </div>
+                <>
+                  {user ? (
+                    <div className="form-group mt-30">
+                      <select
+                        className="form-select"
+                        onChange={(e) => setSelectedFilter(e, "memberId")}
+                        aria-label="Default select example"
+                      >
+                        <option value="null">All members</option>
+                        <option value="10">Marko Markovic</option>
+                        <option value="9">Stefan</option>
+                      </select>
+                    </div>
+                  ) : (
+                    <>
+                      <div className="form-group mt-30">
+                        <select
+                          className="form-select"
+                          onChange={(e) => setSelectedFilter(e, "memberId")}
+                          aria-label="Default select example"
+                        >
+                          <option value="null">All members</option>
+                          <option value="10">Marko Markovic</option>
+                          <option value="9">Stefan</option>
+                        </select>
+                      </div>
+                      <div className="form-group mt-30">
+                        <select
+                          className="form-select"
+                          onChange={(e) =>
+                            setSelectedFilter(e, "organisationId")
+                          }
+                          aria-label="Default select example"
+                        >
+                          <option value="null">All organisation</option>
+                          <option value="8">8 Organisation</option>
+                          <option value="9">9 Organisation</option>
+                        </select>
+                      </div>
+                    </>
+                  )}
+                </>
               )}
             </div>
           </div>

@@ -9,13 +9,30 @@ import history from "../../history";
 import Archive from "./forms/Archive";
 import Edit from "./forms/Edit";
 import AddMember from "./forms/AddMember";
+import getLoggedUser from "../../utils/getLoggedUser";
 
 const MemberList = (props) => {
+  const loggedUser = getLoggedUser();
   const [variant, setVariant] = useState(null);
   const [removeMemberModal, setRemoveMemberModal] = useState(false);
   const [editMemberModal, setEditMemberModal] = useState(false);
   const [createMemberModal, setCreateMemberModal] = useState(false);
   const [memberId, setMemberId] = useState(null);
+  const [filters, setFilters] = useState(null);
+  const [searchFilters, setSearchFilters] = useState({
+    status: null,
+  });
+
+  const getInitialFilters = () => {
+    let initialFilters = [];
+
+    return initialFilters;
+  };
+
+  //Fetch and  rewrite filters based on selected filter
+  const fetchFilters = React.useCallback(({ filters }) => {
+    setFilters(filters);
+  }, []);
 
   useEffect(() => {
     checkResponseAction();
@@ -62,7 +79,6 @@ const MemberList = (props) => {
     if (!name) {
       return <div>-</div>;
     }
-    console.log(props.row.original);
 
     return <div>{name}</div>;
   };
@@ -78,38 +94,47 @@ const MemberList = (props) => {
   const actionCell = (props) => {
     const userId = props.row.original.id;
 
-    return (
-      <div className="d-flex">
-        <button
-          data-bs-toggle="tooltip"
-          data-bs-placement="top"
-          title="View"
-          className="btn action-hover"
-          onClick={() => viewMember(userId)}
-        >
-          <i className="bi bi-eye-fill color-app-green  "></i>
-        </button>
+    console.log(props.singleView);
+    if (!loggedUser) {
+      return null;
+    } else {
+      return (
+        <div className="d-flex">
+          {loggedUser.role !== "member" && (
+            <>
+              <button
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                title="View"
+                className="btn action-hover"
+                onClick={() => viewMember(userId)}
+              >
+                <i className="bi bi-eye-fill color-app-green  "></i>
+              </button>
 
-        <button
-          data-bs-toggle="tooltip"
-          data-bs-placement="top"
-          title="Edit"
-          className=" btn action-hover"
-          onClick={() => setMemberIdEdit(userId)}
-        >
-          <i className="bi bi-pencil-square color-app-blue  "></i>
-        </button>
-        <button
-          data-bs-toggle="tooltip"
-          data-bs-placement="top"
-          title="Remove"
-          className="btn action-hover"
-          onClick={() => setMemberIdRemove(userId)}
-        >
-          <i className="bi bi-person-x-fill color-app-red  "></i>
-        </button>
-      </div>
-    );
+              <button
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                title="Edit"
+                className=" btn action-hover"
+                onClick={() => setMemberIdEdit(userId)}
+              >
+                <i className="bi bi-pencil-square color-app-blue  "></i>
+              </button>
+              <button
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                title="Remove"
+                className="btn action-hover"
+                onClick={() => setMemberIdRemove(userId)}
+              >
+                <i className="bi bi-person-x-fill color-app-red  "></i>
+              </button>
+            </>
+          )}
+        </div>
+      );
+    }
   };
 
   const dateCell = ({ value }) => {
@@ -177,6 +202,7 @@ const MemberList = (props) => {
       };
       const filters = {
         search: searchQuery,
+        status: searchFilters.status,
       };
 
       let reqData = {
@@ -279,20 +305,28 @@ const MemberList = (props) => {
                     Member <b>Management</b>
                   </h2>
                 </div>
-                <div className="magin-auto mr-10">
-                  <button
-                    onClick={() => createMember()}
-                    className="btn btn-primary d-flex align-items-center"
-                  >
-                    <i className="bi bi-plus-circle-fill"></i>
-                    Add New User
-                  </button>
-                </div>
+                {loggedUser && loggedUser.role === "admin" ? (
+                  <div className="magin-auto mr-10">
+                    <button
+                      onClick={() => createMember()}
+                      className="btn btn-primary d-flex align-items-center"
+                    >
+                      <i className="bi bi-plus-circle-fill"></i>
+                      Add New User
+                    </button>
+                  </div>
+                ) : (
+                  ""
+                )}
               </div>
             </div>
 
             <DataTable
               fetchData={fetchData}
+              filterName="All states"
+              fetchFilters={fetchFilters}
+              initialFilters={getInitialFilters}
+              searchFilters={searchFilters}
               data={data}
               columns={columns}
               pageCount={meta && Math.ceil(meta.total / meta.limit)}

@@ -11,7 +11,6 @@ import history from "../../history";
 const MyProfile = (props) => {
   const loggedUser = getLoggedUser();
 
-  console.log(history.location.pathname);
   const isMyPofile = history.location.pathname.includes("my-profile");
   console.log(isMyPofile);
   const [key, setKey] = useState("info");
@@ -30,7 +29,11 @@ const MyProfile = (props) => {
           <MemberInformation memberId={props.match.params.memberId} />
         </Tab>
         <Tab eventKey="news" title="News">
-          <NewsList profile={true} memberId={props.match.params.memberId} />
+          <NewsList
+            isMyPofile={!isMyPofile}
+            profile={true}
+            memberId={props.match.params.memberId}
+          />
         </Tab>
         {(!isMyPofile || loggedUser.role === "member") && (
           <Tab eventKey="payments" title="Payments">

@@ -8,7 +8,7 @@ import { removeNews } from "../../../actions/index";
 const RemoveNews = (props) => {
   const onSubmit = (formValues) => {
     console.log(formValues);
-    props.removeNews(props.newsId, props.memberId);
+    props.removeNews(props.newsId, props.memberId, props.profile);
     props.changeModal();
   };
 

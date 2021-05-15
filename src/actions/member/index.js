@@ -25,9 +25,8 @@ export const getMemberById = (memberId) => async (dispatch) => {
 };
 
 export const getMembers = (data) => async (dispatch) => {
-  console.log("get memberss");
   return await api
-    .put("/member", data, {
+    .put("/member/get-all", data, {
       headers: {
         Authorization: "Bearer " + getToken(),
         "Content-Type": "application/json",
