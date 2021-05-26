@@ -78,17 +78,26 @@ const DataTable = (props) => {
           </div>
         )}
 
-        <div className="form-group ">
-          <select
-            onChange={(e) => setSelectedFilter(e, "memberId")}
-            className="form-select"
-            aria-label="Default select example"
-          >
-            <option value="null">{props.filterName}</option>
-            <option value="9">Stefan2 Grujicic</option>
-            <option value="17">Stefan Gru</option>
-          </select>
-        </div>
+        {props.initialFilters &&
+          props.initialFilters.map((element, i) => {
+            return (
+              <div key={i} className="form-group ">
+                <select
+                  onChange={(e) => setSelectedFilter(e, element.searchName)}
+                  className="form-select"
+                  aria-label="Default select example"
+                >
+                  {element.list.map((filter, i) => {
+                    return (
+                      <option key={i} value={filter.value}>
+                        {filter.title}
+                      </option>
+                    );
+                  })}
+                </select>
+              </div>
+            );
+          })}
       </div>
       <table className="table table-striped table-hover" {...getTableProps()}>
         <thead>

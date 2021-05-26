@@ -24,6 +24,22 @@ export const getMemberById = (memberId) => async (dispatch) => {
     });
 };
 
+export const getAllContactPersons = () => async (dispatch) => {
+  return await api
+    .get("/member/contact-persons/get-all")
+    .then((res) => {
+      const result = res.data.result;
+
+      dispatch({
+        type: memberConstants.GET_CONTACT_PERSONS,
+        data: result,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
 export const getMembers = (data) => async (dispatch) => {
   return await api
     .put("/member/get-all", data, {

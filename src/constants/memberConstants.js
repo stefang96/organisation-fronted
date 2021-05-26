@@ -9,6 +9,7 @@ const authConstants = {
   UPDATE_MEMBER: "UPDATE_MEMBER",
   CREATE_MEMBER: "CREATE_MEMBER",
   GET_ADMINS: "GET_ADMINS",
+  GET_CONTACT_PERSONS: "GET_CONTACT_PERSONS",
 };
 
 export default authConstants;

@@ -275,30 +275,27 @@ const DataGrid = (props) => {
                     </div>
                   ) : (
                     <>
-                      <div className="form-group mt-30">
-                        <select
-                          className="form-select"
-                          onChange={(e) => setSelectedFilter(e, "memberId")}
-                          aria-label="Default select example"
-                        >
-                          <option value="null">All members</option>
-                          <option value="10">Marko Markovic</option>
-                          <option value="9">Stefan</option>
-                        </select>
-                      </div>
-                      <div className="form-group mt-30">
-                        <select
-                          className="form-select"
-                          onChange={(e) =>
-                            setSelectedFilter(e, "organisationId")
-                          }
-                          aria-label="Default select example"
-                        >
-                          <option value="null">All organisation</option>
-                          <option value="8">8 Organisation</option>
-                          <option value="9">9 Organisation</option>
-                        </select>
-                      </div>
+                      {props.initialFilters &&
+                        props.initialFilters.map((element, i) => {
+                          return (
+                            <div key={i} className="form-group mt-30">
+                              <select
+                                onChange={(e) =>
+                                  setSelectedFilter(e, element.searchName)
+                                }
+                                className="form-select"
+                              >
+                                {element.list.map((filter, i) => {
+                                  return (
+                                    <option key={i} value={filter.value}>
+                                      {filter.title}
+                                    </option>
+                                  );
+                                })}
+                              </select>
+                            </div>
+                          );
+                        })}
                     </>
                   )}
                 </>

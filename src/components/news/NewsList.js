@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import DataGrid from "../grid/index";
-import { getNews, clearNewsAction } from "../../actions/index";
+import {
+  getNews,
+  clearNewsAction,
+  getMembers,
+  getOrganisations,
+} from "../../actions/index";
 import "./news.scss";
 import { Height } from "@material-ui/icons";
 import { Modal, Alert } from "react-bootstrap";
@@ -22,17 +27,64 @@ const NewsList = (props) => {
     checkResponseAction();
   }, [props.successAction, props.errorAction]);
 
+  useEffect(() => {
+    props.getMembers();
+    props.getOrganisations();
+  }, []);
+
   let meta;
   const [searchFilters, setSearchFilters] = useState({
     organisationId: null,
     memberId: null,
   });
 
-  const getInitialFilters = () => {
-    let initialFilters = [];
+  let membersList = [
+    {
+      id: 0,
+      title: "All members",
+      value: "null",
+    },
+  ];
 
-    return initialFilters;
-  };
+  let organisationsList = [
+    {
+      id: 0,
+      title: "All organisations",
+      value: "null",
+    },
+  ];
+  props.membersList &&
+    props.membersList.map((member, i) => {
+      i = i + 1;
+      return membersList.push({
+        id: i,
+        title: member.firstName + " " + member.lastName,
+        value: member.id,
+      });
+    });
+
+  props.organisationsList &&
+    props.organisationsList.map((organisation, i) => {
+      i = i + 1;
+      return organisationsList.push({
+        id: i,
+        title: organisation.name,
+        value: organisation.id,
+      });
+    });
+
+  let initialFilters = [
+    {
+      title: "All members",
+      searchName: "memberId",
+      list: membersList,
+    },
+    {
+      title: "All organisations",
+      searchName: "organisationId",
+      list: organisationsList,
+    },
+  ];
   //Fetch and  rewrite filters based on selected filter
   const fetchFilters = React.useCallback(({ filters }) => {
     setFilters(filters);
@@ -195,7 +247,7 @@ const NewsList = (props) => {
           createNews={createNews}
           removeNews={removeNews}
           editNews={editNews}
-          initialFilters={getInitialFilters}
+          initialFilters={!filters ? initialFilters : filters}
           searchFilters={searchFilters}
           profile={props.profile}
           pageCount={meta && Math.ceil(meta.total / meta.limit)}
@@ -220,6 +272,13 @@ const mapStateToProps = (state) => {
     successAction: state.news.successAction,
     errorAction: state.news.errorAction,
     message: state.news.message,
+    organisationsList: state.organisation.organisationList,
+    membersList: state.member.memberList,
   };
 };
-export default connect(mapStateToProps, { getNews, clearNewsAction })(NewsList);
+export default connect(mapStateToProps, {
+  getNews,
+  clearNewsAction,
+  getMembers,
+  getOrganisations,
+})(NewsList);

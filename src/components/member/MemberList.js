@@ -23,12 +23,29 @@ const MemberList = (props) => {
     status: null,
   });
 
-  const getInitialFilters = () => {
-    let initialFilters = [];
-
-    return initialFilters;
-  };
-
+  let initialFilters = [
+    {
+      title: "All states",
+      searchName: "status",
+      list: [
+        {
+          id: 0,
+          title: "All states",
+          value: "null",
+        },
+        {
+          id: 1,
+          title: "Active",
+          value: true,
+        },
+        {
+          id: 2,
+          title: "Inactive",
+          value: false,
+        },
+      ],
+    },
+  ];
   //Fetch and  rewrite filters based on selected filter
   const fetchFilters = React.useCallback(({ filters }) => {
     setFilters(filters);
@@ -325,7 +342,7 @@ const MemberList = (props) => {
               fetchData={fetchData}
               filterName="All states"
               fetchFilters={fetchFilters}
-              initialFilters={getInitialFilters}
+              initialFilters={!filters ? initialFilters : filters}
               searchFilters={searchFilters}
               data={data}
               columns={columns}

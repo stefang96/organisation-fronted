@@ -11,6 +11,7 @@ const initialState = {
   memberMeta: null,
   successAction: false,
   errorAction: false,
+  contactPersons: null,
   message: "",
 };
 
@@ -86,6 +87,11 @@ export default (state = initialState, action) => {
         message: "Success update member.",
       };
 
+    case memberConstants.GET_CONTACT_PERSONS:
+      return {
+        ...state,
+        contactPersons: action.data,
+      };
     default:
       return state;
   }

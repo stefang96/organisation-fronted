@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import DataTable from "../table/DataTable";
 import "../table/table.scss";
-import { getOrganisations, clearMemerAction } from "../../actions/index";
+import {
+  getOrganisations,
+  clearMemerAction,
+  getAllContactPersons,
+} from "../../actions/index";
 import { connect } from "react-redux";
 import moment from "moment";
 import { Modal, Alert } from "react-bootstrap";
@@ -28,7 +32,37 @@ const OrganisationList = (props) => {
 
   useEffect(() => {
     checkResponseAction();
+    props.getAllContactPersons();
   }, [props.successAction, props.errorAction]);
+
+  useEffect(() => {
+    props.getAllContactPersons();
+  }, []);
+
+  let membersList = [
+    {
+      id: 0,
+      title: "All members",
+      value: "null",
+    },
+  ];
+  props.contactPersons &&
+    props.contactPersons.map((member, i) => {
+      i = i + 1;
+      return membersList.push({
+        id: i,
+        title: member.firstName + " " + member.lastName,
+        value: member.id,
+      });
+    });
+
+  let initialFilters = [
+    {
+      title: "All members",
+      searchName: "memberId",
+      list: membersList,
+    },
+  ];
 
   const cotactPersonCell = (props) => {
     const contactPerson = props.row.original.contactPerson;
@@ -206,12 +240,6 @@ const OrganisationList = (props) => {
     setOrganisationId(organisationId);
   };
 
-  const getInitialFilters = () => {
-    let initialFilters = [];
-
-    return initialFilters;
-  };
-
   //Fetch and  rewrite filters based on selected filter
   const fetchFilters = React.useCallback(({ filters }) => {
     setFilters(filters);
@@ -272,15 +300,17 @@ const OrganisationList = (props) => {
                     Organisation <b>Management</b>
                   </h2>
                 </div>
-                <div className="magin-auto mr-10">
-                  <button
-                    onClick={() => createOrganisation()}
-                    className="btn btn-primary d-flex align-items-center"
-                  >
-                    <i className="bi bi-plus-circle-fill "></i>
-                    Add New Organisation
-                  </button>
-                </div>
+                {loggedUser && loggedUser.role === "super_admin" && (
+                  <div className="magin-auto mr-10">
+                    <button
+                      onClick={() => createOrganisation()}
+                      className="btn btn-primary d-flex align-items-center"
+                    >
+                      <i className="bi bi-plus-circle-fill "></i>
+                      Add New Organisation
+                    </button>
+                  </div>
+                )}
               </div>
             </div>
 
@@ -288,7 +318,7 @@ const OrganisationList = (props) => {
               <DataTable
                 fetchData={fetchData}
                 fetchFilters={fetchFilters}
-                initialFilters={getInitialFilters}
+                initialFilters={!filters ? initialFilters : filters}
                 searchFilters={searchFilters}
                 filterName="All contact person"
                 data={data}
@@ -317,8 +347,11 @@ const mapStateToProps = (state) => {
     successAction: state.organisation.successAction,
     errorAction: state.organisation.errorAction,
     message: state.organisation.message,
+    contactPersons: state.member.contactPersons,
   };
 };
-export default connect(mapStateToProps, { getOrganisations, clearMemerAction })(
-  OrganisationList
-);
+export default connect(mapStateToProps, {
+  getOrganisations,
+  clearMemerAction,
+  getAllContactPersons,
+})(OrganisationList);

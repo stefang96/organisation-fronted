@@ -1,6 +1,6 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState, useEffect } from "react";
 import "../table/table.scss";
-import { getPayments } from "../../actions/index";
+import { getPayments, getMembers } from "../../actions/index";
 import DataTable from "../table/DataTable";
 import { connect } from "react-redux";
 import moment from "moment";
@@ -12,11 +12,37 @@ const PaymentsList = (props) => {
     memberId: null,
   });
 
-  const getInitialFilters = () => {
-    let initialFilters = [];
+  useEffect(() => {
+    props.getMembers();
+  }, []);
+  let membersList = [
+    {
+      id: 0,
+      title: "All members",
+      value: "null",
+    },
+  ];
 
-    return initialFilters;
-  };
+  props.membersList &&
+    props.membersList.map((member, i) => {
+      i = i + 1;
+      return membersList.push({
+        id: i,
+        title: member.firstName + " " + member.lastName,
+        value: member.id,
+      });
+    });
+
+  let initialFilters = [];
+  if (!props.profile) {
+    initialFilters = [
+      {
+        title: "All members",
+        searchName: "memberId",
+        list: membersList,
+      },
+    ];
+  }
 
   //Fetch and  rewrite filters based on selected filter
   const fetchFilters = React.useCallback(({ filters }) => {
@@ -96,7 +122,7 @@ const PaymentsList = (props) => {
       page: pageIndex + 1,
     };
     const filters = {
-      memberId: searchFilters.memberId,
+      memberId: null,
     };
     let reqData = {
       pagination: pagination,
@@ -124,7 +150,11 @@ const PaymentsList = (props) => {
     <div>
       {props.profile ? (
         <DataTable
+          name="payments"
           fetchData={fetchData}
+          fetchFilters={fetchFilters}
+          initialFilters={!filters ? initialFilters : filters}
+          searchFilters={searchFilters}
           data={data}
           columns={columns}
           pageCount={meta && Math.ceil(meta.total / meta.limit)}
@@ -146,9 +176,8 @@ const PaymentsList = (props) => {
               <DataTable
                 name="payments"
                 fetchData={fetchData}
-                filterName="All members"
                 fetchFilters={fetchFilters}
-                initialFilters={getInitialFilters}
+                initialFilters={!filters ? initialFilters : filters}
                 searchFilters={searchFilters}
                 data={data}
                 columns={columns}
@@ -166,6 +195,9 @@ const mapStateToProps = (state) => {
   return {
     paymentList: state.payment.paymentList,
     paymentMeta: state.payment.paymentMeta,
+    membersList: state.member.memberList,
   };
 };
-export default connect(mapStateToProps, { getPayments })(PaymentsList);
+export default connect(mapStateToProps, { getPayments, getMembers })(
+  PaymentsList
+);
