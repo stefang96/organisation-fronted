@@ -29,6 +29,33 @@ export const getNews = (data) => async (dispatch) => {
     });
 };
 
+export const getLatestNews = (data) => async (dispatch) => {
+  let headers = {};
+  if (getToken()) {
+    headers = {
+      Authorization: "Bearer " + getToken(),
+      "Content-Type": "application/json",
+    };
+  }
+  return await api
+    .put("/news/get-latest", data, {
+      headers: headers,
+    })
+    .then((res) => {
+      const result = res.data;
+
+      dispatch({
+        type: newsConstants.GET_LATEST_NEWS,
+        data: result,
+      });
+
+      console.log(result);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
 export const getNewsById = (newsId) => async (dispatch) => {
   let headers = {};
   if (getToken()) {

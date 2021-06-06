@@ -6,6 +6,7 @@ import {
   clearNewsAction,
   getMembers,
   getOrganisations,
+  getLatestNews,
 } from "../../actions/index";
 import "./news.scss";
 import { Height } from "@material-ui/icons";
@@ -13,6 +14,7 @@ import { Modal, Alert } from "react-bootstrap";
 import CreateNews from "./forms/CreateNews";
 import EditNews from "./forms/EditNews";
 import RemoveNews from "./forms/RemoveNews";
+import getLoggedUser from "../../utils/getLoggedUser";
 
 const NewsList = (props) => {
   const [filters, setFilters] = useState(null);
@@ -22,6 +24,7 @@ const NewsList = (props) => {
   const [removeNewsModal, setRemoveNewsModal] = useState(false);
   const [newsId, setNewsId] = useState(false);
   const [variant, setVariant] = useState(null);
+  const loggedUser = getLoggedUser();
 
   useEffect(() => {
     checkResponseAction();
@@ -79,12 +82,15 @@ const NewsList = (props) => {
       searchName: "memberId",
       list: membersList,
     },
-    {
+  ];
+
+  if (!loggedUser) {
+    initialFilters.push({
       title: "All organisations",
       searchName: "organisationId",
       list: organisationsList,
-    },
-  ];
+    });
+  }
   //Fetch and  rewrite filters based on selected filter
   const fetchFilters = React.useCallback(({ filters }) => {
     setFilters(filters);
@@ -123,6 +129,7 @@ const NewsList = (props) => {
       }
 
       props.getNews(reqData);
+      props.getLatestNews(reqData);
     },
     []
   );
@@ -240,6 +247,7 @@ const NewsList = (props) => {
         <DataGrid
           data={data}
           meta={meta}
+          latestNews={props.latestNews}
           isMyPofile={props.isMyPofile}
           columns={columns}
           fetchData={fetchData}
@@ -268,6 +276,7 @@ const NewsList = (props) => {
 const mapStateToProps = (state) => {
   return {
     news: state.news.newsList,
+    latestNews: state.news.latestNews,
     newsMeta: state.news.newsMeta,
     successAction: state.news.successAction,
     errorAction: state.news.errorAction,
@@ -280,5 +289,6 @@ export default connect(mapStateToProps, {
   getNews,
   clearNewsAction,
   getMembers,
+  getLatestNews,
   getOrganisations,
 })(NewsList);

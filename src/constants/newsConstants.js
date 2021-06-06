@@ -6,6 +6,7 @@ const newsConstants = {
   REMOVE_NEWS: "REMOVE_NEWS",
   FAILED_RESPONSE: "FAILED_RESPONSE",
   CLEAR_ACTIONS: "CLEAR_ACTIONS",
+  GET_LATEST_NEWS: "GET_LATEST_NEWS",
 };
 
 export default newsConstants;

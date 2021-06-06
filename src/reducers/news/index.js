@@ -9,6 +9,7 @@ const initialState = {
   newsList: null,
   newsMeta: null,
   news: null,
+  latestNews: null,
   message: null,
   successAction: false,
   errorAction: false,
@@ -16,6 +17,11 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case newsConstants.GET_LATEST_NEWS:
+      return {
+        ...state,
+        latestNews: action.data.result,
+      };
     case newsConstants.GET_NEWS:
       return {
         ...state,

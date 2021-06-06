@@ -122,7 +122,7 @@ const PaymentsList = (props) => {
       page: pageIndex + 1,
     };
     const filters = {
-      memberId: null,
+      memberId: searchFilters.memberId,
     };
     let reqData = {
       pagination: pagination,
