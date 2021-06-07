@@ -7,28 +7,23 @@ export default (formValues) => {
     "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$";
 
   if (!formValues.email) {
-    errors.email = "Email required";
+    errors.email = "Email is required";
   } else if (!formValues.email.match(emailRegex)) {
     errors.email = "Invalid email";
   }
-  if (!formValues.name) {
-    errors.name = "Name required";
+
+  if (!formValues.price) {
+    errors.price = "Price is required";
   }
 
-  if (!formValues.type) {
-    errors.type = "Type required";
-  }
-  if (!formValues.numberOfEmployees) {
-    errors.numberOfEmployees = "Number of employees required";
-  }
   if (!formValues.firstName) {
-    errors.firstName = "First Name required";
+    errors.firstName = "First Name is required";
   }
   if (!formValues.lastName) {
-    errors.lastName = "Last Name required";
+    errors.lastName = "Last Name is required";
   }
   if (!formValues.name) {
-    errors.name = "Name required";
+    errors.name = "Name is required";
   }
 
   return errors;

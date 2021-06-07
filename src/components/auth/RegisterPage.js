@@ -60,10 +60,10 @@ const RegisterPage = (props) => {
               />
               <div className="flex-wrap d-flex justify-content-between w-100">
                 <Field
-                  name="type"
+                  name="price"
                   component={renderTextField}
-                  label="Type"
-                  type="text"
+                  label="Pice"
+                  type="number"
                 />
                 <Field
                   name="numberOfEmployees"

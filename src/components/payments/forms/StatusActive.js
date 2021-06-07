@@ -5,7 +5,7 @@ import renderTextField from "../../fields/renderTextField ";
 import validate from "../../fields/validation/validateContactPersonForm";
 import { connect } from "react-redux";
 import { getLatestPayment } from "../../../actions/index";
-
+import moment from "moment";
 const StatusActive = (props) => {
   const { payment } = props;
   useEffect(() => {
@@ -21,8 +21,12 @@ const StatusActive = (props) => {
       <Modal.Body className="px-70">
         {props.payment &&
           `Uplatili ste clanarinu ${payment.fromDate &&
-            payment.fromDate} , vasa clanarina istice
-${payment.toDate}. Iznos clanarine iznosi ${payment.price}.`}
+            moment
+              .unix(payment.fromDate)
+              .format("MMMM Do YYYY")} , vasa clanarina istice
+  ${moment
+    .unix(payment.toDate)
+    .format("MMMM Do YYYY")}. Iznos clanarine iznosi ${payment.price}.`}
       </Modal.Body>
       <Modal.Footer>
         <div className="modal-left-button">

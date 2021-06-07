@@ -202,6 +202,8 @@ const NewsList = (props) => {
     setRemoveNewsModal(!removeNewsModal);
     if (newsId) setNewsId(newsId);
   };
+  console.log("data");
+  console.log(data);
   return (
     <>
       <Modal

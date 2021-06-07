@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Modal, Button, closeButton } from "react-bootstrap";
 import { reduxForm, Field } from "redux-form";
 import renderTextField from "../../fields/renderTextField ";
-
+import moment from "moment";
 import { connect } from "react-redux";
 import { addPayments, getLatestPayment } from "../../../actions/index";
 
@@ -35,10 +35,17 @@ const StatusInActive = (props) => {
       </Modal.Header>
       <form onSubmit={props.handleSubmit(onSubmit)} noValidate>
         <Modal.Body className="px-70">
-          <div>
-            Vasa clanarina je istekla {payment.toDate}. <br /> Clanarina za
-            nerednu godinu iznosi: 250$. <hr />
-          </div>
+          {payment ? (
+            <div>
+              Vasa clanarina je istekla{" "}
+              {moment.unix(payment.toDate).format("MMMM Do YYYY")} . <br />{" "}
+              Clanarina za nerednu godinu iznosi: 250$. <hr />
+            </div>
+          ) : (
+            <div>
+              Clanarina za nerednu godinu iznosi: 250$. <hr />
+            </div>
+          )}
 
           <Field
             name="price"

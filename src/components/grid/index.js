@@ -63,9 +63,11 @@ const DataGrid = (props) => {
     history.push("/news/" + id);
   };
 
-  if (data)
-    return (
-      <>
+  console.log(data);
+
+  return (
+    <>
+      {data.length > 0 ? (
         <div className="news-left bg-color-light-grey ">
           <div className=" ">
             <div className="row">
@@ -149,6 +151,7 @@ const DataGrid = (props) => {
               </div>
             </div>
           </div>
+
           <div className="news-pagination mt-30 ">
             {pageCount > 1 && (
               <div className=" ">
@@ -225,61 +228,65 @@ const DataGrid = (props) => {
             )}
           </div>
         </div>
-        <div className="news-right ">
-          <>
-            <div className="p-30  h-auto bg-color-light-grey">
-              <div className="filter filter--search ">
-                {user && !props.isMyPofile && (
-                  <button
-                    onClick={() => props.createNews()}
-                    className="btn btn-create-news h-50-px mb-30 w-100    "
-                  >
-                    <div className="center">
-                      <i className="bi bi-plus-square mr-10"></i>
-                      <span>Create news</span>
-                    </div>
-                  </button>
-                )}
-                <div className="form-group">
-                  <label htmlFor="searchInput">Search</label>
-                  <input
-                    type="text"
-                    id="searchInput"
-                    className="form-control"
-                    placeholder="Search"
-                    aria-label="Search"
-                    aria-describedby="basic-addon1"
-                    onChange={onSearchChange}
-                  />
-                </div>
-
-                {!props.profile && (
-                  <>
-                    {props.initialFilters &&
-                      props.initialFilters.map((element, i) => {
-                        return (
-                          <div key={i} className="form-group mt-30">
-                            <select
-                              onChange={(e) =>
-                                setSelectedFilter(e, element.searchName)
-                              }
-                              className="form-select"
-                            >
-                              {element.list.map((filter, i) => {
-                                return (
-                                  <option key={i} value={filter.value}>
-                                    {filter.title}
-                                  </option>
-                                );
-                              })}
-                            </select>
-                          </div>
-                        );
-                      })}
-                  </>
-                )}
+      ) : (
+        <div className="news-left   "> No data found </div>
+      )}
+      <div className="news-right ">
+        <>
+          <div className="p-30  h-auto bg-color-light-grey">
+            <div className="filter filter--search ">
+              {user && !props.isMyPofile && (
+                <button
+                  onClick={() => props.createNews()}
+                  className="btn btn-create-news h-50-px mb-30 w-100    "
+                >
+                  <div className="center">
+                    <i className="bi bi-plus-square mr-10"></i>
+                    <span>Create news</span>
+                  </div>
+                </button>
+              )}
+              <div className="form-group">
+                <label htmlFor="searchInput">Search</label>
+                <input
+                  type="text"
+                  id="searchInput"
+                  className="form-control"
+                  placeholder="Search"
+                  aria-label="Search"
+                  aria-describedby="basic-addon1"
+                  onChange={onSearchChange}
+                />
               </div>
+
+              {!props.profile && (
+                <>
+                  {props.initialFilters &&
+                    props.initialFilters.map((element, i) => {
+                      return (
+                        <div key={i} className="form-group mt-30">
+                          <select
+                            onChange={(e) =>
+                              setSelectedFilter(e, element.searchName)
+                            }
+                            className="form-select"
+                          >
+                            {element.list.map((filter, i) => {
+                              return (
+                                <option key={i} value={filter.value}>
+                                  {filter.title}
+                                </option>
+                              );
+                            })}
+                          </select>
+                        </div>
+                      );
+                    })}
+                </>
+              )}
             </div>
+          </div>
+          {data.length > 0 && (
             <div className="form-group mt-30">
               <ul className="list-group group-scroll">
                 <li className="list-group-item active" aria-current="true">
@@ -300,12 +307,11 @@ const DataGrid = (props) => {
                   })}
               </ul>
             </div>
-          </>
-        </div>
-      </>
-    );
-
-  return "No data found";
+          )}
+        </>
+      </div>
+    </>
+  );
 };
 
 export default DataGrid;
