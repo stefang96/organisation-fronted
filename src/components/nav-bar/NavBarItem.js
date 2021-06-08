@@ -75,7 +75,12 @@ const NavBarItem = (props) => {
   return (
     <>
       <ul className="navbar-nav me-auto mb-2 mb-lg-0"></ul>
-      <Modal show={statusModal} onHide={changeStatusModal}>
+      <Modal
+        show={statusModal}
+        dialogClassName="modal-30w"
+        aria-labelledby="example-custom-modal-styling-title"
+        onHide={changeStatusModal}
+      >
         <StatusModal
           changeModal={changeStatusModal}
           active={userData.active}

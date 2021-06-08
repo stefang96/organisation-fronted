@@ -5,6 +5,7 @@ import renderTextField from "../../fields/renderTextField ";
 import moment from "moment";
 import { connect } from "react-redux";
 import { addPayments, getLatestPayment } from "../../../actions/index";
+import getLoggedUser from "../../../utils/getLoggedUser";
 
 const validate = (formValues) => {
   const errors = {};
@@ -17,6 +18,7 @@ const validate = (formValues) => {
 
 const StatusInActive = (props) => {
   const { payment } = props;
+  const loggedUser = getLoggedUser();
   useEffect(() => {
     props.getLatestPayment();
   }, []);
@@ -25,27 +27,37 @@ const StatusInActive = (props) => {
     props.addPayments(formValues);
     props.changeModal();
   };
+  let body;
+  if (payment) {
+    body = `You are no longer an active member of our organisation. <br/>
+  Your membership fee has expired   <b>${moment
+    .unix(payment.toDate)
+    .format(
+      "MMMM Do YYYY"
+    )} </b> and you no longer have the opportunity to publish news about our organisation. <br/>
+  If you want to extend the membership fee, pay the amount below.  <br/>  <br/>
+  
+  The membership fee for the following year is:   <b> ${loggedUser &&
+    loggedUser.organisation.price}$  </b> . <br/> <br/>`;
+  } else {
+    body = `You are not an active member of our organisation. <br/>
+  And you don't have the opportunity to publish news about our organisation.
+  If you want to pay the membership fee, pay the amount below.
+  
+  The membership fee for the following year is: <b> ${loggedUser &&
+    loggedUser.organisation.price}$  </b> .  <br/> <br/>`;
+  }
 
   return (
     <div>
-      <Modal.Header className="app-bg-color" closeButton>
+      <Modal.Header className="app-bg-color-red" closeButton>
         <Modal.Title className="m-auto color-white">
           Status: In Active
         </Modal.Title>
       </Modal.Header>
       <form onSubmit={props.handleSubmit(onSubmit)} noValidate>
         <Modal.Body className="px-70">
-          {payment ? (
-            <div>
-              Vasa clanarina je istekla{" "}
-              {moment.unix(payment.toDate).format("MMMM Do YYYY")} . <br />{" "}
-              Clanarina za nerednu godinu iznosi: 250$. <hr />
-            </div>
-          ) : (
-            <div>
-              Clanarina za nerednu godinu iznosi: 250$. <hr />
-            </div>
-          )}
+          <div dangerouslySetInnerHTML={{ __html: body }} />
 
           <Field
             name="price"

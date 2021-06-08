@@ -27,7 +27,11 @@ const NewsList = (props) => {
   const loggedUser = getLoggedUser();
 
   useEffect(() => {
+    let dataLatest = {
+      memberId: props.memberId,
+    };
     checkResponseAction();
+    props.getLatestNews(dataLatest);
   }, [props.successAction, props.errorAction]);
 
   useEffect(() => {
@@ -129,7 +133,6 @@ const NewsList = (props) => {
       }
 
       props.getNews(reqData);
-      props.getLatestNews(reqData);
     },
     []
   );
@@ -202,8 +205,7 @@ const NewsList = (props) => {
     setRemoveNewsModal(!removeNewsModal);
     if (newsId) setNewsId(newsId);
   };
-  console.log("data");
-  console.log(data);
+
   return (
     <>
       <Modal

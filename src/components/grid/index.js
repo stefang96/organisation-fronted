@@ -77,22 +77,28 @@ const DataGrid = (props) => {
                   data.map((item) => {
                     return (
                       <div className="post-slide  " key={`news-${item.id}`}>
-                        <div className="actions ">
-                          <div className="d-flex actions_buttons">
-                            <button
-                              onClick={() => props.editNews(item.id)}
-                              className="btn   h-50-px   w-100"
-                            >
-                              <i className="bi bi-pencil-square color-app-blue ml-5-px mr-5-px"></i>
-                            </button>
-                            <button
-                              onClick={() => props.removeNews(item.id)}
-                              className="btn  h-50-px   w-100"
-                            >
-                              <i className="bi bi-x-circle-fill h-50-px color-app-red mr-5-px"></i>
-                            </button>
-                          </div>
-                        </div>
+                        {user &&
+                          (user.id === item.member.id ||
+                            user === "admin" ||
+                            user === "super_admin") && (
+                            <div className="actions ">
+                              <div className="d-flex actions_buttons">
+                                <button
+                                  onClick={() => props.editNews(item.id)}
+                                  className="btn   h-50-px   w-100"
+                                >
+                                  <i className="bi bi-pencil-square color-app-blue ml-5-px mr-5-px"></i>
+                                </button>
+                                <button
+                                  onClick={() => props.removeNews(item.id)}
+                                  className="btn  h-50-px   w-100"
+                                >
+                                  <i className="bi bi-x-circle-fill h-50-px color-app-red mr-5-px"></i>
+                                </button>
+                              </div>
+                            </div>
+                          )}
+
                         <div
                           className="  cursor-pointer"
                           onClick={() => getSingleView(item.id)}
@@ -286,28 +292,27 @@ const DataGrid = (props) => {
               )}
             </div>
           </div>
-          {data.length > 0 && (
-            <div className="form-group mt-30">
-              <ul className="list-group group-scroll">
-                <li className="list-group-item active" aria-current="true">
-                  Latest news
-                </li>
 
-                {latestNews &&
-                  latestNews.map((news, i) => {
-                    return (
-                      <li key={i} className="list-group-item">
-                        {" "}
-                        <h5>
-                          <b>{news.title}</b>{" "}
-                        </h5>
-                        <div>{news.shortDescription}</div>
-                      </li>
-                    );
-                  })}
-              </ul>
-            </div>
-          )}
+          <div className="form-group mt-30">
+            <ul className="list-group group-scroll">
+              <li className="list-group-item active" aria-current="true">
+                Latest news
+              </li>
+
+              {latestNews &&
+                latestNews.map((news, i) => {
+                  return (
+                    <li key={i} className="list-group-item">
+                      {" "}
+                      <h5>
+                        <b>{news.title}</b>{" "}
+                      </h5>
+                      <div>{news.shortDescription}</div>
+                    </li>
+                  );
+                })}
+            </ul>
+          </div>
         </>
       </div>
     </>
