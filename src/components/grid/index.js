@@ -84,14 +84,20 @@ const DataGrid = (props) => {
                             <div className="actions ">
                               <div className="d-flex actions_buttons">
                                 <button
-                                  onClick={() => props.editNews(item.id)}
-                                  className="btn   h-50-px   w-100"
+                                  onClick={() =>
+                                    user.active && props.editNews(item.id)
+                                  }
+                                  className={`btn ${!user.active &&
+                                    "btn--disabled"}  h-50-px w-100`}
                                 >
                                   <i className="bi bi-pencil-square color-app-blue ml-5-px mr-5-px"></i>
                                 </button>
                                 <button
-                                  onClick={() => props.removeNews(item.id)}
-                                  className="btn  h-50-px   w-100"
+                                  onClick={() =>
+                                    user.active && props.removeNews(item.id)
+                                  }
+                                  className={`btn  ${!user.active &&
+                                    "btn--disabled"}  h-50-px w-100`}
                                 >
                                   <i className="bi bi-x-circle-fill h-50-px color-app-red mr-5-px"></i>
                                 </button>
@@ -128,9 +134,6 @@ const DataGrid = (props) => {
                             </a>
                           </div>
                           <div className="post-review">
-                            <h3 className="post-title">
-                              <a href="#">{item.title}</a>
-                            </h3>
                             <ul className="post-bar">
                               <li>
                                 <i className="bi bi-person-fill"></i>
@@ -144,10 +147,25 @@ const DataGrid = (props) => {
                                 <i className="bi bi-building"></i>
                                 <a href="#">{item.member.organisation.name}</a>
                               </li>
+                              <li>
+                                <i class="bi bi-calendar2-day"></i>
+                                <a href="#">
+                                  {" "}
+                                  {moment
+                                    .unix(item.createdAt)
+                                    .format("MMMM Do YYYY")}
+                                </a>
+                              </li>
                             </ul>
 
                             <p className="post-description">
-                              {item.shortDescription}
+                              <br />
+                              <h3 className="post-title">
+                                <a href="#">{item.title}</a>
+                              </h3>
+                              <div className="description-overflow ">
+                                {item.shortDescription}
+                              </div>
                             </p>
                           </div>
                         </div>
@@ -243,8 +261,10 @@ const DataGrid = (props) => {
             <div className="filter filter--search ">
               {user && !props.isMyPofile && (
                 <button
-                  onClick={() => props.createNews()}
-                  className="btn btn-create-news h-50-px mb-30 w-100    "
+                  onClick={() => user.active && props.createNews()}
+                  className={`btn btn__news ${
+                    !user.active ? "btn--disabled" : "btn-create-news"
+                  } h-50-px mb-30 w-100   `}
                 >
                   <div className="center">
                     <i className="bi bi-plus-square mr-10"></i>

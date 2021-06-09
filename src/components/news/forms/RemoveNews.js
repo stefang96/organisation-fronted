@@ -14,18 +14,20 @@ const RemoveNews = (props) => {
 
   return (
     <div>
-      <Modal.Header className="app-bg-color" closeButton>
-        <Modal.Title className="m-auto color-white">Edit news</Modal.Title>
+      <Modal.Header className="app-bg-color-red" closeButton>
+        <Modal.Title className="m-auto color-white">Remove news</Modal.Title>
       </Modal.Header>
       <form onSubmit={props.handleSubmit(onSubmit)} noValidate>
-        <Modal.Body className="px-70">Remove news?</Modal.Body>
+        <Modal.Body className="px-70">
+          Do you want to remove this news?
+        </Modal.Body>
 
         <Modal.Footer>
           <div className="modal-left-button">
             <button
               onClick={props.changeModal}
               type="button"
-              className="btn  btn-outline-danger    w-150"
+              className="btn  btn-outline-danger w-150"
             >
               Close
             </button>

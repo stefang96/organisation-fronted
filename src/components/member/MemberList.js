@@ -298,7 +298,12 @@ const MemberList = (props) => {
       >
         <AddMember changeModal={createMember} />
       </Modal>
-      <Modal show={removeMemberModal} onHide={removeMember}>
+      <Modal
+        dialogClassName="modal-30w"
+        aria-labelledby="example-custom-modal-styling-title"
+        show={removeMemberModal}
+        onHide={removeMember}
+      >
         <Archive memberId={memberId} changeModal={removeMember} />
       </Modal>
       <Modal

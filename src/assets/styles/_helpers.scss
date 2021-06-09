@@ -99,6 +99,14 @@ button:disabled {
   width: 31%;
   max-width: none !important;
 }
+.m-width-500 {
+  max-width: 500px;
+}
+
+.description-overflow {
+  height: 45px;
+  overflow: hidden;
+}
 .public-title {
   text-align: center;
   margin-bottom: 10px;
@@ -131,10 +139,31 @@ button:disabled {
 .h-200 {
   height: 200px;
 }
+.btn--disabled {
+  opacity: 0.65;
+  cursor: not-allowed !important;
+}
+.btn__news {
+  background-color: #299be4;
+  border-color: #299be4;
+  font-size: 20px;
+
+  span {
+    color: white;
+  }
+  i {
+    color: white;
+  }
+  .center {
+    margin: 0 auto;
+  }
+}
+
 .btn-create-news {
   background-color: #299be4;
   border-color: #299be4;
   font-size: 20px;
+
   span {
     color: white;
   }

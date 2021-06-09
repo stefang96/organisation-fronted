@@ -29,17 +29,20 @@ const RemoveOrganisation = (props) => {
       <form onSubmit={props.handleSubmit(onSubmit)} noValidate>
         <Modal.Body className="px-70">
           <h5>
-            {" "}
-            Remove organisation
-            <b> {props.organisation && props.organisation.name} </b>
+            Do you want to remove organisation
+            <b> {props.organisation && props.organisation.name} </b>?
           </h5>
+          <p>
+            If you remove this organisation, all its users and user news will be
+            remove automatically
+          </p>
         </Modal.Body>
         <Modal.Footer>
           <div className="modal-left-button">
             <button
               onClick={props.changeModal}
               type="button"
-              className="btn  btn-outline-danger    w-150"
+              className="btn  btn-outline-danger  w-150"
             >
               Close
             </button>

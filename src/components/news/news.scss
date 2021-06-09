@@ -5,7 +5,7 @@
   background-color: #fff !important;
   min-height: 217px;
   position: relative;
-
+  height: 120px;
   .actions {
     display: none;
   }
@@ -28,6 +28,9 @@
         border-radius: 3px;
         padding: 3px;
         background-color: #f1f1f2;
+        border-left: 2px solid #007bff;
+
+        border-bottom: 2px solid #007bff;
       }
     }
   }
@@ -40,7 +43,7 @@
 }
 .post-slide .post-img img {
   width: 100%;
-  height: auto;
+  height: 120px;
   max-width: 177.5px;
   max-height: 120px;
 }
@@ -78,6 +81,7 @@
 .post-slide .post-title {
   margin: 0 0 10px 0;
   overflow: hidden;
+
   white-space: nowrap;
   text-overflow: ellipsis;
 }
@@ -85,7 +89,8 @@
 .post-slide .post-title a {
   font-size: 13px;
   font-weight: bold;
-  color: #333;
+  color: #007bff;
+
   text-transform: uppercase;
 }
 .post-slide .post-title a:hover {

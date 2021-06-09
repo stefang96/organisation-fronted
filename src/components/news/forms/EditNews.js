@@ -56,10 +56,18 @@ const EditNews = (props) => {
           <div className=" row">
             <div>
               {fileUrl ? (
-                <img src={fileUrl} className="h-200" alt="file" />
+                <img
+                  src={fileUrl}
+                  className=" img-thumbnail rounded mx-auto d-block max-width-500 h-200"
+                  alt="file"
+                />
               ) : (
                 props.filePath && (
-                  <img src={props.filePath} className="h-200" alt="file" />
+                  <img
+                    src={props.filePath}
+                    className=" img-thumbnail rounded mx-auto d-block max-width-500 h-200"
+                    alt="file"
+                  />
                 )
               )}
             </div>

@@ -17,20 +17,23 @@ const Archive = (props) => {
   return (
     <div>
       <Modal.Header className="app-bg-color-red" closeButton>
-        <Modal.Title className="m-auto color-white">Delete member</Modal.Title>
+        <Modal.Title className="m-auto color-white">Remove member</Modal.Title>
       </Modal.Header>
 
       <form onSubmit={props.handleSubmit(onSubmit)} noValidate>
         <Modal.Body className="px-70">
           <h5>
-            {" "}
-            Delete{" "}
+            Do you want to remove member
             <b>
               {" "}
               {props.member &&
-                props.member.firstName + " " + props.member.lastName}{" "}
+                props.member.firstName + " " + props.member.lastName}
             </b>
+            ?
           </h5>
+          <p>
+            If you delete this user, all his news will be automatically removed!
+          </p>
         </Modal.Body>
         <Modal.Footer>
           <div className="modal-left-button">
@@ -44,7 +47,7 @@ const Archive = (props) => {
           </div>
           <div className="modal-right-button">
             <button className="btn  btn-outline-primary  w-150 " type="submit">
-              Delete
+              Remove
             </button>
           </div>
         </Modal.Footer>

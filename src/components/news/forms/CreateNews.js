@@ -39,7 +39,13 @@ const CreateNews = (props) => {
         <Modal.Body className="px-70">
           <div className="row">
             <div>
-              {file && <img src={fileUrl} className="h-200" alt="file" />}
+              {file && (
+                <img
+                  src={fileUrl}
+                  className="img-thumbnail  rounded mx-auto d-block max-width-500 h-200"
+                  alt="file"
+                />
+              )}
             </div>
             <div className="col">
               <Field

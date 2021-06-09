@@ -25,8 +25,10 @@ const MemberInformation = (props) => {
       return (
         <>
           <button
-            onClick={() => editMember()}
-            className="btn btn-primary d-flex align-items-center"
+            onClick={() => user.active && editMember()}
+            className={`btn   ${
+              !user.active ? "btn--disabled" : "btn-primary"
+            } d-flex align-items-center`}
           >
             <i className="bi bi-pencil-square"></i>
             Edit member
@@ -62,7 +64,12 @@ const MemberInformation = (props) => {
 
   return (
     <>
-      <Modal show={archiveMemberModal} onHide={archiveMember}>
+      <Modal
+        dialogClassName="modal-30w"
+        aria-labelledby="example-custom-modal-styling-title"
+        show={archiveMemberModal}
+        onHide={archiveMember}
+      >
         <Archive memberId={props.memberId} changeModal={archiveMember} />
       </Modal>
       <Modal
