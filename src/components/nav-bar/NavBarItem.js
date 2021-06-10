@@ -7,10 +7,12 @@ import Status from "../member/forms/Status";
 import { connect } from "react-redux";
 import AddPayments from "../payments/forms/AddPayments";
 import StatusModal from "../payments/forms/StatusModal";
+import ChangePassword from "../auth/ChangePassword";
 
 const NavBarItem = (props) => {
   const loggedUser = getLoggedUser();
   const [statusModal, setStatusModal] = useState(false);
+  const [changePassword, setChangePassword] = useState(false);
   const [userData, setUserData] = useState({ active: null, id: null });
 
   useEffect(() => {}, [props.loggedIn, props.loggedActive]);
@@ -72,6 +74,10 @@ const NavBarItem = (props) => {
     setUserData({ active: userActive, id: userId });
   };
 
+  const changePasswordModal = () => {
+    setChangePassword(!changePassword);
+  };
+
   return (
     <>
       <ul className="navbar-nav me-auto mb-2 mb-lg-0"></ul>
@@ -86,6 +92,15 @@ const NavBarItem = (props) => {
           active={userData.active}
           id={userData.id}
         />
+      </Modal>
+
+      <Modal
+        show={changePassword}
+        dialogClassName="modal-30w"
+        aria-labelledby="example-custom-modal-styling-title"
+        onHide={changePasswordModal}
+      >
+        <ChangePassword changeModal={changePasswordModal} />
       </Modal>
 
       <ul className="nav navbar-nav navbar-right">
@@ -136,16 +151,15 @@ const NavBarItem = (props) => {
           <>
             {loggedUser.role === "admin" ? "" : ""}
             <li className=" navbar-brand dropdown">
-              <a
+              <span
                 className="nav-link dropdown-toggle"
-                href="#"
                 id="navbarDropdown"
                 role="button"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
                 {loggedUser.firstName + " " + loggedUser.lastName}
-              </a>
+              </span>
               <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li>
                   <NavLink
@@ -156,9 +170,12 @@ const NavBarItem = (props) => {
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink className="dropdown-item" to="/change-password">
+                  <button
+                    className="dropdown-item"
+                    onClick={() => changePasswordModal()}
+                  >
                     Change password
-                  </NavLink>
+                  </button>
                 </li>
                 <li>
                   <hr className="dropdown-divider" />

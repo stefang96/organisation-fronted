@@ -1,25 +1,33 @@
-import React from "react";
-import InputLabel from "@material-ui/core/InputLabel";
-import Input from "@material-ui/core/Input";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import IconButton from "@material-ui/core/IconButton";
-import Visibility from "@material-ui/icons/Visibility";
-import VisibilityOff from "@material-ui/icons/VisibilityOff";
-import FormControl from "@material-ui/core/FormControl";
-import clsx from "clsx";
+import React, { useState } from "react";
 
-export default ({ input, label, type, meta: { touched, error, warning } }) => (
-  <div className="mb-3">
-    <label className="form-label">{label}</label>
-    <input
-      {...input}
-      type={type}
-      className="form-control"
-      placeholder={label}
-    />
+export default ({ input, label, type, meta: { touched, error, warning } }) => {
+  const [visibilePassword, setvisibilePassword] = useState(false);
 
-    {touched &&
-      ((error && <span className="text-danger">{error}</span>) ||
-        (warning && <span>{warning}</span>))}
-  </div>
-);
+  const passwordEye = () => {
+    setvisibilePassword(!visibilePassword);
+  };
+  return (
+    <div className="position__relative mb-3">
+      <label className="form-label">{label}</label>
+      <input
+        {...input}
+        type={!visibilePassword ? "password" : "text"}
+        className="form-control"
+        placeholder={label}
+      />
+      <div
+        onClick={() => passwordEye()}
+        className="  position__absolute password-eye"
+      >
+        <i
+          className={`${
+            !visibilePassword ? "bi bi-eye-slash-fill" : " bi bi-eye-fill"
+          } `}
+        ></i>
+      </div>
+      {touched &&
+        ((error && <span className="text-danger">{error}</span>) ||
+          (warning && <span>{warning}</span>))}
+    </div>
+  );
+};

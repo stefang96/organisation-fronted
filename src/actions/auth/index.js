@@ -25,6 +25,19 @@ export const setPassword = (data, email, setpasswordtoken) => async (
     });
 };
 
+export const changePassword = (data) => async (dispatch) => {
+  return await api
+    .post("/auth/change-password", {
+      data,
+    })
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
 export const login = (data) => async (dispatch) => {
   return await api
     .post("/auth/login", {

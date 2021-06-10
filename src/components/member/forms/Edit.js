@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Modal, Button, closeButton } from "react-bootstrap";
 import { reduxForm, Field } from "redux-form";
 import renderTextField from "../../fields/renderTextField ";
-import validate from "../../fields/validation/validateContactPersonForm";
+import validate from "../../fields/validation/validateMember";
 import { connect } from "react-redux";
 import { updateMember, getMemberById } from "../../../actions/index";
 import renderSelectField from "../../fields/renderSelectField";
@@ -120,6 +120,7 @@ const mapStateToProps = (state) => {
 export default connect(mapStateToProps, { updateMember, getMemberById })(
   reduxForm({
     form: "updateMemberForm", // a unique identifier for this form
+    validate,
     enableReinitialize: true,
     touchOnBlur: false,
   })(Edit)

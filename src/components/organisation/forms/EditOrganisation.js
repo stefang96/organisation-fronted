@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Modal, Button, closeButton } from "react-bootstrap";
 import { reduxForm, Field } from "redux-form";
 import renderTextField from "../../fields/renderTextField ";
-import validate from "../../fields/validation/validateContactPersonForm";
+import validate from "../../fields/validation/validateOrganisation";
 import { connect } from "react-redux";
 import {
   updateOrganisation,
@@ -50,6 +50,33 @@ const EditOrganisation = (props) => {
           <div className="row">
             <div className="col">
               <Field
+                name="price"
+                component={renderTextField}
+                label="Price"
+                type="number"
+              />
+            </div>
+            <div className="col">
+              <Field
+                className="w-50"
+                name="contactPerson"
+                component={renderSelectField}
+                label="Contact Person"
+              >
+                {props.organisationAdmins &&
+                  props.organisationAdmins.map((admin) => {
+                    return (
+                      <option value={admin.id}>
+                        {admin.firstName + " " + admin.lastName}
+                      </option>
+                    );
+                  })}
+              </Field>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col">
+              <Field
                 name="type"
                 component={renderTextField}
                 label="Type"
@@ -61,26 +88,9 @@ const EditOrganisation = (props) => {
                 name="numberOfEmployees"
                 component={renderTextField}
                 label="Number of Employees"
-                type="text"
+                type="number"
               />
             </div>
-          </div>
-          <div>
-            <Field
-              className="w-50"
-              name="contactPerson"
-              component={renderSelectField}
-              label="Contact Person"
-            >
-              {props.organisationAdmins &&
-                props.organisationAdmins.map((admin) => {
-                  return (
-                    <option value={admin.id}>
-                      {admin.firstName + " " + admin.lastName}
-                    </option>
-                  );
-                })}
-            </Field>
           </div>
         </Modal.Body>
         <Modal.Footer>
@@ -130,6 +140,7 @@ export default connect(mapStateToProps, {
 })(
   reduxForm({
     form: "updateOrganisationForm", // a unique identifier for this form
+    validate,
     enableReinitialize: true,
     touchOnBlur: false,
   })(EditOrganisation)
