@@ -38,13 +38,10 @@ const DataGrid = (props) => {
   }, [fetchData, pageIndex, searchQuery, searchFilters]);
 
   const onSearchChange = (e) => {
-    console.log(e.target.value);
     setSearchQuery(e.target.value);
   };
 
   const setSelectedFilter = (e, searchName) => {
-    // let filtersInner = props.searchFilters;
-    console.log(e.target.value);
     const valueData = e.target.value;
     const value = valueData === "null" ? null : valueData;
 

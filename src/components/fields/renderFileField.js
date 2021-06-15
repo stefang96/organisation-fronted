@@ -11,7 +11,6 @@ export default ({
   meta: { touched, error, warning },
 }) => {
   const handleChange = (event) => {
-    console.log(event.target.files[0]);
     changeFile(event.target.files[0]);
   };
 
