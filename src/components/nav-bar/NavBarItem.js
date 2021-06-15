@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { isLogin } from "../../middleware/auth";
 import getLoggedUser from "../../utils/getLoggedUser";
-import { Modal, Alert } from "react-bootstrap";
-import Status from "../member/forms/Status";
+import { Modal } from "react-bootstrap";
 import { connect } from "react-redux";
-import AddPayments from "../payments/forms/AddPayments";
 import StatusModal from "../payments/forms/StatusModal";
 import ChangePassword from "../auth/ChangePassword";
 
@@ -61,8 +59,12 @@ const NavBarItem = (props) => {
       ];
     }
   const publicItems = [
-    { className: "glyphicon glyphicon-log-in", name: "Login", to: "/login" },
-    { className: " ", name: "Register", to: "/register" },
+    {
+      className: "glyphicon glyphicon-log-in",
+      name: "Sign In",
+      to: "/sign-in",
+    },
+    { className: " ", name: "Sign Up", to: "/sign-up" },
   ];
 
   const changeStatusModal = () => {

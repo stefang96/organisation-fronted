@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { Modal, Alert } from "react-bootstrap";
+import { Modal } from "react-bootstrap";
 import Archive from "./forms/Archive";
 import Edit from "./forms/Edit";
 import loggedUser from "../../utils/getLoggedUser";

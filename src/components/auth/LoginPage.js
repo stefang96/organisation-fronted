@@ -1,6 +1,5 @@
 import React from "react";
 import { reduxForm, Field } from "redux-form";
-import { withStyles } from "@material-ui/core/styles";
 import Container from "./Container";
 import renderPasswordField from "../fields/renderPasswordField";
 import renderTextField from "../fields/renderTextField ";
@@ -11,19 +10,6 @@ import { login } from "../../actions/index";
 import { connect } from "react-redux";
 
 const LoginPage = (props) => {
-  const classNamees = withStyles();
-  const [values, setValues] = React.useState({
-    showPassword: false,
-  });
-
-  const handleClickShowPassword = () => {
-    setValues({ ...values, showPassword: !values.showPassword });
-  };
-
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
-  };
-
   const onSubmit = (formValues) => {
     return props.login(formValues);
   };
@@ -49,7 +35,7 @@ const LoginPage = (props) => {
 
           <div className="d-grid gap-2">
             <button className="btn btn-primary br-30 mt-10" type="submit">
-              Login
+              Sign In
             </button>
           </div>
         </form>
@@ -60,7 +46,7 @@ const LoginPage = (props) => {
             </Link>
           </div>
           <div>
-            <Link to="/register">Don't have an account? Sign Up</Link>
+            <Link to="/sign-up">Don't have an account? Sign Up</Link>
           </div>
         </div>
       </>

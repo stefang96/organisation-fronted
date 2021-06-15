@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Modal, Button, closeButton } from "react-bootstrap";
+import { Modal } from "react-bootstrap";
 import { reduxForm, Field } from "redux-form";
 import renderTextField from "../../fields/renderTextField ";
 import { connect } from "react-redux";
@@ -12,6 +12,7 @@ const EditNews = (props) => {
 
   useEffect(() => {
     props.getNewsById(props.newsId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.newsId]);
 
   const renderTextArea = ({ input, label, name, classNameField }) => {
@@ -29,9 +30,6 @@ const EditNews = (props) => {
   };
 
   const onSubmit = (formValues) => {
-    console.log(file);
-    console.log(formValues);
-
     const formData = new FormData();
     if (file) formData.append("file", file);
 

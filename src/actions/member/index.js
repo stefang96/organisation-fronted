@@ -1,6 +1,5 @@
 import api from "../../api/index";
 import memberConstants from "../../constants/memberConstants";
-import { SubmissionError } from "redux-form";
 import getToken from "../../utils/getToken";
 
 export const getMemberById = (memberId) => async (dispatch) => {

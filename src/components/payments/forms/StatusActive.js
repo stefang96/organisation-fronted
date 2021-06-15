@@ -1,15 +1,14 @@
 import React, { useEffect } from "react";
-import { Modal, Button, closeButton } from "react-bootstrap";
-import { reduxForm, Field } from "redux-form";
-import renderTextField from "../../fields/renderTextField ";
-import validate from "../../fields/validation/validateContactPersonForm";
+import { Modal } from "react-bootstrap";
 import { connect } from "react-redux";
 import { getLatestPayment } from "../../../actions/index";
 import moment from "moment";
+
 const StatusActive = (props) => {
   const { payment } = props;
   useEffect(() => {
     props.getLatestPayment();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   let c;

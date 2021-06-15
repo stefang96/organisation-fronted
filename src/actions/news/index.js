@@ -57,13 +57,6 @@ export const getLatestNews = (data) => async (dispatch) => {
 };
 
 export const getNewsById = (newsId) => async (dispatch) => {
-  let headers = {};
-  if (getToken()) {
-    headers = {
-      Authorization: "Bearer " + getToken(),
-      "Content-Type": "application/json",
-    };
-  }
   return await api
     .get("/news/" + newsId)
     .then((res) => {

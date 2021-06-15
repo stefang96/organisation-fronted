@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Modal, Button, closeButton } from "react-bootstrap";
+import { Modal } from "react-bootstrap";
 import { reduxForm, Field } from "redux-form";
 import renderTextField from "../../fields/renderTextField ";
 import validate from "../../fields/validation/validateOrganisation";
@@ -10,18 +10,15 @@ import {
   getOrganisationAdmins,
 } from "../../../actions/index";
 import renderSelectField from "../../fields/renderSelectField";
-import loggedUser from "../../../utils/getLoggedUser";
 
 const EditOrganisation = (props) => {
-  const user = loggedUser();
-
   useEffect(() => {
     props.getOrganisationById(props.organisationId);
     props.getOrganisationAdmins(props.organisationId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.organisationId]);
 
   const onSubmit = (formValues) => {
-    console.log(formValues);
     props.updateOrganisation(props.organisationId, formValues);
     props.changeModal();
   };
@@ -123,6 +120,7 @@ const mapStateToProps = (state) => {
   const initialValues = {
     name: organisation.name,
     type: organisation.type,
+    price: organisation.price,
     address: organisation.address,
     numberOfEmployees: organisation.numberOfEmployees,
     contactPerson: contactPerson,

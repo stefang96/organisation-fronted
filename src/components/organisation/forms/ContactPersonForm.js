@@ -1,5 +1,5 @@
 import React from "react";
-import { Modal, Button, closeButton } from "react-bootstrap";
+import { Modal } from "react-bootstrap";
 import { reduxForm, Field } from "redux-form";
 import renderTextField from "../../fields/renderTextField ";
 import { connect } from "react-redux";

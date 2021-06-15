@@ -2,6 +2,7 @@ import authConstants from "../../constants/authConstants";
 import api from "../../api/index";
 import history from "../../history";
 import { SubmissionError } from "redux-form";
+import getToken from "../../utils/getToken";
 
 export const setPassword = (data, email, setpasswordtoken) => async (
   dispatch,
@@ -17,7 +18,7 @@ export const setPassword = (data, email, setpasswordtoken) => async (
     })
     .then((res) => {
       if (res.data.status) {
-        history.push("/login");
+        history.push("/sign-in");
       }
     })
     .catch((err) => {
@@ -27,8 +28,11 @@ export const setPassword = (data, email, setpasswordtoken) => async (
 
 export const changePassword = (data) => async (dispatch) => {
   return await api
-    .post("/auth/change-password", {
-      data,
+    .put("/auth/change-password", data, {
+      headers: {
+        Authorization: "Bearer " + getToken(),
+        "Content-Type": "application/json",
+      },
     })
     .then((res) => {
       console.log(res);
@@ -61,7 +65,6 @@ export const login = (data) => async (dispatch) => {
 };
 
 export const register = (data) => async (dispatch) => {
-  console.log(data);
   return await api
     .post("/auth/signup", data)
     .then((res) => {

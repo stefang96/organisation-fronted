@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Modal, Button, closeButton } from "react-bootstrap";
+import { Modal } from "react-bootstrap";
 import { reduxForm } from "redux-form";
 import { connect } from "react-redux";
 import {
@@ -10,10 +10,10 @@ import {
 const RemoveOrganisation = (props) => {
   useEffect(() => {
     props.getOrganisationById(props.organisationId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.organisationId]);
 
   const onSubmit = (formValues) => {
-    console.log(formValues);
     props.removeOrganisation(props.organisationId);
     props.changeModal();
   };

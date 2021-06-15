@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Modal, Button, closeButton } from "react-bootstrap";
+import { Modal } from "react-bootstrap";
 import { reduxForm } from "redux-form";
 import { connect } from "react-redux";
 import { deleteMember, getMemberById } from "../../../actions/index";
@@ -7,10 +7,10 @@ import { deleteMember, getMemberById } from "../../../actions/index";
 const Archive = (props) => {
   useEffect(() => {
     props.getMemberById(props.memberId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.memberId]);
 
   const onSubmit = (formValues) => {
-    console.log(formValues);
     props.deleteMember(props.memberId);
     props.changeModal();
   };

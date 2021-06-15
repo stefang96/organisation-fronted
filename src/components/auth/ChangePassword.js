@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Modal, Button, closeButton } from "react-bootstrap";
+import React from "react";
+import { Modal } from "react-bootstrap";
 import { reduxForm, Field } from "redux-form";
 import validate from "../fields/validation/validateSetPassword";
 import { connect } from "react-redux";
@@ -8,9 +8,8 @@ import renderPasswordField from "../fields/renderPasswordField";
 
 const ChangePassword = (props) => {
   const onSubmit = (formValues) => {
-    console.log(formValues);
-    // props.changePassword(props.newsId, props.memberId, props.profile);
-    //   props.changeModal();
+    props.changePassword(formValues);
+    props.changeModal();
   };
 
   return (

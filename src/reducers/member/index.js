@@ -1,4 +1,3 @@
-import { Map, List, fromJS } from "immutable";
 import memberConstants from "../../constants/memberConstants";
 
 /**

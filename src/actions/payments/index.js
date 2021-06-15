@@ -1,7 +1,6 @@
 import api from "../../api/index";
 import paymentsConstants from "../../constants/paymentsConstants";
 import authConstants from "../../constants/authConstants";
-import { SubmissionError } from "redux-form";
 import getToken from "../../utils/getToken";
 
 export const getPayments = (data) => async (dispatch) => {

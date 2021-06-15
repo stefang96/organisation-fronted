@@ -6,7 +6,7 @@ import loggedUser from "../../utils/getLoggedUser";
 
 const DataGrid = (props) => {
   const user = loggedUser();
-  const { data, fetchData, searchFilters, meta, fetchPage, latestNews } = props;
+  const { data, fetchData, searchFilters, latestNews } = props;
 
   const [searchQuery, setSearchQuery] = useState(null);
 
@@ -59,11 +59,8 @@ const DataGrid = (props) => {
   };
 
   const getSingleView = (id) => {
-    console.log(id);
     history.push("/news/" + id);
   };
-
-  console.log(data);
 
   return (
     <>
@@ -110,7 +107,7 @@ const DataGrid = (props) => {
                           onClick={() => getSingleView(item.id)}
                         >
                           <div className="post-img">
-                            <a href="#">
+                            <span>
                               <img
                                 src={
                                   item.filePath
@@ -131,42 +128,42 @@ const DataGrid = (props) => {
                                     .format("MMMM")}
                                 </span>
                               </div>
-                            </a>
+                            </span>
                           </div>
                           <div className="post-review">
                             <ul className="post-bar">
                               <li>
                                 <i className="bi bi-person-fill"></i>
-                                <a href="#">
+                                <span>
                                   {item.member.firstName +
                                     " " +
                                     item.member.lastName}
-                                </a>
+                                </span>
                               </li>
                               <li>
                                 <i className="bi bi-building"></i>
-                                <a href="#">{item.member.organisation.name}</a>
+                                <span>{item.member.organisation.name}</span>
                               </li>
                               <li>
-                                <i class="bi bi-calendar2-day"></i>
-                                <a href="#">
+                                <i className="bi bi-calendar2-day"></i>
+                                <span>
                                   {" "}
                                   {moment
                                     .unix(item.createdAt)
                                     .format("MMMM Do YYYY")}
-                                </a>
+                                </span>
                               </li>
                             </ul>
 
-                            <p className="post-description">
+                            <div className="post-description">
                               <br />
                               <h3 className="post-title">
-                                <a href="#">{item.title}</a>
+                                <span href="#">{item.title}</span>
                               </h3>
                               <div className="description-overflow ">
                                 {item.shortDescription}
                               </div>
-                            </p>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -324,10 +321,10 @@ const DataGrid = (props) => {
                   return (
                     <li key={i} className="list-group-item">
                       {" "}
-                      <h5>
+                      <div onClick={() => getSingleView(news.id)}>
                         <b>{news.title}</b>{" "}
-                      </h5>
-                      <div>{news.shortDescription}</div>
+                      </div>
+                      <p>{news.shortDescription}</p>
                     </li>
                   );
                 })}

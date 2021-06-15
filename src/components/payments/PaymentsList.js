@@ -8,12 +8,13 @@ import "../table/table.scss";
 
 const PaymentsList = (props) => {
   const [filters, setFilters] = useState(null);
-  const [searchFilters, setSearchFilters] = useState({
+  const [searchFilters] = useState({
     memberId: null,
   });
 
   useEffect(() => {
     props.getMembers();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   let membersList = [
     {
@@ -115,29 +116,33 @@ const PaymentsList = (props) => {
   );
 
   //Fetch data into list, based on current page, search query or selected filters
-  const fetchData = useCallback(({ pageIndex, pageSize, searchFilters }) => {
-    window.scrollTo(0, 0);
+  const fetchData = useCallback(
+    ({ pageIndex, pageSize, searchFilters }) => {
+      window.scrollTo(0, 0);
 
-    const pagination = {
-      page: pageIndex + 1,
-    };
-    const filters = {
-      memberId: searchFilters.memberId,
-    };
-    let reqData = {
-      pagination: pagination,
-      filters: filters,
-    };
-    if (props.memberId) {
-      reqData = {
+      const pagination = {
+        page: pageIndex + 1,
+      };
+      const filters = {
+        memberId: searchFilters.memberId,
+      };
+      let reqData = {
         pagination: pagination,
         filters: filters,
-        memberId: props.memberId,
       };
-    }
+      if (props.memberId) {
+        reqData = {
+          pagination: pagination,
+          filters: filters,
+          memberId: props.memberId,
+        };
+      }
 
-    props.getPayments(reqData);
-  }, []);
+      props.getPayments(reqData);
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
+  );
 
   let data = [];
   const meta = props.paymentMeta;

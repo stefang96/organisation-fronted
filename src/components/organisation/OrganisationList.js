@@ -26,17 +26,19 @@ const OrganisationList = (props) => {
   const [createOrganisationModal, setCreateOrganisationModal] = useState(false);
   const [organisationId, setOrganisationId] = useState(null);
   const [filters, setFilters] = useState(null);
-  const [searchFilters, setSearchFilters] = useState({
+  const [searchFilters] = useState({
     memberId: null,
   });
 
   useEffect(() => {
     checkResponseAction();
     props.getAllContactPersons();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.successAction, props.errorAction]);
 
   useEffect(() => {
     props.getAllContactPersons();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   let membersList = [
@@ -82,12 +84,19 @@ const OrganisationList = (props) => {
   };
 
   const dateCell = ({ value }) => {
-    console.log(value);
     if (!value) {
       return <div>-</div>;
     }
 
     return <div>{moment.unix(value).format("MMMM Do YYYY")}</div>;
+  };
+
+  const priceCell = ({ value }) => {
+    if (!value) {
+      return <div>-</div>;
+    }
+
+    return <div>{value + " "}$</div>;
   };
 
   const actionCell = (props) => {
@@ -136,8 +145,8 @@ const OrganisationList = (props) => {
   const columns = React.useMemo(
     () => [
       {
-        Header: "#",
-        accessor: "id",
+        Header: " ",
+        accessor: " ",
       },
       {
         Header: "Name",
@@ -147,6 +156,11 @@ const OrganisationList = (props) => {
         Header: "Contact person",
         accessor: "contactPerson",
         Cell: cotactPersonCell,
+      },
+      {
+        Header: "Price",
+        accessor: "price",
+        Cell: priceCell,
       },
       {
         Header: "Address",
@@ -167,6 +181,7 @@ const OrganisationList = (props) => {
         Cell: actionCell,
       },
     ],
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     []
   );
 
@@ -188,6 +203,7 @@ const OrganisationList = (props) => {
 
       props.getOrganisations(reqData);
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     []
   );
 

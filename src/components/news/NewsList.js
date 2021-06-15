@@ -9,7 +9,6 @@ import {
   getLatestNews,
 } from "../../actions/index";
 import "./news.scss";
-import { Height } from "@material-ui/icons";
 import { Modal, Alert } from "react-bootstrap";
 import CreateNews from "./forms/CreateNews";
 import EditNews from "./forms/EditNews";
@@ -18,7 +17,6 @@ import getLoggedUser from "../../utils/getLoggedUser";
 
 const NewsList = (props) => {
   const [filters, setFilters] = useState(null);
-  const [pageIndex, setPageIndex] = useState(null);
   const [createNewsModal, setCreateNewsModal] = useState(false);
   const [editNewsModal, setEditNewsModal] = useState(false);
   const [removeNewsModal, setRemoveNewsModal] = useState(false);
@@ -32,15 +30,17 @@ const NewsList = (props) => {
     };
     checkResponseAction();
     props.getLatestNews(dataLatest);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.successAction, props.errorAction]);
 
   useEffect(() => {
     props.getMembers();
     props.getOrganisations();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   let meta;
-  const [searchFilters, setSearchFilters] = useState({
+  const [searchFilters] = useState({
     organisationId: null,
     memberId: null,
   });
@@ -100,10 +100,6 @@ const NewsList = (props) => {
     setFilters(filters);
   }, []);
 
-  const fetchPage = React.useCallback(({ pageIndex }) => {
-    setPageIndex(pageIndex);
-  }, []);
-
   let data = [];
   if (props.news) {
     data = props.news;
@@ -134,6 +130,7 @@ const NewsList = (props) => {
 
       props.getNews(reqData);
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     []
   );
 

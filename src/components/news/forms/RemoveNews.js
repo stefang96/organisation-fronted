@@ -1,13 +1,12 @@
-import React, { useState } from "react";
-import { Modal, Button, closeButton } from "react-bootstrap";
-import { reduxForm, Field } from "redux-form";
+import React from "react";
+import { Modal } from "react-bootstrap";
+import { reduxForm } from "redux-form";
 
 import { connect } from "react-redux";
 import { removeNews } from "../../../actions/index";
 
 const RemoveNews = (props) => {
   const onSubmit = (formValues) => {
-    console.log(formValues);
     props.removeNews(props.newsId, props.memberId, props.profile);
     props.changeModal();
   };

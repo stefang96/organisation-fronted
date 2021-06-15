@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Modal, Button, closeButton } from "react-bootstrap";
+import { Modal } from "react-bootstrap";
 import { reduxForm, Field } from "redux-form";
 import renderTextField from "../../fields/renderTextField ";
 import validate from "../../fields/validation/validateMember";
@@ -13,10 +13,10 @@ const Edit = (props) => {
 
   useEffect(() => {
     props.getMemberById(props.memberId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.memberId]);
 
   const onSubmit = (formValues) => {
-    console.log(formValues);
     props.updateMember(formValues, props.memberId);
     props.changeModal();
   };

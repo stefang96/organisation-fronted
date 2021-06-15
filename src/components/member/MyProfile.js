@@ -12,10 +12,11 @@ const MyProfile = (props) => {
   const loggedUser = getLoggedUser();
 
   const isMyPofile = history.location.pathname.includes("my-profile");
-  console.log(isMyPofile);
+
   const [key, setKey] = useState("info");
   useEffect(() => {
     props.getMemberById(props.match.params.memberId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.match.params.memberId]);
 
   return (

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Modal, Button, closeButton } from "react-bootstrap";
+import { Modal } from "react-bootstrap";
 import { reduxForm, Field } from "redux-form";
 import renderTextField from "../../fields/renderTextField ";
 import validate from "../../fields/validation/validateNews";
@@ -13,8 +13,6 @@ const CreateNews = (props) => {
   const [file, setFile] = useState(null);
 
   const onSubmit = (formValues) => {
-    console.log(file);
-    console.log(formValues);
     const formData = new FormData();
     if (file) formData.append("file", file);
 

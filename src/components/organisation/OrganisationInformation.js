@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import loggedUser from "../../utils/getLoggedUser";
 import RemoveOrganisation from "./forms/RemoveOrganisation";
-import { Modal, Alert } from "react-bootstrap";
+import { Modal } from "react-bootstrap";
 import { connect } from "react-redux";
 import EditOrganisation from "./forms/EditOrganisation";
 

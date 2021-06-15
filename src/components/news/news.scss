@@ -86,14 +86,14 @@
   text-overflow: ellipsis;
 }
 
-.post-slide .post-title a {
+.post-slide .post-title span {
   font-size: 13px;
   font-weight: bold;
   color: #007bff;
 
   text-transform: uppercase;
 }
-.post-slide .post-title a:hover {
+.post-slide .post-title span:hover {
   text-decoration: underline;
 }
 .post-slide .post-bar {
@@ -126,13 +126,13 @@
   white-space: nowrap;
   text-overflow: ellipsis;
 }
-.post-slide .post-bar li a {
+.post-slide .post-bar li span {
   font-size: 13px;
   text-decoration: none;
   text-transform: uppercase;
   color: #ec3c6a;
 }
-.post-slide .post-bar li a:hover {
+.post-slide .post-bar li span:hover {
   color: #ec3c6a;
 }
 .post-slide .post-bar li i {

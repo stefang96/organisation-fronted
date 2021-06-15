@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-
 import { useTable, usePagination } from "react-table";
 
 const DataTable = (props) => {
@@ -20,7 +19,7 @@ const DataTable = (props) => {
     gotoPage,
     nextPage,
     previousPage,
-    setPageSize,
+
     state: { pageIndex, pageSize },
   } = useTable(
     {
@@ -41,13 +40,10 @@ const DataTable = (props) => {
   }, [fetchData, pageIndex, pageSize, searchQuery, searchFilters]);
 
   const onSearchChange = (e) => {
-    console.log(e.target.value);
     setSearchQuery(e.target.value);
   };
 
   const setSelectedFilter = (e, searchName) => {
-    // let filtersInner = props.searchFilters;
-    console.log(e.target.value);
     const valueData = e.target.value;
     const value = valueData === "null" ? null : valueData;
 
@@ -139,7 +135,6 @@ const DataTable = (props) => {
                   onClick={() => gotoPage(0)}
                   disabled={!canPreviousPage}
                   className="page-link"
-                  href="#"
                   aria-label="Previous"
                 >
                   <span aria-hidden="true">&laquo;</span>
@@ -150,7 +145,6 @@ const DataTable = (props) => {
                   onClick={() => previousPage()}
                   disabled={!canPreviousPage}
                   className="page-link"
-                  href="#"
                 >
                   {" "}
                   {"<"}
@@ -161,7 +155,6 @@ const DataTable = (props) => {
                   onClick={() => nextPage()}
                   disabled={!canNextPage}
                   className="page-link"
-                  href="#"
                 >
                   {" "}
                   {">"}
@@ -173,7 +166,6 @@ const DataTable = (props) => {
                   onClick={() => gotoPage(pageCount - 1)}
                   disabled={!canNextPage}
                   className="page-link"
-                  href="#"
                   aria-label="Next"
                 >
                   <span aria-hidden="true">&raquo;</span>

@@ -1,8 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { reduxForm, Field } from "redux-form";
-
 import Container from "./Container";
-
 import renderTextField from "../fields/renderTextField ";
 import { Link } from "react-router-dom";
 import validate from "../fields/validation/validateSignUp";
@@ -13,12 +11,11 @@ import history from "../../history";
 
 const RegisterPage = (props) => {
   const onSubmit = (formValues) => {
-    console.log(formValues);
     return props.register(formValues);
   };
   const disableAuthMessage = () => {
     props.disableAuthMessage();
-    history.push("/login");
+    history.push("/sign-in");
   };
   return (
     <Container>
@@ -107,8 +104,8 @@ const RegisterPage = (props) => {
             </form>
             <div className="login__links">
               <div>
-                <Link to="/login" className="login__links-right">
-                  You already have an account please Sign in
+                <Link to="/sign-in" className="login__links-right">
+                  You already have an account please Sign In
                 </Link>
               </div>
             </div>

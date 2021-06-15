@@ -1,13 +1,19 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { getNewsById } from "../../actions";
-
 import moment from "moment";
+import history from "../../history";
+
 const SingleNews = (props) => {
-  const { news } = props;
+  const { news, latestNews } = props;
   useEffect(() => {
     props.getNewsById(props.match.params.newsId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.match.params.newsId]);
+
+  const getSingleView = (id) => {
+    history.push("/news/" + id);
+  };
 
   return (
     news && (
@@ -26,52 +32,26 @@ const SingleNews = (props) => {
             />
             <div className="card-body d-flex">
               <div className="left">
-                <ul className="list-group group-scroll">
-                  <li className="list-group-item active" aria-current="true">
-                    Latest news
-                  </li>
+                <div className="form-group mt-30">
+                  <ul className="list-group ">
+                    <li className="list-group-item active" aria-current="true">
+                      Latest news
+                    </li>
 
-                  <li className="list-group-item">
-                    {" "}
-                    <h5>
-                      <b>A third item</b>{" "}
-                    </h5>
-                    <div>
-                      A third itemA third itemA third itemA third itemA third
-                      item
-                    </div>
-                  </li>
-                  <li className="list-group-item">
-                    {" "}
-                    <h5>
-                      <b>A third item</b>{" "}
-                    </h5>
-                    <div>
-                      A third itemA third itemA third itemA third itemA third
-                      item
-                    </div>
-                  </li>
-                  <li className="list-group-item">
-                    {" "}
-                    <h5>
-                      <b>A third item</b>{" "}
-                    </h5>
-                    <div>
-                      A third itemA third itemA third itemA third itemA third
-                      item
-                    </div>
-                  </li>
-                  <li className="list-group-item">
-                    {" "}
-                    <h5>
-                      <b>A third item</b>{" "}
-                    </h5>
-                    <div>
-                      A third itemA third itemA third itemA third itemA third
-                      item
-                    </div>
-                  </li>
-                </ul>
+                    {latestNews &&
+                      latestNews.map((news, i) => {
+                        return (
+                          <li key={i} className="list-group-item">
+                            {" "}
+                            <div onClick={() => getSingleView(news.id)}>
+                              <b>{news.title}</b>{" "}
+                            </div>
+                            <p>{news.shortDescription}</p>
+                          </li>
+                        );
+                      })}
+                  </ul>
+                </div>
               </div>
               <div className="right">
                 <h7>
@@ -94,6 +74,7 @@ const SingleNews = (props) => {
 const mapStateToProps = (state) => {
   return {
     news: state.news.news,
+    latestNews: state.news.latestNews,
   };
 };
 

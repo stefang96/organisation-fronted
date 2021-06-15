@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Router, Route } from "react-router-dom";
+import { Switch, Router } from "react-router-dom";
 import SetPassword from "./auth/SetPassword";
 import history from "../history";
 import PublicRoute from "./PublicRoute";
@@ -13,7 +13,6 @@ import NavBar from "./nav-bar/NavBar";
 import OrganisationList from "./organisation/OrganisationList";
 import SingleNews from "./news/SingleNews";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { isLogin } from "../middleware/auth";
 import Logout from "./auth/Logout";
 import MemberList from "./member/MemberList";
 import MyProfile from "./member/MyProfile";
@@ -36,13 +35,13 @@ function App(props) {
             component={LoginPage}
             restricted={true}
             exact
-            path="/login"
+            path="/sign-in"
           />
           <PublicRoute
             component={RegisterPage}
             restricted={true}
             exact
-            path="/register"
+            path="/sign-up"
           />
           <PublicRoute
             component={ResetPassword}

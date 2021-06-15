@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { Modal, Button, closeButton } from "react-bootstrap";
+import React from "react";
+import { Modal } from "react-bootstrap";
 import { reduxForm, Field } from "redux-form";
 import renderTextField from "../../fields/renderTextField ";
 import validate from "../../fields/validation/validateMember";
@@ -12,7 +12,6 @@ const AddMember = (props) => {
   const user = loggedUser();
 
   const onSubmit = (formValues) => {
-    console.log(formValues);
     props.addMember(formValues);
     props.changeModal();
   };

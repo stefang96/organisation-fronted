@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Tab, Tabs } from "react-bootstrap";
 import MemberList from "../member/MemberList";
-
 import { connect } from "react-redux";
 import { getOrganisationById } from "../../actions/index";
 import OrganisationInformation from "./OrganisationInformation";
@@ -11,6 +10,7 @@ const SingleOrganisation = (props) => {
 
   useEffect(() => {
     props.getOrganisationById(props.match.params.organisationId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.match.params.organisationId]);
 
   return (

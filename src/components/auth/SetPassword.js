@@ -12,24 +12,8 @@ const SetPassword = (props) => {
   const classNamees = withStyles();
 
   let query = useQuery();
-  const [values, setValues] = React.useState({
-    showPassword: false,
-  });
-
-  const handleClickShowPassword = () => {
-    setValues({ ...values, showPassword: !values.showPassword });
-  };
-
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
-  };
 
   const onSubmit = (formValues) => {
-    console.log(query.get("email"));
-    console.log(query.get("setpasswordtoken"));
-    console.log(query.get("verifytoken"));
-    console.log(formValues);
-
     const email = query.get("email");
     const token = query.get("setpasswordtoken");
 

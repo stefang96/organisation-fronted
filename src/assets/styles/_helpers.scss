@@ -511,7 +511,14 @@ button:disabled {
 .mb-10 {
   margin-bottom: 10px;
 }
-
+.list-group-item {
+  div {
+    &:hover {
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  }
+}
 .mr-3 {
   margin-right: 3%;
 }

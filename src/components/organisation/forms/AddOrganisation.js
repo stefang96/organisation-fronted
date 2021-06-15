@@ -1,12 +1,9 @@
-import React, { useEffect } from "react";
-import { Modal, Button, closeButton } from "react-bootstrap";
+import React from "react";
+import { Modal } from "react-bootstrap";
 import { reduxForm, Field } from "redux-form";
 import renderTextField from "../../fields/renderTextField ";
-import validate from "../../fields/validation/validateContactPersonForm";
 import { connect } from "react-redux";
 import { addOrganisation } from "../../../actions/index";
-import renderSelectField from "../../fields/renderSelectField";
-import loggedUser from "../../../utils/getLoggedUser";
 
 const AddOrganisation = (props) => {
   const onSubmit = (formValues) => {

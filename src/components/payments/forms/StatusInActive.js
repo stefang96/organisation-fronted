@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Modal, Button, closeButton } from "react-bootstrap";
+import { Modal } from "react-bootstrap";
 import { reduxForm, Field } from "redux-form";
 import renderTextField from "../../fields/renderTextField ";
 import moment from "moment";
@@ -8,7 +8,15 @@ import { addPayments, getLatestPayment } from "../../../actions/index";
 import getLoggedUser from "../../../utils/getLoggedUser";
 
 const validate = (formValues) => {
+  const loggedUser = getLoggedUser();
   const errors = {};
+
+  if (
+    loggedUser &&
+    Number(loggedUser.organisation.price) !== Number(formValues.price)
+  ) {
+    errors.price = "The membership fee for the following year is: 150$";
+  }
   if (!formValues.price) {
     errors.price = "Price required";
   }
@@ -21,6 +29,7 @@ const StatusInActive = (props) => {
   const loggedUser = getLoggedUser();
   useEffect(() => {
     props.getLatestPayment();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const onSubmit = (formValues) => {

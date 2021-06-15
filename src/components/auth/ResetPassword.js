@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Container from "./Container";
 import { reduxForm, Field } from "redux-form";
 import renderTextField from "../fields/renderTextField ";
@@ -23,13 +23,12 @@ const validate = (formValues) => {
 
 const ResetPassword = (props) => {
   const onSubmit = (formValues) => {
-    console.log(formValues);
     return props.resetPassword(formValues);
   };
 
   const disableAuthMessage = () => {
     props.disableAuthMessage();
-    history.push("/login");
+    history.push("/sign-in");
   };
 
   return (
@@ -76,7 +75,7 @@ const ResetPassword = (props) => {
 
             <div className="login__links">
               <div>
-                <Link to="/login" className="">
+                <Link to="/sign-in" className="">
                   Back
                 </Link>
               </div>

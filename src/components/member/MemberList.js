@@ -19,7 +19,7 @@ const MemberList = (props) => {
   const [createMemberModal, setCreateMemberModal] = useState(false);
   const [memberId, setMemberId] = useState(null);
   const [filters, setFilters] = useState(null);
-  const [searchFilters, setSearchFilters] = useState({
+  const [searchFilters] = useState({
     status: null,
   });
 
@@ -53,12 +53,13 @@ const MemberList = (props) => {
 
   useEffect(() => {
     checkResponseAction();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.successAction, props.errorAction]);
 
   const statusCell = (props) => {
     const active = props.row.original.active;
     let status = "";
-    console.log(props.row.original);
+
     if (active) {
       status = "Active";
     } else {
@@ -83,7 +84,6 @@ const MemberList = (props) => {
   const nameCell = (props) => {
     const firstName = props.row.original.firstName;
     const lastName = props.row.original.lastName;
-    console.log(props.row.original);
 
     return (
       <div>
@@ -111,7 +111,6 @@ const MemberList = (props) => {
   const actionCell = (props) => {
     const userId = props.row.original.id;
 
-    console.log(props.singleView);
     if (!loggedUser) {
       return null;
     } else {
@@ -155,7 +154,6 @@ const MemberList = (props) => {
   };
 
   const dateCell = ({ value }) => {
-    console.log(value);
     if (!value) {
       return <div>-</div>;
     }
@@ -207,6 +205,7 @@ const MemberList = (props) => {
         Cell: actionCell,
       },
     ],
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     []
   );
 
@@ -236,6 +235,7 @@ const MemberList = (props) => {
 
       props.getMembers(reqData);
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     []
   );
 
@@ -243,7 +243,6 @@ const MemberList = (props) => {
   const meta = props.memberMeta;
   if (props.memberList) {
     data = props.memberList;
-    console.log(Math.ceil(meta.total / meta.limit));
   }
 
   const checkResponseAction = () => {
