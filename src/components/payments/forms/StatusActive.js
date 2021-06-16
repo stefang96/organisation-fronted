@@ -32,7 +32,8 @@ const StatusActive = (props) => {
     } </b> $ .<br/> <br/>
         Your membership fee expires on   <b>${moment
           .unix(payment.toDate)
-          .format("MMMM Do YYYY")}  </b> or in  <b> ${c && c}   </b> days.`;
+          .format("MMMM Do YYYY")}  </b> or in  <b> ${c &&
+      Number(c + 1)}   </b> days.`;
 
   return (
     <div>

@@ -73,8 +73,8 @@ const DataGrid = (props) => {
                       <div className="post-slide  " key={`news-${item.id}`}>
                         {user &&
                           (user.id === item.member.id ||
-                            user === "admin" ||
-                            user === "super_admin") && (
+                            user.role === "admin" ||
+                            user.role === "super_admin") && (
                             <div className="actions ">
                               <div className="d-flex actions_buttons">
                                 <button

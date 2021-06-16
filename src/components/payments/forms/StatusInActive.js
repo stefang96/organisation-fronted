@@ -15,7 +15,7 @@ const validate = (formValues) => {
     loggedUser &&
     Number(loggedUser.organisation.price) !== Number(formValues.price)
   ) {
-    errors.price = "The membership fee for the following year is: 150$";
+    errors.price = `The membership fee for the following year is: ${loggedUser.organisation.price}$`;
   }
   if (!formValues.price) {
     errors.price = "Price required";
