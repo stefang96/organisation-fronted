@@ -70,7 +70,7 @@ export const register = (data) => async (dispatch) => {
     .then((res) => {
       dispatch({
         type: authConstants.SIGNUP_MESSAGE,
-        data: `You has signed up successfully,please check your email for activation.
+        data: `You has signed up  successfully,please check your email for activation.
         `,
       });
     })
