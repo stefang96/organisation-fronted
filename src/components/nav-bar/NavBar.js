@@ -1,6 +1,7 @@
 import React from "react";
 import NavBarItem from "./NavBarItem";
 import { NavLink } from "react-router-dom";
+import Logo from "./Logo";
 const NavBar = (props) => {
   return (
     <nav
@@ -9,7 +10,7 @@ const NavBar = (props) => {
     >
       <div className="container">
         <NavLink className="navbar-brand" to="/news">
-          Logo
+          <Logo />
         </NavLink>
         <button
           className="navbar-toggler"
